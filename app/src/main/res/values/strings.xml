@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Sabor Tropical</string>
+    <string name="action_funcionario">Funcionário</string>
+    <string name="action_cliente">Clientes</string>
+    <string name="action_fornecedor">Fornecedor</string>
+    <string name="action_produto">Produto</string>
+    <string name="action_relatorio">Relatorio</string>
+    <string name="action_novocliente">Novo</string>
 </resources>

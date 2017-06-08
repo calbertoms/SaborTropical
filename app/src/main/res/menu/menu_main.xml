@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" tools:context=".Telas.MainActivity">
+
+    <item android:title="@string/action_funcionario"
+          android:id="@+id/action_funcionario"
+          android:orderInCategory="100"
+          app:showAsAction="never"/>
+
+    <item android:title="@string/action_cliente"
+        android:id="@+id/action_cliente"
+        android:orderInCategory="100"
+        app:showAsAction="never"/>
+
+    <item android:title="@string/action_fornecedor"
+        android:id="@+id/action_fornecedor"
+        android:orderInCategory="100"
+        app:showAsAction="never"/>
+
+    <item android:title="@string/action_produto"
+        android:id="@+id/action_produto"
+        android:orderInCategory="100"
+        app:showAsAction="never"/>
+
+    <item android:title="@string/action_relatorio"
+        android:id="@+id/action_relatorio"
+        android:orderInCategory="100"
+        app:showAsAction="never"/>
+</menu>
