@@ -43,4 +43,9 @@ public class Usuario extends Pessoa {
         this.nivel = nivel;
     }
 
+    @Override
+    public String toString() {
+        return this.getId() + " - " + this.getNome() + " - " + this.getSobreNome();
+    }
+
 }

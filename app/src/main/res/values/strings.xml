@@ -1,16 +1,18 @@
 <resources>
     <!-- Strings related to main -->
     <string name="app_name">Sabor Tropical</string>
-    <string name="action_funcionario">Funcionário</string>
+    <string name="action_usuario">Usuários</string>
     <string name="action_cliente">Clientes</string>
     <string name="action_fornecedor">Fornecedor</string>
     <string name="action_produto">Produto</string>
     <string name="action_relatorio">Relatorio</string>
     <string name="action_novocliente">Novo</string>
     <!-- Strings related to login -->
-    <string name="title_activity_login">Sabor Tropical Login</string>
+    <string name="title_activity_login">Sabor Tropical</string>
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Senha</string>
     <string name="action_sign_in">Entrar</string>
     <string name="action_sair">Sair</string>
+    <!-- Strings related to usuarios -->
+    <string name="title_activity_usuarios">Sabor Tropical -> Usuários</string>
 </resources>

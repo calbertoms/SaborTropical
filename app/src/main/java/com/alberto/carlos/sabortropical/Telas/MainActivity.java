@@ -41,11 +41,21 @@ public class MainActivity extends AppCompatActivity {
             startActivity(it);
 
         }
+        else if (id == R.id.action_usuario){
+
+            Intent it = new Intent(this,UsuariosActivity.class);
+            startActivity(it);
+
+        }
+        else if (id == R.id.action_sair){
+
+            finish();
+
+        }
 
         return super.onOptionsItemSelected(item);
 
     }
-
 
 
 }
