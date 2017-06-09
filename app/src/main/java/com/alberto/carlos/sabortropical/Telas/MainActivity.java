@@ -37,8 +37,8 @@ public class MainActivity extends AppCompatActivity {
 
         if (id == R.id.action_cliente){
 
-            Intent it = new Intent(this,ClientesActivity.class);
-            startActivity(it);
+           // Intent it = new Intent(this,ClientesActivity.class);
+           // startActivity(it);
 
         }
         else if (id == R.id.action_usuario){
