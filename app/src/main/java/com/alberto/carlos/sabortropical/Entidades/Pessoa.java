@@ -6,6 +6,7 @@ package com.alberto.carlos.sabortropical.Entidades;
 
 public abstract class Pessoa {
 
+    private long id;
     private String nome;
     private String sobreNome;
     private String dataNascimento;
@@ -17,6 +18,47 @@ public abstract class Pessoa {
     private int estadoCivil;
     private String cpf;
     private String identidade;
+
+    public Pessoa(long id, String nome, String sobreNome, String dataNascimento, int corPele, int corOlhos, int sexo, String nomePai, String nomeMae, int estadoCivil, String cpf, String identidade) {
+        this.id = id;
+        this.nome = nome;
+        this.sobreNome = sobreNome;
+        this.dataNascimento = dataNascimento;
+        this.corPele = corPele;
+        this.corOlhos = corOlhos;
+        this.sexo = sexo;
+        this.nomePai = nomePai;
+        this.nomeMae = nomeMae;
+        this.estadoCivil = estadoCivil;
+        this.cpf = cpf;
+        this.identidade = identidade;
+    }
+
+    public Pessoa(String nome, String sobreNome, String dataNascimento, int corPele, int corOlhos, int sexo, String nomePai, String nomeMae, int estadoCivil, String cpf, String identidade) {
+        this.nome = nome;
+        this.sobreNome = sobreNome;
+        this.dataNascimento = dataNascimento;
+        this.corPele = corPele;
+        this.corOlhos = corOlhos;
+        this.sexo = sexo;
+        this.nomePai = nomePai;
+        this.nomeMae = nomeMae;
+        this.estadoCivil = estadoCivil;
+        this.cpf = cpf;
+        this.identidade = identidade;
+    }
+
+    public Pessoa() {
+
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 
     public String getNome() {
         return nome;
