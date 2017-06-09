@@ -28,9 +28,6 @@ public class UsuarioDao {
 
     protected SQLiteDatabase db;
 
-    public static String[] colunas = new String[] {"id", "nome", "telefone", "email", "rua", "numero",
-            "bairro", "cep", "complemento", "cidade", "estado"};
-
     public UsuarioDao(Context ctx) {
         //Abre o banco de dados
         db = ctx.openOrCreateDatabase(NOME_BANCO, Context.MODE_PRIVATE, null);
@@ -78,6 +75,7 @@ public class UsuarioDao {
 
         inserirUsuario(values);
         return id;
+
     }
 
     private Long inserirPessoa(ContentValues values) {
@@ -145,7 +143,10 @@ public class UsuarioDao {
         String where = "id=?";
         String _id = String.valueOf(id);
         String[] whereArgs = new String[] { _id };
-        int count = deletarUsuario(where, whereArgs);
+        int countUsuario = deletarUsuario(where, whereArgs);
+        int countPessoa = deletarPessoa(where, whereArgs);
+        int count = countPessoa + countUsuario;
+
         return count;
 
     }
@@ -171,48 +172,48 @@ public class UsuarioDao {
     public Cursor getCursor() {
 
         try {
-            //select * from clientes
-//			return db.rawQuery("SELECT * FROM clientes", null);
-            Cursor c = db.query(NOME_TABELA_PESSOA, colunas, null, null, null, null, null);
-            return c;
+ 			 return db.rawQuery("SELECT * FROM pessoas t1 INNER JOIN usuarios t2 ON (t1.id = t2.id)", null);
         } catch (SQLException e) {
-            Log.i(CATEGORIA, "Erro ao buscar os clientes: " + e.toString());
+            Log.i(CATEGORIA, "Erro ao buscar os usuarios: " + e.toString());
             return null;
         }
 
     }
 
-    /*public List<Cliente> listarClientes(){
+    public List<Usuario> listarUsuarios(){
 
-        List<Cliente> clientes = new ArrayList<Cliente>();
+        List<Usuario> usuarios = new ArrayList<>();
 
         Cursor c = getCursor();
         if(c == null){
             return null;
         }
 
-//		"nome", "telefone", "email", "rua", "numero",
-//		"bairro", "cep", "complemento", "cidade", "estado
         while(c.moveToNext()) {
             //Recupera os indices das colunas
-            Cliente cliente = new Cliente();
-            cliente.setId(c.getLong(c.getColumnIndex("id")));
-            cliente.setNome(c.getString(c.getColumnIndex("nome")));
-            cliente.setTelefone(c.getString(c.getColumnIndex("telefone")));
-            cliente.setEmail(c.getString(c.getColumnIndex("email")));
-            cliente.setRua(c.getString(c.getColumnIndex("rua")));
-            cliente.setNumero(c.getInt(c.getColumnIndex("numero")));
-            cliente.setBairro(c.getString(c.getColumnIndex("bairro")));
-            cliente.setCep(c.getString(c.getColumnIndex("cep")));
-            cliente.setComplemento(c.getString(c.getColumnIndex("complemento")));
-            cliente.setCidade(c.getString(c.getColumnIndex("cidade")));
-            cliente.setEstado(c.getString(c.getColumnIndex("estado")));
+            Usuario usuario = new Usuario();
+            usuario.setId(c.getLong(c.getColumnIndex("id")));
+            usuario.setNome(c.getString(c.getColumnIndex("nome")));
+            usuario.setSobreNome(c.getString(c.getColumnIndex("sobreNome")));
+            usuario.setDataNascimento(c.getString(c.getColumnIndex("dataNascimento")));
+            usuario.setCorPele(c.getInt(c.getColumnIndex("corPele")));
+            usuario.setCorOlhos(c.getInt(c.getColumnIndex("corOlhos")));
+            usuario.setSexo(c.getInt(c.getColumnIndex("sexo")));
+            usuario.setNomePai(c.getString(c.getColumnIndex("nomePai")));
+            usuario.setNomeMae(c.getString(c.getColumnIndex("nomeMae")));
+            usuario.setEstadoCivil(c.getInt(c.getColumnIndex("estadoCivil")));
+            usuario.setCpf(c.getString(c.getColumnIndex("cpf")));
+            usuario.setIdentidade(c.getString(c.getColumnIndex("identidade")));
+            usuario.setEmail(c.getString(c.getColumnIndex("email")));
+            usuario.setSenha(c.getString(c.getColumnIndex("senha")));
+            usuario.setDataAdmissao(c.getString(c.getColumnIndex("dataAdmissao")));
+            usuario.setNivel(c.getInt(c.getColumnIndex("nivelAcesso")));
 
-            clientes.add(cliente);
+            usuarios.add(usuario);
         }
 
-        return clientes;
-    }*/
+        return usuarios;
+    }
 
     //Fechar o banco
     public void fechar(){
