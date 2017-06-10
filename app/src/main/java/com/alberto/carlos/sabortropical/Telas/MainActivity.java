@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.alberto.carlos.sabortropical.R;
 
@@ -39,17 +40,20 @@ public class MainActivity extends AppCompatActivity {
 
            // Intent it = new Intent(this,ClientesActivity.class);
            // startActivity(it);
+            Toast.makeText(MainActivity.this,"Clientes.",Toast.LENGTH_LONG).show();
 
         }
         else if (id == R.id.action_usuario){
 
             Intent it = new Intent(this,UsuariosActivity.class);
             startActivity(it);
+            Toast.makeText(MainActivity.this,"Usuarios.",Toast.LENGTH_LONG).show();
 
         }
         else if (id == R.id.action_sair){
 
             finish();
+            Toast.makeText(MainActivity.this,"Até Logo.",Toast.LENGTH_LONG).show();
 
         }
 

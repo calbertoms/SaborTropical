@@ -3,8 +3,8 @@ package com.alberto.carlos.sabortropical.Telas;
 import android.content.Intent;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
@@ -19,7 +19,7 @@ import com.alberto.carlos.sabortropical.R;
 import java.util.List;
 
 //classe principal
-public class UsuariosActivity extends AppCompatActivity {
+public class ClientesActivity extends AppCompatActivity {
 
     private ListView listaUsuarios;
     private Database database;
@@ -36,7 +36,7 @@ public class UsuariosActivity extends AppCompatActivity {
         registerForContextMenu(listaUsuarios);
 
         try {
-            database = new Database(UsuariosActivity.this);
+            database = new Database(ClientesActivity.this);
             conn = database.getReadableDatabase();
             UsuarioDao dao = new UsuarioDao(conn);
             Usuario usuario = new Usuario();
@@ -61,15 +61,15 @@ public class UsuariosActivity extends AppCompatActivity {
             UsuarioDao dao2 = new UsuarioDao(conn);
             List<Usuario> usuarios = dao2.listarUsuarios();
             ArrayAdapter<Usuario> adapter = new ArrayAdapter<Usuario>
-                    (UsuariosActivity.this, android.R.layout.simple_list_item_1, usuarios);
+                    (ClientesActivity.this, android.R.layout.simple_list_item_1, usuarios);
 
             listaUsuarios.setAdapter(adapter);
-            Toast.makeText(UsuariosActivity.this,"Criado com sucesso. Usuario: " + idUsuario,Toast.LENGTH_LONG).show();
+            Toast.makeText(ClientesActivity.this,"Criado com sucesso. Usuario: " + idUsuario,Toast.LENGTH_LONG).show();
 
         }
         catch (SQLException e){
 
-            Toast.makeText(UsuariosActivity.this,"Erro: " + e.getMessage(),Toast.LENGTH_LONG).show();
+            Toast.makeText(ClientesActivity.this,"Erro: " + e.getMessage(),Toast.LENGTH_LONG).show();
 
         }
 
@@ -95,20 +95,20 @@ public class UsuariosActivity extends AppCompatActivity {
 
             // Intent it = new Intent(this,ClientesActivity.class);
             // startActivity(it);
-            Toast.makeText(UsuariosActivity.this,"Clientes.",Toast.LENGTH_LONG).show();
+            Toast.makeText(ClientesActivity.this,"Clientes.",Toast.LENGTH_LONG).show();
 
         }
         else if (id == R.id.action_usuario){
 
-            Intent it = new Intent(this,UsuariosActivity.class);
+            Intent it = new Intent(this,ClientesActivity.class);
             startActivity(it);
-            Toast.makeText(UsuariosActivity.this,"Usuarios.",Toast.LENGTH_LONG).show();
+            Toast.makeText(ClientesActivity.this,"Usuarios.",Toast.LENGTH_LONG).show();
 
         }
         else if (id == R.id.action_sair){
 
             finish();
-            Toast.makeText(UsuariosActivity.this,"Até Logo.",Toast.LENGTH_LONG).show();
+            Toast.makeText(ClientesActivity.this,"Até Logo.",Toast.LENGTH_LONG).show();
 
         }
 
@@ -123,16 +123,5 @@ public class UsuariosActivity extends AppCompatActivity {
         //this.carregarLista();
     }
 
-    /*private void carregarLista() {
-        database = new Database(UsuariosActivity.this);
-        conn = database.getReadableDatabase();
-        UsuarioDao dao = new UsuarioDao(conn);
-        List<Usuario> usuarios = dao.listarUsuarios();
-        ArrayAdapter<Usuario> adapter = new ArrayAdapter<Usuario>
-                (UsuariosActivity.this, android.R.layout.simple_list_item_1, usuarios);
-
-        listaUsuarios.setAdapter(adapter);
-
-    }*/
 
 }

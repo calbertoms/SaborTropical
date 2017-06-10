@@ -65,6 +65,7 @@ public class LoginActivity extends AppCompatActivity{
 
             Intent it = new Intent(this,MainActivity.class);
             startActivity(it);
+            Toast.makeText(LoginActivity.this,"Bemvindo.",Toast.LENGTH_LONG).show();
 
         }
         else{
@@ -79,6 +80,7 @@ public class LoginActivity extends AppCompatActivity{
      //clique botão sair
      public void sair(View view){
 
+         Toast.makeText(LoginActivity.this,"Até Logo.",Toast.LENGTH_LONG).show();
          finish();
 
      }
