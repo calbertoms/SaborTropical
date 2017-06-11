@@ -122,5 +122,5 @@ public abstract class Endereco {
         this.cep = cep;
     }
 
-    
+
 }

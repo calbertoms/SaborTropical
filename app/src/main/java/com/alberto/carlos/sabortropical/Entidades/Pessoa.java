@@ -18,6 +18,8 @@ public abstract class Pessoa {
     private int estadoCivil;
     private String cpf;
     private String identidade;
+    //private String status;
+
 
     public Pessoa(long id, String nome, String sobreNome, String dataNascimento, int corPele, int corOlhos, int sexo, String nomePai, String nomeMae, int estadoCivil, String cpf, String identidade) {
         this.id = id;
@@ -32,6 +34,7 @@ public abstract class Pessoa {
         this.estadoCivil = estadoCivil;
         this.cpf = cpf;
         this.identidade = identidade;
+        //this.status = status;
     }
 
     public Pessoa(String nome, String sobreNome, String dataNascimento, int corPele, int corOlhos, int sexo, String nomePai, String nomeMae, int estadoCivil, String cpf, String identidade) {
@@ -46,6 +49,7 @@ public abstract class Pessoa {
         this.estadoCivil = estadoCivil;
         this.cpf = cpf;
         this.identidade = identidade;
+        //this.status = status;
     }
 
     public Pessoa() {
@@ -147,5 +151,15 @@ public abstract class Pessoa {
     public void setIdentidade(String identidade) {
         this.identidade = identidade;
     }
+/*
+
+    public String getStatuse() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+*/
 
 }

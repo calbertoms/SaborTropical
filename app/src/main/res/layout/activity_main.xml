@@ -6,4 +6,15 @@
     android:layout_height="match_parent"
     tools:context="com.alberto.carlos.sabortropical.Telas.MainActivity">
 
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="129dp"
+        android:layout_height="101dp"
+        android:adjustViewBounds="true"
+        android:cropToPadding="true"
+        android:scaleType="fitXY"
+        android:visibility="visible"
+        app:srcCompat="@android:drawable/star_big_on"
+        tools:layout_editor_absoluteX="116dp"
+        tools:layout_editor_absoluteY="205dp" />
 </android.support.constraint.ConstraintLayout>
