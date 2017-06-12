@@ -63,6 +63,7 @@ public class UsuarioDao {
         Long id = inserirPessoa(valuesPessoa);
 
         ContentValues valuesUsuario = new ContentValues();
+        valuesUsuario.put("id", id);
         valuesUsuario.put("email", usuario.getEmail());
         valuesUsuario.put("senha", usuario.getSenha());
         valuesUsuario.put("dataAdmissao", usuario.getDataAdmissao());
@@ -167,7 +168,7 @@ public class UsuarioDao {
     public Cursor getCursor() {
 
         try {
- 			 Cursor cursor =  conn.rawQuery("SELECT id,nome,sobreNome FROM pessoas", null);
+            Cursor cursor =  conn.rawQuery("SELECT t1.id,t1.nome,t1.sobreNome,t1.dataNascimento,t1.corPele,t1.corOlhos,t1.sexo,t1.nomePai,t1.nomeMae,t1.estadoCivil,t1.cpf,t1.identidade,t2.email,t2.senha,t2.dataAdmissao,t2.nivelAcesso FROM pessoas t1 INNER JOIN usuarios t2 ON (t1.id = t2.id)", null);
             return cursor;
         } catch (SQLException e) {
             Log.d(CATEGORIA, "Erro ao buscar os usuarios: " + e.toString());
@@ -191,7 +192,7 @@ public class UsuarioDao {
             usuario.setId(c.getLong(c.getColumnIndex("id")));
             usuario.setNome(c.getString(c.getColumnIndex("nome")));
             usuario.setSobreNome(c.getString(c.getColumnIndex("sobreNome")));
-            /*usuario.setDataNascimento(c.getString(c.getColumnIndex("dataNascimento")));
+            usuario.setDataNascimento(c.getString(c.getColumnIndex("dataNascimento")));
             usuario.setCorPele(c.getInt(c.getColumnIndex("corPele")));
             usuario.setCorOlhos(c.getInt(c.getColumnIndex("corOlhos")));
             usuario.setSexo(c.getInt(c.getColumnIndex("sexo")));
@@ -203,7 +204,7 @@ public class UsuarioDao {
             usuario.setEmail(c.getString(c.getColumnIndex("email")));
             usuario.setSenha(c.getString(c.getColumnIndex("senha")));
             usuario.setDataAdmissao(c.getString(c.getColumnIndex("dataAdmissao")));
-            usuario.setNivel(c.getInt(c.getColumnIndex("nivelAcesso")));*/
+            usuario.setNivel(c.getInt(c.getColumnIndex("nivelAcesso")));
 
             usuarios.add(usuario);
         }

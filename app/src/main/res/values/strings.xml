@@ -15,4 +15,8 @@
     <string name="action_sair">Sair</string>
     <!-- Strings related to usuarios -->
     <string name="title_activity_usuarios">Sabor Tropical -> Usuários</string>
+    <string name="title_activity_usuarios_cad">Sabor Tropical -> Usuários -> Cadastro</string>
+    <string name="title_activity_usuarios_edit_del">Sabor Tropical -> Usuários -> Ediçao</string>
+    <string name="action_cadastrar_usuario_cad">Entrar</string>
+    <string name="action_novoUsuario">Novo</string>
 </resources>

@@ -1,10 +1,12 @@
 package com.alberto.carlos.sabortropical.Entidades;
 
+import java.io.Serializable;
+
 /**
  * Created by SuporteE6530 on 08/06/2017.
  */
 
-public class Usuario extends Pessoa {
+public class Usuario extends Pessoa implements Serializable {
 
     private String email;
     private String senha;
