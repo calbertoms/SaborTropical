@@ -159,7 +159,7 @@ public class UsuarioDao {
     }
 
 
-    //Retorna o cursor com todos os carros
+    //Retorna o cursor com todos os usuarios
     public Cursor getCursor() {
 
         try {
@@ -168,6 +168,19 @@ public class UsuarioDao {
         } catch (SQLException e) {
             Log.d(CATEGORIA, "Erro ao buscar os usuarios: " + e.toString());
             return null;
+        }
+
+    }
+
+    public Boolean existeUsuario(String email, String senha){
+
+        String[] whereArgs = new String[] { email, senha };
+        Cursor cursor =  conn.rawQuery("SELECT email,senha FROM usuarios WHERE email = ? AND senha = ?", whereArgs);
+        if ((cursor == null) || (cursor.getCount() < 1)) {
+            return false;
+        }
+        else{
+            return true;
         }
 
     }
