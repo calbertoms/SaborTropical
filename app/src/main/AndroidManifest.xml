@@ -42,6 +42,14 @@
             android:label="@string/title_activity_clientes_cad" />
         <activity android:name=".Telas.Cliente.ClientesEditDelActivity"
             android:label="@string/title_activity_clientes_edit_del"/>
+        <activity
+            android:name=".Telas.Fornecedor.FornecedoresActivity"
+            android:label="@string/title_activity_fornecedores" />
+        <activity
+            android:name=".Telas.Fornecedor.FornecedoresCadActivity"
+            android:label="@string/title_activity_fornecedores_cad" />
+        <activity android:name=".Telas.Fornecedor.FornecedoresEditDelActivity"
+            android:label="@string/title_activity_fornecedores_edit_del"/>
     </application>
 
 </manifest>

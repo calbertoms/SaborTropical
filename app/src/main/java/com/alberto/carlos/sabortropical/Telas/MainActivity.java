@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import com.alberto.carlos.sabortropical.R;
 import com.alberto.carlos.sabortropical.Telas.Cliente.ClientesActivity;
+import com.alberto.carlos.sabortropical.Telas.Fornecedor.FornecedoresActivity;
 import com.alberto.carlos.sabortropical.Telas.Usuario.UsuariosActivity;
 
 
@@ -48,7 +49,12 @@ public class MainActivity extends AppCompatActivity {
 
             Intent it = new Intent(this,UsuariosActivity.class);
             startActivity(it);
-            Toast.makeText(MainActivity.this,"Usuarios.",Toast.LENGTH_LONG).show();
+
+        }
+        else if (id == R.id.action_fornecedor){
+
+            Intent it = new Intent(this, FornecedoresActivity.class);
+            startActivity(it);
 
         }
         else if (id == R.id.action_sair){

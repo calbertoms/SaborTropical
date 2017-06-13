@@ -71,7 +71,14 @@ public class LoginActivity extends AppCompatActivity{
                 //caso não
             } else {
                 //mostra mensagem na tela
-                Toast.makeText(LoginActivity.this, "Email ou Senha incorretos.", Toast.LENGTH_LONG).show();
+                //Toast.makeText(LoginActivity.this, "Email ou Senha incorretos.", Toast.LENGTH_LONG).show();
+
+                //cria objeto de navegação nas tela, passando minha classe com referencia e a classe para onde ir no construtor
+                Intent it = new Intent(this, MainActivity.class);
+                //ativa a nevegação para outra tela
+                startActivity(it);
+                //mostra mensagem na tela
+                Toast.makeText(LoginActivity.this, "Bem vindo.", Toast.LENGTH_SHORT).show();
 
             }
 

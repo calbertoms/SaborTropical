@@ -1,25 +1,28 @@
 package com.alberto.carlos.sabortropical.Entidades;
 
+import java.io.Serializable;
+
 /**
  * Created by carlos.alberto on 11/06/2017.
  */
 
-public class Fornecedor {
+public class Fornecedor implements Serializable {
 
     private long id;
-    private String contrato;
-    private long status;
+    private int contrato;
+    private int status;
     private String nomeResponsavel;
     private String cnpj;
     private String inscEstadual;
-    private long credito;
+    private double credito;
     private String banco;
     private String agencia;
     private String contaCorrente;
     private String tipoPagamento;
-    private long desempenho;
+    private int desempenho;
+    private Endereco endereco;
 
-    public Fornecedor (long id, String contrato, long status, String nomeResponsavel, String cnpj, String inscEstadual, long credito, String banco, String agencia, String contaCorrente, String tipoPagamento, long desempenho ){
+    public Fornecedor (long id, int contrato, int status, String nomeResponsavel, String cnpj, String inscEstadual, double credito, String banco, String agencia, String contaCorrente, String tipoPagamento, int desempenho ){
 
         this.id = id;
         this.contrato = contrato;
@@ -36,7 +39,7 @@ public class Fornecedor {
 
     }
 
-    public Fornecedor (String contrato, long status, String nomeResponsavel, String cnpj, String inscEstadual, long credito, String banco, String agencia, String contaCorrente, String tipoPagamento, long desempenho ){
+    public Fornecedor (int contrato, int status, String nomeResponsavel, String cnpj, String inscEstadual, double credito, String banco, String agencia, String contaCorrente, String tipoPagamento, int desempenho ){
 
         this.contrato = contrato;
         this.status = status;
@@ -65,19 +68,19 @@ public class Fornecedor {
         this.id = id;
     }
 
-    public String getContrato() {
+    public int getContrato() {
         return contrato;
     }
 
-    public void setContrato(String contrato) {
+    public void setContrato(int contrato) {
         this.contrato = contrato;
     }
 
-    public long getStatus() {
+    public int getStatus() {
         return status;
     }
 
-    public void setStatus(long status) {
+    public void setStatus(int status) {
         this.status = status;
     }
 
@@ -105,11 +108,11 @@ public class Fornecedor {
         this.inscEstadual = inscEstadual;
     }
 
-    public long getCredito() {
+    public double getCredito() {
         return credito;
     }
 
-    public void setCredito(long credito) {
+    public void setCredito(double credito) {
         this.credito = credito;
     }
 
@@ -145,11 +148,19 @@ public class Fornecedor {
         this.tipoPagamento = tipoPagamento;
     }
 
-    public long getDesempenho() {
+    public int getDesempenho() {
         return desempenho;
     }
 
-    public void setDesempenho(long desempenho) {
+    public void setDesempenho(int desempenho) {
         this.desempenho = desempenho;
+    }
+
+    public Endereco getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
     }
 }
