@@ -1,65 +1,38 @@
 package com.alberto.carlos.sabortropical.Telas;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
-import android.annotation.TargetApi;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.database.sqlite.SQLiteDatabase;
-import android.support.annotation.IdRes;
-import android.support.annotation.NonNull;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
-import android.app.LoaderManager.LoaderCallbacks;
-
-import android.content.CursorLoader;
-import android.content.Loader;
-import android.database.Cursor;
-import android.net.Uri;
-import android.os.AsyncTask;
-
-import android.os.Build;
 import android.os.Bundle;
-import android.provider.ContactsContract;
+import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
-import android.view.KeyEvent;
 import android.view.View;
-import android.view.View.OnClickListener;
-import android.view.inputmethod.EditorInfo;
-import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import com.alberto.carlos.sabortropical.BancoDeDados.Database;
 import com.alberto.carlos.sabortropical.Dao.UsuarioDao;
 import com.alberto.carlos.sabortropical.R;
-import com.alberto.carlos.sabortropical.Telas.Usuario.UsuariosActivity;
-import com.alberto.carlos.sabortropical.Telas.Usuario.UsuariosCadActivity;
-
-import static android.Manifest.permission.READ_CONTACTS;
 
 /**
  * A login screen that offers login via email/password.
  */
 public class LoginActivity extends AppCompatActivity{
 
+    //declaração de variáveis
     private EditText edEmail;
     private EditText edSenha;
     private Database database;
     private SQLiteDatabase conn;
 
     @Override
-    //cria o layout
+    //cria o layout ao iniciar a classe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //cria a tela
         setContentView(R.layout.activity_login);
+        //referancia da tela para a classe o campo de texto de email
         edEmail = (EditText) findViewById(R.id.email);
+        //referancia da tela para a classe o campo de texto de senha
         edSenha = (EditText) findViewById(R.id.password);
     }
 
@@ -68,24 +41,36 @@ public class LoginActivity extends AppCompatActivity{
     //clique do botão entrar
     public void login(View view){
 
+        //declaração de variavel
         boolean existe;
+        //pega retorno de verificaçao de campos vazios na tela
         boolean verificar = testarCampoVazio();
 
+        //se for false, todos os campos foram preenchidos
         if (!verificar) {
 
+            //cria minha base de dados, passando como referencia minha tela
             database = new Database(LoginActivity.this);
+            //pede permissão para ler do banco
             conn = database.getReadableDatabase();
+            //instancia a classe de persistência do usuário, passando o objeto de conexão do banco no construtor
             UsuarioDao dao = new UsuarioDao(conn);
+            //executa metodo de verificação de email ou senha, caso existe retorna true
             existe = dao.existeUsuario(edEmail.getText().toString(), edSenha.getText().toString());
 
+            //se existir o usuario
             if (existe) {
 
+                //cria objeto de navegação nas tela, passando minha classe com referencia e a classe para onde ir no construtor
                 Intent it = new Intent(this, MainActivity.class);
+                //ativa a nevegação para outra tela
                 startActivity(it);
+                //mostra mensagem na tela
                 Toast.makeText(LoginActivity.this, "Bem vindo.", Toast.LENGTH_SHORT).show();
 
+                //caso não
             } else {
-
+                //mostra mensagem na tela
                 Toast.makeText(LoginActivity.this, "Email ou Senha incorretos.", Toast.LENGTH_LONG).show();
 
             }
@@ -96,20 +81,25 @@ public class LoginActivity extends AppCompatActivity{
 
      //clique botão sair
      public void sair(View view){
-
+        //mostra mensagem na tela
          Toast.makeText(LoginActivity.this,"Até Logo.",Toast.LENGTH_LONG).show();
+         //fecha tela
          finish();
 
      }
 
+     //funçao para verificação se os campos estão vazios ou não, retorna true caso esteja vazio
     private boolean testarCampoVazio() {
 
+        //verifica se o campo email está vazio
         if(TextUtils.isEmpty(edEmail.getText().toString())) {
+            //mostra mensagem na tela
             Toast.makeText(LoginActivity.this, "Campo email esta vazio.", Toast.LENGTH_SHORT).show();
             return true;
         }
-
+        //verifica se o campo senha está vazio
         if(TextUtils.isEmpty(edSenha.getText().toString())) {
+            //mostra mensagem na tela
             Toast.makeText(LoginActivity.this, "Campo Senha esta vazio.", Toast.LENGTH_SHORT).show();
             return true;
         }
