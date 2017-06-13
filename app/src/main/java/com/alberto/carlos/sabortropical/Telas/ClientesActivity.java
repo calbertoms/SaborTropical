@@ -11,7 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.alberto.carlos.sabortropical.BancoDeDados.Database;
+import com.alberto.carlos.sabortropical.BancoDeDados.DatabaseUsuario;
 import com.alberto.carlos.sabortropical.Dao.UsuarioDao;
 import com.alberto.carlos.sabortropical.Entidades.Usuario;
 import com.alberto.carlos.sabortropical.R;
@@ -22,7 +22,7 @@ import java.util.List;
 public class ClientesActivity extends AppCompatActivity {
 
     private ListView listaUsuarios;
-    private Database database;
+    private DatabaseUsuario database;
     private SQLiteDatabase conn;
     private long idUsuario;
 
@@ -36,7 +36,7 @@ public class ClientesActivity extends AppCompatActivity {
         registerForContextMenu(listaUsuarios);
 
         try {
-            database = new Database(ClientesActivity.this);
+            database = new DatabaseUsuario(ClientesActivity.this);
             conn = database.getReadableDatabase();
             UsuarioDao dao = new UsuarioDao(conn);
             Usuario usuario = new Usuario();

@@ -9,7 +9,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.alberto.carlos.sabortropical.BancoDeDados.Database;
+import com.alberto.carlos.sabortropical.BancoDeDados.DatabaseUsuario;
 import com.alberto.carlos.sabortropical.Dao.UsuarioDao;
 import com.alberto.carlos.sabortropical.R;
 
@@ -21,7 +21,7 @@ public class LoginActivity extends AppCompatActivity{
     //declaração de variáveis
     private EditText edEmail;
     private EditText edSenha;
-    private Database database;
+    private DatabaseUsuario databaseUsuario;
     private SQLiteDatabase conn;
 
     @Override
@@ -50,9 +50,9 @@ public class LoginActivity extends AppCompatActivity{
         if (!verificar) {
 
             //cria minha base de dados, passando como referencia minha tela
-            database = new Database(LoginActivity.this);
+            databaseUsuario = new DatabaseUsuario(LoginActivity.this);
             //pede permissão para ler do banco
-            conn = database.getReadableDatabase();
+            conn = databaseUsuario.getReadableDatabase();
             //instancia a classe de persistência do usuário, passando o objeto de conexão do banco no construtor
             UsuarioDao dao = new UsuarioDao(conn);
             //executa metodo de verificação de email ou senha, caso existe retorna true

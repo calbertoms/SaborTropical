@@ -1,15 +1,11 @@
 package com.alberto.carlos.sabortropical.Dao;
 
 import android.content.ContentValues;
-import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
-
-import com.alberto.carlos.sabortropical.BancoDeDados.Database;
 import com.alberto.carlos.sabortropical.Entidades.Usuario;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,34 +13,25 @@ import java.util.List;
  * Created by SuporteE6530 on 08/06/2017.
  */
 
+//classe de persistencia do usuario
 public class UsuarioDao {
-
+    //nome do banco
     private static final String CATEGORIA = "Sabor Tropical";
     //Nome da tabela
     private static final String NOME_TABELA_PESSOA = "pessoas";
     //Nome da tabela
     private static final String NOME_TABELA_USUARIO = "usuarios";
 
-
+    //objeto de conexão com banco
     private SQLiteDatabase conn;
 
     public UsuarioDao(SQLiteDatabase conn) {
+
         this.conn = conn;
+
     }
 
-    //Salva um cliente ou atualiza
-    public Long salvar(Usuario usuario) {
-        Long id = usuario.getId();
-        if(id != null) {
-            id = (long) atualizar(usuario);
-        } else {
-            //Insere um novo
-            id = inserir(usuario);
-        }
-
-        return id;
-    }
-
+    //metodo inserir usuario
     public Long inserir(Usuario usuario) {
 
         ContentValues valuesPessoa = new ContentValues();
@@ -74,15 +61,19 @@ public class UsuarioDao {
 
     }
 
+    //metodo inseri pessoa no banco
     private Long inserirPessoa(ContentValues values) {
         Long id = conn.insert(NOME_TABELA_PESSOA, null, values);
         return id;
     }
 
+
+    //metodo inseri usuario no banco
     private void inserirUsuario(ContentValues values) {
         conn.insert(NOME_TABELA_USUARIO, null, values);
     }
 
+    //metodo atualiza usuario
     public int atualizar(Usuario usuario) {
 
         ContentValues valuesPessoa = new ContentValues();
@@ -117,6 +108,7 @@ public class UsuarioDao {
 
     }
 
+    //metodo atualiza pessoa
     private int atualizarPessoa(ContentValues values, String where, String[] whereArgs) {
 
         int count = conn.update(NOME_TABELA_PESSOA, values, where, whereArgs);
@@ -125,6 +117,7 @@ public class UsuarioDao {
 
     }
 
+    //metodo atualiza usuario
     private int atualizarUsuario(ContentValues values, String where, String[] whereArgs) {
 
         int count = conn.update(NOME_TABELA_USUARIO, values, where, whereArgs);
@@ -134,7 +127,7 @@ public class UsuarioDao {
     }
 
 
-
+    //metodo deleta usuario
     public void deletar(Long id) {
 
         String where = "id=?";
@@ -145,6 +138,7 @@ public class UsuarioDao {
 
     }
 
+    //metodo deleta usuario
     private void deletarUsuario(String where, String[] whereArgs) {
 
         conn.delete(NOME_TABELA_USUARIO, where, whereArgs);
@@ -152,6 +146,7 @@ public class UsuarioDao {
 
     }
 
+    //metodo deleta pessoa
     private void deletarPessoa(String where, String[] whereArgs) {
 
         conn.delete(NOME_TABELA_PESSOA, where, whereArgs);
@@ -172,6 +167,7 @@ public class UsuarioDao {
 
     }
 
+    //metodo verifica existencia de usuario
     public Boolean existeUsuario(String email, String senha){
 
         String[] whereArgs = new String[] { email, senha };
@@ -185,6 +181,7 @@ public class UsuarioDao {
 
     }
 
+    //metodo retorna uma lista de usuario
     public List<Usuario> listarUsuarios(){
 
         List<Usuario> usuarios = new ArrayList<>();

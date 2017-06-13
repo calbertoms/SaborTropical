@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    >
+    <LinearLayout
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="EDIÇÃO DE USUÁRIO"
+            android:layout_gravity="center"
+            />
+
+        <TableLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:stretchColumns="1">
+
+            <TableRow >
+                <TextView
+                    android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="Nome:"
+                    />
+                <EditText
+                    android:layout_width="fill_parent" android:layout_height="wrap_content"
+                    android:id="@+id/campo_nome"
+                    />
+            </TableRow>
+
+            <TableRow >
+                <TextView
+                    android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="Sobrenome:"
+                    />
+                <EditText
+                    android:layout_width="fill_parent" android:layout_height="wrap_content"
+                    android:id="@+id/campo_sobreNome"
+                    />
+            </TableRow>
+
+            <TableRow >
+                <TextView
+                    android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="Data Nascimento:"
+                    />
+                <EditText
+                    android:layout_width="fill_parent" android:layout_height="wrap_content"
+                    android:id="@+id/campo_dataNascimento"
+                    android:inputType="date"
+                    />
+            </TableRow>
+
+            <TableRow >
+                <TextView
+                    android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="Cor da Pele:"
+                    />
+                <Spinner
+                    android:id="@+id/campo_corPele"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content" />
+            </TableRow>
+
+            <TableRow >
+                <TextView
+                    android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="Cor dos Olhos:"
+                    />
+                <Spinner
+                    android:id="@+id/campo_corOlhos"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content" />
+            </TableRow>
+
+            <TableRow >
+                <TextView
+                    android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="Sexo:"
+                    />
+                <Spinner
+                    android:id="@+id/campo_sexo"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content" />
+            </TableRow>
+
+            <TableRow >
+                <TextView
+                    android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="Nome do Pai:"
+                    />
+
+                <EditText
+                    android:layout_width="fill_parent" android:layout_height="wrap_content"
+                    android:id="@+id/campo_nomePai"
+                    android:inputType="text"
+                    />
+            </TableRow>
+
+            <TableRow >
+                <TextView
+                    android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="Nome da Mãe:"
+                    />
+                <EditText
+                    android:layout_width="fill_parent" android:layout_height="wrap_content"
+                    android:id="@+id/campo_nomeMae"
+                    />
+            </TableRow>
+
+            <TableRow >
+                <TextView
+                    android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="Estado Civil:"
+                    />
+                <Spinner
+                    android:id="@+id/campo_estadoCivil"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content" />
+            </TableRow>
+
+            <TableRow >
+                <TextView
+                    android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="Cpf:"
+                    />
+
+                <EditText
+                    android:layout_width="fill_parent" android:layout_height="wrap_content"
+                    android:id="@+id/campo_cpf"
+                    android:inputType="text"
+                    />
+            </TableRow>
+
+            <TableRow >
+                <TextView
+                    android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="Identidade:"
+                    />
+
+                <EditText
+                    android:layout_width="fill_parent" android:layout_height="wrap_content"
+                    android:id="@+id/campo_identidade"
+                    android:inputType="text"
+                    />
+            </TableRow>
+
+            <TableRow >
+                <TextView
+                    android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="Email:"
+                    />
+
+                <EditText
+                    android:layout_width="fill_parent" android:layout_height="wrap_content"
+                    android:id="@+id/campo_email"
+                    android:inputType="textEmailAddress"
+                    />
+            </TableRow>
+
+            <TableRow >
+                <TextView
+                    android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="Senha:"
+                    />
+
+                <EditText
+                    android:layout_width="fill_parent" android:layout_height="wrap_content"
+                    android:id="@+id/campo_senha"
+                    android:inputType="textPassword"
+                    />
+            </TableRow>
+
+            <TableRow >
+                <TextView
+                    android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="Nivel Acesso:"
+                    />
+                <Spinner
+                    android:id="@+id/campo_nivelAcesso"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content" />
+            </TableRow>
+
+            <Button
+                android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:id="@+id/botao_editar"
+                android:layout_gravity="center"
+                android:text="Editar"
+                android:onClick="editar"
+                />
+            <Button
+                android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:id="@+id/botao_deletar"
+                android:layout_gravity="center"
+                android:text="Deletar"
+                android:onClick="deletar"
+                />
+
+        </TableLayout>
+    </LinearLayout>
+</ScrollView>

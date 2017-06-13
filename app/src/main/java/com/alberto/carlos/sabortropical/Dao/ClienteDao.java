@@ -5,9 +5,7 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
-
-import com.alberto.carlos.sabortropical.Entidades.Usuario;
-
+import com.alberto.carlos.sabortropical.Entidades.Cliente;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,104 +13,98 @@ import java.util.List;
  * Created by SuporteE6530 on 08/06/2017.
  */
 
+//classe de persistencia do cliente
 public class ClienteDao {
-
+    //nome do banco
     private static final String CATEGORIA = "Sabor Tropical";
     //Nome da tabela
     private static final String NOME_TABELA_PESSOA = "pessoas";
     //Nome da tabela
-    private static final String NOME_TABELA_USUARIO = "usuarios";
+    private static final String NOME_TABELA_CLIENTE = "clientes";
 
-
+    //objeto de conexão com banco
     private SQLiteDatabase conn;
 
     public ClienteDao(SQLiteDatabase conn) {
+
         this.conn = conn;
+
     }
 
-    //Salva um cliente ou atualiza
-    public Long salvar(Usuario usuario) {
-        Long id = usuario.getId();
-        if(id != null) {
-            id = (long) atualizar(usuario);
-        } else {
-            //Insere um novo
-            id = inserir(usuario);
-        }
-
-        return id;
-    }
-
-    public Long inserir(Usuario usuario) {
+    //metodo inserir cliente
+    public Long inserir(Cliente cliente) {
 
         ContentValues valuesPessoa = new ContentValues();
-        valuesPessoa.put("nome", usuario.getNome());
-        valuesPessoa.put("sobreNome", usuario.getSobreNome());
-        valuesPessoa.put("dataNascimento", usuario.getDataNascimento());
-        valuesPessoa.put("corPele", usuario.getCorPele());
-        valuesPessoa.put("corOlhos", usuario.getCorOlhos());
-        valuesPessoa.put("sexo", usuario.getSexo());
-        valuesPessoa.put("nomePai", usuario.getNomePai());
-        valuesPessoa.put("nomeMae", usuario.getNomeMae());
-        valuesPessoa.put("estadoCivil", usuario.getEstadoCivil());
-        valuesPessoa.put("cpf", usuario.getCpf());
-        valuesPessoa.put("identidade", usuario.getIdentidade());
+        valuesPessoa.put("nome", cliente.getNome());
+        valuesPessoa.put("sobreNome", cliente.getSobreNome());
+        valuesPessoa.put("dataNascimento", cliente.getDataNascimento());
+        valuesPessoa.put("corPele", cliente.getCorPele());
+        valuesPessoa.put("corOlhos", cliente.getCorOlhos());
+        valuesPessoa.put("sexo", cliente.getSexo());
+        valuesPessoa.put("nomePai", cliente.getNomePai());
+        valuesPessoa.put("nomeMae", cliente.getNomeMae());
+        valuesPessoa.put("estadoCivil", cliente.getEstadoCivil());
+        valuesPessoa.put("cpf", cliente.getCpf());
+        valuesPessoa.put("identidade", cliente.getIdentidade());
 
         Long id = inserirPessoa(valuesPessoa);
 
-        ContentValues valuesUsuario = new ContentValues();
-        valuesUsuario.put("email", usuario.getEmail());
-        valuesUsuario.put("senha", usuario.getSenha());
-        valuesUsuario.put("dataAdmissao", usuario.getDataAdmissao());
-        valuesUsuario.put("nivelAcesso", usuario.getNivel());
+        ContentValues valuescliente = new ContentValues();
+        valuescliente.put("id", id);
+        valuescliente.put("regiao", cliente.getRegiao());
+        valuescliente.put("pontos", cliente.getPontos());
 
-        inserirUsuario(valuesUsuario);
+        inserirCliente(valuescliente);
         return id;
 
     }
 
+    //metodo inseri pessoa no banco
     private Long inserirPessoa(ContentValues values) {
         Long id = conn.insert(NOME_TABELA_PESSOA, null, values);
         return id;
     }
 
-    private void inserirUsuario(ContentValues values) {
-        conn.insert(NOME_TABELA_USUARIO, null, values);
+
+    //metodo inseri cliente no banco
+    private void inserirCliente(ContentValues values) {
+        conn.insert(NOME_TABELA_CLIENTE, null, values);
     }
 
-    public int atualizar(Usuario usuario) {
+    //metodo atualiza cliente
+    public int atualizar(Cliente cliente) {
 
-        ContentValues values = new ContentValues();
-        values.put("nome", usuario.getNome());
-        values.put("sobreNome", usuario.getSobreNome());
-        values.put("dataNascimento", usuario.getDataNascimento());
-        values.put("corPele", usuario.getCorPele());
-        values.put("corOlhos", usuario.getCorOlhos());
-        values.put("sexo", usuario.getSexo());
-        values.put("nomePai", usuario.getNomePai());
-        values.put("nomeMae", usuario.getNomeMae());
-        values.put("estadoCivil", usuario.getEstadoCivil());
-        values.put("cpf", usuario.getCpf());
-        values.put("identidade", usuario.getIdentidade());
+        ContentValues valuesPessoa = new ContentValues();
+        valuesPessoa.put("nome", cliente.getNome());
+        valuesPessoa.put("sobreNome", cliente.getSobreNome());
+        valuesPessoa.put("dataNascimento", cliente.getDataNascimento());
+        valuesPessoa.put("corPele", cliente.getCorPele());
+        valuesPessoa.put("corOlhos", cliente.getCorOlhos());
+        valuesPessoa.put("sexo", cliente.getSexo());
+        valuesPessoa.put("nomePai", cliente.getNomePai());
+        valuesPessoa.put("nomeMae", cliente.getNomeMae());
+        valuesPessoa.put("estadoCivil", cliente.getEstadoCivil());
+        valuesPessoa.put("cpf", cliente.getCpf());
+        valuesPessoa.put("identidade", cliente.getIdentidade());
 
-        String id = String.valueOf(usuario.getId());
+        String id = String.valueOf(cliente.getId());
         String where = "id=?";
         String[] whereArgs = new String[] { id };
-        int countPessoa = atualizarPessoa(values, where, whereArgs);
+        int countPessoa = atualizarPessoa(valuesPessoa, where, whereArgs);
 
-        values = null;
-        values.put("email", usuario.getEmail());
-        values.put("senha", usuario.getSenha());
-        values.put("dataAdmissao", usuario.getDataAdmissao());
-        values.put("nivelAcesso", usuario.getNivel());
-        int countUsuario = atualizarUsuario(values, where, whereArgs);
+        ContentValues valuescliente = new ContentValues();
+
+        valuescliente.put("regiao", cliente.getRegiao());
+        valuescliente.put("pontos", cliente.getPontos());
+        int countcliente = atualizarcliente(valuescliente, where, whereArgs);
 
 
-        int count = countPessoa + countUsuario;
+        int count = countPessoa + countcliente;
         return count;
 
     }
 
+    //metodo atualiza pessoa
     private int atualizarPessoa(ContentValues values, String where, String[] whereArgs) {
 
         int count = conn.update(NOME_TABELA_PESSOA, values, where, whereArgs);
@@ -121,62 +113,61 @@ public class ClienteDao {
 
     }
 
-    private int atualizarUsuario(ContentValues values, String where, String[] whereArgs) {
+    //metodo atualiza cliente
+    private int atualizarcliente(ContentValues values, String where, String[] whereArgs) {
 
-        int count = conn.update(NOME_TABELA_USUARIO, values, where, whereArgs);
+        int count = conn.update(NOME_TABELA_CLIENTE, values, where, whereArgs);
         Log.i(CATEGORIA, "Atualizou [" + count + "] registros");
         return count;
 
     }
 
 
-
-    public int deletar(Long id) {
+    //metodo deleta cliente
+    public void deletar(Long id) {
 
         String where = "id=?";
         String _id = String.valueOf(id);
         String[] whereArgs = new String[] { _id };
-        int countUsuario = deletarUsuario(where, whereArgs);
-        int countPessoa = deletarPessoa(where, whereArgs);
-        int count = countPessoa + countUsuario;
-
-        return count;
+        deletarCliente(where, whereArgs);
+        deletarPessoa(where, whereArgs);
 
     }
 
-    private int deletarUsuario(String where, String[] whereArgs) {
+    //metodo deleta cliente
+    private void deletarCliente(String where, String[] whereArgs) {
 
-        int count = conn.delete(NOME_TABELA_USUARIO, where, whereArgs);
-        Log.i(CATEGORIA, "Deletou [" + count + "] registros");
+        conn.delete(NOME_TABELA_CLIENTE, where, whereArgs);
+        Log.i(CATEGORIA, "Deletou registro");
 
-        return count;
     }
 
-    private int deletarPessoa(String where, String[] whereArgs) {
+    //metodo deleta pessoa
+    private void deletarPessoa(String where, String[] whereArgs) {
 
-        int count = conn.delete(NOME_TABELA_PESSOA, where, whereArgs);
-        Log.i(CATEGORIA, "Deletou [" + count + "] registros");
-
-        return count;
+        conn.delete(NOME_TABELA_PESSOA, where, whereArgs);
+        Log.i(CATEGORIA, "Deletou registro");
     }
 
 
-    //Retorna o cursor com todos os carros
+    //Retorna o cursor com todos os clientes
     public Cursor getCursor() {
 
         try {
- 			 Cursor cursor =  conn.rawQuery("SELECT id,nome,sobreNome FROM pessoas", null);
+            Cursor cursor =  conn.rawQuery("SELECT t1.id,t1.nome,t1.sobreNome,t1.dataNascimento,t1.corPele,t1.corOlhos,t1.sexo,t1.nomePai,t1.nomeMae,t1.estadoCivil,t1.cpf,t1.identidade,t2.email,t2.senha,t2.dataAdmissao,t2.nivelAcesso FROM pessoas t1 INNER JOIN clientes t2 ON (t1.id = t2.id)", null);
             return cursor;
         } catch (SQLException e) {
-            Log.d(CATEGORIA, "Erro ao buscar os usuarios: " + e.toString());
+            Log.d(CATEGORIA, "Erro ao buscar os clientes: " + e.toString());
             return null;
         }
 
     }
 
-    public List<Usuario> listarUsuarios(){
+    
+    //metodo retorna uma lista de cliente
+    public List<Cliente> listarClientes(){
 
-        List<Usuario> usuarios = new ArrayList<>();
+        List<Cliente> clientes = new ArrayList<>();
 
         Cursor c = getCursor();
         if(c == null){
@@ -185,28 +176,27 @@ public class ClienteDao {
 
         while(c.moveToNext()) {
             //Recupera os indices das colunas
-            Usuario usuario = new Usuario();
-            usuario.setId(c.getLong(c.getColumnIndex("id")));
-            usuario.setNome(c.getString(c.getColumnIndex("nome")));
-            usuario.setSobreNome(c.getString(c.getColumnIndex("sobreNome")));
-            /*usuario.setDataNascimento(c.getString(c.getColumnIndex("dataNascimento")));
-            usuario.setCorPele(c.getInt(c.getColumnIndex("corPele")));
-            usuario.setCorOlhos(c.getInt(c.getColumnIndex("corOlhos")));
-            usuario.setSexo(c.getInt(c.getColumnIndex("sexo")));
-            usuario.setNomePai(c.getString(c.getColumnIndex("nomePai")));
-            usuario.setNomeMae(c.getString(c.getColumnIndex("nomeMae")));
-            usuario.setEstadoCivil(c.getInt(c.getColumnIndex("estadoCivil")));
-            usuario.setCpf(c.getString(c.getColumnIndex("cpf")));
-            usuario.setIdentidade(c.getString(c.getColumnIndex("identidade")));
-            usuario.setEmail(c.getString(c.getColumnIndex("email")));
-            usuario.setSenha(c.getString(c.getColumnIndex("senha")));
-            usuario.setDataAdmissao(c.getString(c.getColumnIndex("dataAdmissao")));
-            usuario.setNivel(c.getInt(c.getColumnIndex("nivelAcesso")));*/
+            Cliente cliente = new Cliente();
+            cliente.setId(c.getLong(c.getColumnIndex("id")));
+            cliente.setNome(c.getString(c.getColumnIndex("nome")));
+            cliente.setSobreNome(c.getString(c.getColumnIndex("sobreNome")));
+            cliente.setDataNascimento(c.getString(c.getColumnIndex("dataNascimento")));
+            cliente.setCorPele(c.getInt(c.getColumnIndex("corPele")));
+            cliente.setCorOlhos(c.getInt(c.getColumnIndex("corOlhos")));
+            cliente.setSexo(c.getInt(c.getColumnIndex("sexo")));
+            cliente.setNomePai(c.getString(c.getColumnIndex("nomePai")));
+            cliente.setNomeMae(c.getString(c.getColumnIndex("nomeMae")));
+            cliente.setEstadoCivil(c.getInt(c.getColumnIndex("estadoCivil")));
+            cliente.setCpf(c.getString(c.getColumnIndex("cpf")));
+            cliente.setIdentidade(c.getString(c.getColumnIndex("identidade")));
+            cliente.setRegiao(c.getString(c.getColumnIndex("regiao")));
+            cliente.setPontos(c.getInt(c.getColumnIndex("pontos")));
+           
 
-            usuarios.add(usuario);
+            clientes.add(cliente);
         }
 
-        return usuarios;
+        return clientes;
     }
 
     //Fechar o banco

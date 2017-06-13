@@ -8,7 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
  * Created by SuporteE6530 on 09/06/2017.
  */
 
-public class Database extends SQLiteOpenHelper {
+public class DatabaseUsuario extends SQLiteOpenHelper {
 
     //Nome do Banco
     private static final String NOME_BANCO = "sabor_tropical";
@@ -35,7 +35,7 @@ public class Database extends SQLiteOpenHelper {
 
 
 
-    public Database(Context context) {
+    public DatabaseUsuario(Context context) {
         super(context, NOME_BANCO, null, VERSAO_BANCO);
     }
 
