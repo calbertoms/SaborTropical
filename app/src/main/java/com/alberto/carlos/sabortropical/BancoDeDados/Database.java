@@ -51,8 +51,8 @@ public class Database extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
-        db.execSQL(SCRIPT_DATABASE_DELETE_PESSOA);
         db.execSQL(SCRIPT_DATABASE_DELETE_USUARIO);
+        db.execSQL(SCRIPT_DATABASE_DELETE_PESSOA);
         onCreate(db);
 
 

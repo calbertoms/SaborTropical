@@ -85,30 +85,31 @@ public class UsuarioDao {
 
     public int atualizar(Usuario usuario) {
 
-        ContentValues values = new ContentValues();
-        values.put("nome", usuario.getNome());
-        values.put("sobreNome", usuario.getSobreNome());
-        values.put("dataNascimento", usuario.getDataNascimento());
-        values.put("corPele", usuario.getCorPele());
-        values.put("corOlhos", usuario.getCorOlhos());
-        values.put("sexo", usuario.getSexo());
-        values.put("nomePai", usuario.getNomePai());
-        values.put("nomeMae", usuario.getNomeMae());
-        values.put("estadoCivil", usuario.getEstadoCivil());
-        values.put("cpf", usuario.getCpf());
-        values.put("identidade", usuario.getIdentidade());
+        ContentValues valuesPessoa = new ContentValues();
+        valuesPessoa.put("nome", usuario.getNome());
+        valuesPessoa.put("sobreNome", usuario.getSobreNome());
+        valuesPessoa.put("dataNascimento", usuario.getDataNascimento());
+        valuesPessoa.put("corPele", usuario.getCorPele());
+        valuesPessoa.put("corOlhos", usuario.getCorOlhos());
+        valuesPessoa.put("sexo", usuario.getSexo());
+        valuesPessoa.put("nomePai", usuario.getNomePai());
+        valuesPessoa.put("nomeMae", usuario.getNomeMae());
+        valuesPessoa.put("estadoCivil", usuario.getEstadoCivil());
+        valuesPessoa.put("cpf", usuario.getCpf());
+        valuesPessoa.put("identidade", usuario.getIdentidade());
 
         String id = String.valueOf(usuario.getId());
         String where = "id=?";
         String[] whereArgs = new String[] { id };
-        int countPessoa = atualizarPessoa(values, where, whereArgs);
+        int countPessoa = atualizarPessoa(valuesPessoa, where, whereArgs);
 
-        values = null;
-        values.put("email", usuario.getEmail());
-        values.put("senha", usuario.getSenha());
-        values.put("dataAdmissao", usuario.getDataAdmissao());
-        values.put("nivelAcesso", usuario.getNivel());
-        int countUsuario = atualizarUsuario(values, where, whereArgs);
+        ContentValues valuesUsuario = new ContentValues();
+
+        valuesUsuario.put("email", usuario.getEmail());
+        valuesUsuario.put("senha", usuario.getSenha());
+        valuesUsuario.put("dataAdmissao", usuario.getDataAdmissao());
+        valuesUsuario.put("nivelAcesso", usuario.getNivel());
+        int countUsuario = atualizarUsuario(valuesUsuario, where, whereArgs);
 
 
         int count = countPessoa + countUsuario;
@@ -134,33 +135,27 @@ public class UsuarioDao {
 
 
 
-    public int deletar(Long id) {
+    public void deletar(Long id) {
 
         String where = "id=?";
         String _id = String.valueOf(id);
         String[] whereArgs = new String[] { _id };
-        int countUsuario = deletarUsuario(where, whereArgs);
-        int countPessoa = deletarPessoa(where, whereArgs);
-        int count = countPessoa + countUsuario;
-
-        return count;
+        deletarUsuario(where, whereArgs);
+        deletarPessoa(where, whereArgs);
 
     }
 
-    private int deletarUsuario(String where, String[] whereArgs) {
+    private void deletarUsuario(String where, String[] whereArgs) {
 
-        int count = conn.delete(NOME_TABELA_USUARIO, where, whereArgs);
-        Log.i(CATEGORIA, "Deletou [" + count + "] registros");
+        conn.delete(NOME_TABELA_USUARIO, where, whereArgs);
+        Log.i(CATEGORIA, "Deletou registro");
 
-        return count;
     }
 
-    private int deletarPessoa(String where, String[] whereArgs) {
+    private void deletarPessoa(String where, String[] whereArgs) {
 
-        int count = conn.delete(NOME_TABELA_PESSOA, where, whereArgs);
-        Log.i(CATEGORIA, "Deletou [" + count + "] registros");
-
-        return count;
+        conn.delete(NOME_TABELA_PESSOA, where, whereArgs);
+        Log.i(CATEGORIA, "Deletou registro");
     }
 
 

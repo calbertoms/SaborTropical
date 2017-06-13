@@ -1,4 +1,4 @@
-package com.alberto.carlos.sabortropical.Telas;
+package com.alberto.carlos.sabortropical.Telas.Usuario;
 
 import android.content.Intent;
 import android.database.SQLException;

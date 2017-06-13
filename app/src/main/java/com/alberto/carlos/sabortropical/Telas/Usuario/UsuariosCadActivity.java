@@ -1,4 +1,4 @@
-package com.alberto.carlos.sabortropical.Telas;
+package com.alberto.carlos.sabortropical.Telas.Usuario;
 
 import android.content.Intent;
 import android.database.SQLException;
@@ -20,7 +20,6 @@ import com.alberto.carlos.sabortropical.R;
 import com.alberto.carlos.sabortropical.utilitarios.Mask;
 
 import java.text.SimpleDateFormat;
-import java.util.List;
 
 public class UsuariosCadActivity extends AppCompatActivity {
 
@@ -90,7 +89,6 @@ public class UsuariosCadActivity extends AppCompatActivity {
         nivelAcesso.setAdapter(adapter);
 
         Button buttonSalvar = (Button) findViewById(R.id.botao_salvar);
-
 
 
         buttonSalvar.setOnClickListener(new View.OnClickListener() {

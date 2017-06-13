@@ -28,12 +28,12 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Telas.UsuariosActivity"
+            android:name=".Telas.Usuario.UsuariosActivity"
             android:label="@string/title_activity_usuarios" />
         <activity
-            android:name=".Telas.UsuariosCadActivity"
+            android:name=".Telas.Usuario.UsuariosCadActivity"
             android:label="@string/title_activity_usuarios_cad" />
-        <activity android:name=".Telas.UsuariosEditDelActivity"
+        <activity android:name=".Telas.Usuario.UsuariosEditDelActivity"
             android:label="@string/title_activity_usuarios_edit_del"/>
     </application>
 

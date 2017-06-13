@@ -28,65 +28,65 @@ public class FormularioHelperDetallharUsuario {
 
 	public FormularioHelperDetallharUsuario(Activity activity) {
 
-		 EditText nome = (EditText) activity.findViewById(R.id.campo_nome);
+  		this.nome = (EditText) activity.findViewById(R.id.campo_nome);
 
-		 EditText sobreNome = (EditText) activity.findViewById(R.id.campo_sobreNome);
+  		this.sobreNome = (EditText) activity.findViewById(R.id.campo_sobreNome);
 
-		 EditText dataNascimento = (EditText) activity.findViewById(R.id.campo_dataNascimento);
+		this.dataNascimento = (EditText) activity.findViewById(R.id.campo_dataNascimento);
 
 		final String[] strCorPele = new String[]{"Branco","Moreno","Negro"};
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>
 				(activity, android.R.layout.simple_spinner_dropdown_item, strCorPele);
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-		 Spinner corPele = (Spinner) activity.findViewById(R.id.campo_corPele);
-		corPele.setAdapter(adapter);
+		this.corPele = (Spinner) activity.findViewById(R.id.campo_corPele);
+		this.corPele.setAdapter(adapter);
 
 		final String[] strCorOlhos = new String[]{"Azul","Verde","Castanho Claro","Castanho Escuro"};
 		adapter = new ArrayAdapter<String>
 				(activity, android.R.layout.simple_spinner_dropdown_item, strCorOlhos);
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-		 Spinner corOlhos = (Spinner) activity.findViewById(R.id.campo_corOlhos);
-		corOlhos.setAdapter(adapter);
+		this.corOlhos = (Spinner) activity.findViewById(R.id.campo_corOlhos);
+		this.corOlhos.setAdapter(adapter);
 
 		final String[] strSexo = new String[]{"Feminino","Masculino","Outros"};
 		adapter = new ArrayAdapter<String>
 				(activity, android.R.layout.simple_spinner_dropdown_item, strSexo);
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-		 Spinner sexo = (Spinner) activity.findViewById(R.id.campo_sexo);
-		sexo.setAdapter(adapter);
+		this.sexo = (Spinner) activity.findViewById(R.id.campo_sexo);
+		this.sexo.setAdapter(adapter);
 
-		 EditText nomePai = (EditText) activity.findViewById(R.id.campo_nomePai);
+		this.nomePai = (EditText) activity.findViewById(R.id.campo_nomePai);
 
-		 EditText nomeMae = (EditText) activity.findViewById(R.id.campo_nomeMae);
+		this.nomeMae = (EditText) activity.findViewById(R.id.campo_nomeMae);
 
 		final String[] strEstadoCivil = new String[]{"Solteiro","Casado","Viúvo"};
 		adapter = new ArrayAdapter<String>
 				(activity, android.R.layout.simple_spinner_dropdown_item, strEstadoCivil);
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-		 Spinner estadoCivil = (Spinner) activity.findViewById(R.id.campo_estadoCivil);
-		estadoCivil.setAdapter(adapter);
+		this.estadoCivil = (Spinner) activity.findViewById(R.id.campo_estadoCivil);
+		this.estadoCivil.setAdapter(adapter);
 
-		 EditText cpf = (EditText) activity.findViewById(R.id.campo_cpf);
-		cpf.addTextChangedListener(Mask.insert("###.###.###-##", cpf));
+		this.cpf = (EditText) activity.findViewById(R.id.campo_cpf);
+		this.cpf.addTextChangedListener(Mask.insert("###.###.###-##", cpf));
 
-		 EditText identidade = (EditText) activity.findViewById(R.id.campo_identidade);
-		identidade.addTextChangedListener(Mask.insert("#.###-###", identidade));
+		this.identidade = (EditText) activity.findViewById(R.id.campo_identidade);
+		this.identidade.addTextChangedListener(Mask.insert("#.###-###", identidade));
 
-		 EditText email = (EditText) activity.findViewById(R.id.campo_email);
+		this.email = (EditText) activity.findViewById(R.id.campo_email);
 
-		 EditText senha = (EditText) activity.findViewById(R.id.campo_senha);
+		this.senha = (EditText) activity.findViewById(R.id.campo_senha);
 
 		final String[] strNIvelAcesso = new String[]{"Usuário","Administrador"};
 		adapter = new ArrayAdapter<String>
 				(activity, android.R.layout.simple_spinner_dropdown_item, strNIvelAcesso);
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-		 Spinner nivelAcesso = (Spinner) activity.findViewById(R.id.campo_nivelAcesso);
-		nivelAcesso.setAdapter(adapter);
+		this.nivelAcesso = (Spinner) activity.findViewById(R.id.campo_nivelAcesso);
+		this.nivelAcesso.setAdapter(adapter);
 		
 		this.usuario = new Usuario();
 	}
@@ -94,8 +94,21 @@ public class FormularioHelperDetallharUsuario {
 	public void colocaUsuarioNoFormulario(Usuario usuarioDetalhado) {
 
 		this.usuario = usuarioDetalhado;
-		
-		nome.setText(usuarioDetalhado.getNome());
+
+		this.nome.setText(this.usuario.getNome());
+		this.sobreNome.setText(this.usuario.getSobreNome());
+		this.dataNascimento.setText(this.usuario.getDataNascimento());
+		this.corPele.setSelection(this.usuario.getCorPele());
+		this.corOlhos.setSelection(this.usuario.getCorOlhos());
+		this.sexo.setSelection(this.usuario.getSexo());
+		this.nomePai.setText(this.usuario.getNomePai());
+		this.nomeMae.setText(this.usuario.getNomeMae());
+		this.estadoCivil.setSelection(this.usuario.getEstadoCivil());
+		this.cpf.setText(this.usuario.getCpf());
+		this.identidade.setText(this.usuario.getIdentidade());
+		this.email.setText(this.usuario.getEmail());
+		this.senha.setText(this.usuario.getSenha());
+		this.nivelAcesso.setSelection(this.usuario.getNivel());
 		
 	}
 
