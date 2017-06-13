@@ -19,4 +19,10 @@
     <string name="title_activity_usuarios_edit_del">Sabor Tropical -> Usuários -> Ediçao</string>
     <string name="action_cadastrar_usuario_cad">Entrar</string>
     <string name="action_novoUsuario">Novo</string>
+    <!-- Strings related to clientes -->
+    <string name="title_activity_clientes">Sabor Tropical -> Clientes</string>
+    <string name="title_activity_clientes_cad">Sabor Tropical -> Clientes -> Cadastro</string>
+    <string name="title_activity_clientes_edit_del">Sabor Tropical -> Clientes -> Ediçao</string>
+    <string name="action_cadastrar_clientes_cad">Entrar</string>
+    <string name="action_novoCliente">Novo</string>
 </resources>

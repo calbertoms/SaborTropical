@@ -1,10 +1,12 @@
 package com.alberto.carlos.sabortropical.Entidades;
 
+import java.io.Serializable;
+
 /**
  * Created by SuporteE6530 on 07/06/2017.
  */
 
-public abstract class Endereco {
+public class Endereco implements Serializable {
 
 
     private long id;

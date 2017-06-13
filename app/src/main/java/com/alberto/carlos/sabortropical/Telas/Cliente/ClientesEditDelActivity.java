@@ -13,8 +13,12 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.alberto.carlos.sabortropical.BancoDeDados.DatabaseCliente;
 import com.alberto.carlos.sabortropical.BancoDeDados.DatabaseUsuario;
+import com.alberto.carlos.sabortropical.Dao.ClienteDao;
 import com.alberto.carlos.sabortropical.Dao.UsuarioDao;
+import com.alberto.carlos.sabortropical.Entidades.Cliente;
+import com.alberto.carlos.sabortropical.Entidades.Endereco;
 import com.alberto.carlos.sabortropical.Entidades.Usuario;
 import com.alberto.carlos.sabortropical.R;
 import com.alberto.carlos.sabortropical.utilitarios.Mask;
@@ -24,9 +28,9 @@ public class ClientesEditDelActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_usuarios_edit_del);
+        setContentView(R.layout.activity_clientes_edit_del);
 
-        final Usuario usuarioDetalhado = (Usuario) getIntent().getSerializableExtra("usuarioSelecionado");
+        final Cliente clienteDetalhado = (Cliente) getIntent().getSerializableExtra("clienteSelecionado");
 
         final EditText nome = (EditText) findViewById(R.id.campo_nome);
 
@@ -76,36 +80,48 @@ public class ClientesEditDelActivity extends AppCompatActivity {
         final EditText identidade = (EditText) findViewById(R.id.campo_identidade);
         identidade.addTextChangedListener(Mask.insert("#.###-###", identidade));
 
-        final EditText email = (EditText) findViewById(R.id.campo_email);
+        final EditText logradouro = (EditText) findViewById(R.id.campo_logradouro);
 
-        final EditText senha = (EditText) findViewById(R.id.campo_senha);
+        final EditText numero = (EditText) findViewById(R.id.campo_numero);
 
-        final String[] strNIvelAcesso = new String[]{"Usuário","Administrador"};
-        adapter = new ArrayAdapter<String>
-                (this, android.R.layout.simple_spinner_dropdown_item, strNIvelAcesso);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        final EditText bairro = (EditText) findViewById(R.id.campo_bairro);
 
-        final Spinner nivelAcesso = (Spinner) findViewById(R.id.campo_nivelAcesso);
-        nivelAcesso.setAdapter(adapter);
+        final EditText cidade = (EditText) findViewById(R.id.campo_cidade);
+
+        final EditText uf = (EditText) findViewById(R.id.campo_uf);
+
+        final EditText pais = (EditText) findViewById(R.id.campo_pais);
+
+        final EditText pontoReferencia = (EditText) findViewById(R.id.campo_pontoReferencia);
+
+        final EditText cep = (EditText) findViewById(R.id.campo_cep);
+
+        final EditText regiao = (EditText) findViewById(R.id.campo_regiao);
 
         Button buttonEditar = (Button) findViewById(R.id.botao_editar);
         Button buttonDeletar = (Button) findViewById(R.id.botao_deletar);
 
 
-        nome.setText(usuarioDetalhado.getNome());
-        sobreNome.setText(usuarioDetalhado.getSobreNome());
-        dataNascimento.setText(usuarioDetalhado.getDataNascimento());
-        corPele.setSelection(usuarioDetalhado.getCorPele());
-        corOlhos.setSelection(usuarioDetalhado.getCorOlhos());
-        sexo.setSelection(usuarioDetalhado.getSexo());
-        nomePai.setText(usuarioDetalhado.getNomePai());
-        nomeMae.setText(usuarioDetalhado.getNomeMae());
-        estadoCivil.setSelection(usuarioDetalhado.getEstadoCivil());
-        cpf.setText(usuarioDetalhado.getCpf());
-        identidade.setText(usuarioDetalhado.getIdentidade());
-        email.setText(usuarioDetalhado.getEmail());
-        senha.setText(usuarioDetalhado.getSenha());
-        nivelAcesso.setSelection(usuarioDetalhado.getNivel());
+        nome.setText(clienteDetalhado.getNome());
+        sobreNome.setText(clienteDetalhado.getSobreNome());
+        dataNascimento.setText(clienteDetalhado.getDataNascimento());
+        corPele.setSelection(clienteDetalhado.getCorPele());
+        corOlhos.setSelection(clienteDetalhado.getCorOlhos());
+        sexo.setSelection(clienteDetalhado.getSexo());
+        nomePai.setText(clienteDetalhado.getNomePai());
+        nomeMae.setText(clienteDetalhado.getNomeMae());
+        estadoCivil.setSelection(clienteDetalhado.getEstadoCivil());
+        cpf.setText(clienteDetalhado.getCpf());
+        identidade.setText(clienteDetalhado.getIdentidade());
+        regiao.setText(clienteDetalhado.getRegiao());
+        logradouro.setText(clienteDetalhado.getEndereco().getLogradouro());
+        numero.setText(Integer.toString(clienteDetalhado.getEndereco().getNumero()));
+        bairro.setText(clienteDetalhado.getEndereco().getBairro());
+        cidade.setText(clienteDetalhado.getEndereco().getCidade());
+        uf.setText(clienteDetalhado.getEndereco().getUf());
+        pais.setText(clienteDetalhado.getEndereco().getPais());
+        pontoReferencia.setText(clienteDetalhado.getEndereco().getPontoreferencia());
+        cep.setText(clienteDetalhado.getEndereco().getCep());
 
         buttonEditar.setOnClickListener(new View.OnClickListener() {
 
@@ -114,34 +130,43 @@ public class ClientesEditDelActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 boolean verificador = testarCampoVazio();
-                DatabaseUsuario databaseUsuario;
+                DatabaseCliente databaseCliente;
                 SQLiteDatabase conn;
                 int qtdAtualizadas;
 
                 if(!verificador) {
 
                     try {
-                        databaseUsuario = new DatabaseUsuario(ClientesEditDelActivity.this);
-                        conn = databaseUsuario.getWritableDatabase();
-                        UsuarioDao dao = new UsuarioDao(conn);
-                        Usuario usuario = new Usuario();
-                        usuario.setId(usuarioDetalhado.getId());
-                        usuario.setNome(nome.getText().toString());
-                        usuario.setSobreNome(sobreNome.getText().toString());
-                        usuario.setDataNascimento(dataNascimento.getText().toString());
-                        usuario.setCorPele(corPele.getSelectedItemPosition());
-                        usuario.setCorOlhos(corOlhos.getSelectedItemPosition());
-                        usuario.setSexo(sexo.getSelectedItemPosition());
-                        usuario.setNomePai(nomePai.getText().toString());
-                        usuario.setNomeMae(nomeMae.getText().toString());
-                        usuario.setEstadoCivil(estadoCivil.getSelectedItemPosition());
-                        usuario.setCpf(cpf.getText().toString());
-                        usuario.setIdentidade(identidade.getText().toString());
-                        usuario.setEmail(email.getText().toString());
-                        usuario.setSenha(senha.getText().toString());
-                        usuario.setDataAdmissao(usuarioDetalhado.getDataAdmissao());
-                        usuario.setNivel(nivelAcesso.getSelectedItemPosition());
-                        qtdAtualizadas = dao.atualizar(usuario);
+                        databaseCliente = new DatabaseCliente(ClientesEditDelActivity.this);
+                        conn = databaseCliente.getWritableDatabase();
+                        ClienteDao dao = new ClienteDao(conn);
+                        Cliente cliente = new Cliente();
+                        Endereco endereco = new Endereco();
+                        cliente.setId(clienteDetalhado.getId());
+                        cliente.setNome(nome.getText().toString());
+                        cliente.setSobreNome(sobreNome.getText().toString());
+                        cliente.setDataNascimento(dataNascimento.getText().toString());
+                        cliente.setCorPele(corPele.getSelectedItemPosition());
+                        cliente.setCorOlhos(corOlhos.getSelectedItemPosition());
+                        cliente.setSexo(sexo.getSelectedItemPosition());
+                        cliente.setNomePai(nomePai.getText().toString());
+                        cliente.setNomeMae(nomeMae.getText().toString());
+                        cliente.setEstadoCivil(estadoCivil.getSelectedItemPosition());
+                        cliente.setCpf(cpf.getText().toString());
+                        cliente.setIdentidade(identidade.getText().toString());
+                        cliente.setRegiao(regiao.getText().toString());
+                        cliente.setPontos(0);
+                        endereco.setId(clienteDetalhado.getEndereco().getId());
+                        endereco.setLogradouro(logradouro.getText().toString());
+                        endereco.setNumero(Integer.parseInt(numero.getText().toString()));
+                        endereco.setBairro(bairro.getText().toString());
+                        endereco.setCidade(cidade.getText().toString());
+                        endereco.setUf(uf.getText().toString());
+                        endereco.setPais(pais.getText().toString());
+                        endereco.setPontoreferencia(pontoReferencia.getText().toString());
+                        endereco.setCep(cep.getText().toString());
+                        cliente.setEndereco(endereco);
+                        qtdAtualizadas = dao.atualizar(cliente);
                         dao.fechar();
 
                         Toast.makeText(ClientesEditDelActivity.this, "Foram atualizados " + qtdAtualizadas + " campos", Toast.LENGTH_SHORT).show();
@@ -200,13 +225,48 @@ public class ClientesEditDelActivity extends AppCompatActivity {
                     return true;
                 }
 
-                if(TextUtils.isEmpty(email.getText().toString())) {
-                    Toast.makeText(ClientesEditDelActivity.this, "Campo email esta vazio.", Toast.LENGTH_SHORT).show();
+                if(TextUtils.isEmpty(logradouro.getText().toString())) {
+                    Toast.makeText(ClientesEditDelActivity.this, "Campo Logradouro esta vazio.", Toast.LENGTH_SHORT).show();
                     return true;
                 }
 
-                if(TextUtils.isEmpty(senha.getText().toString())) {
-                    Toast.makeText(ClientesEditDelActivity.this, "Campo Senha esta vazio.", Toast.LENGTH_SHORT).show();
+                if(TextUtils.isEmpty(numero.getText().toString())) {
+                    Toast.makeText(ClientesEditDelActivity.this, "Campo Numero esta vazio.", Toast.LENGTH_SHORT).show();
+                    return true;
+                }
+
+                if(TextUtils.isEmpty(bairro.getText().toString())) {
+                    Toast.makeText(ClientesEditDelActivity.this, "Campo Bairro esta vazio.", Toast.LENGTH_SHORT).show();
+                    return true;
+                }
+
+                if(TextUtils.isEmpty(cidade.getText().toString())) {
+                    Toast.makeText(ClientesEditDelActivity.this, "Campo Cidade esta vazio.", Toast.LENGTH_SHORT).show();
+                    return true;
+                }
+
+                if(TextUtils.isEmpty(uf.getText().toString())) {
+                    Toast.makeText(ClientesEditDelActivity.this, "Campo Uf esta vazio.", Toast.LENGTH_SHORT).show();
+                    return true;
+                }
+
+                if(TextUtils.isEmpty(pais.getText().toString())) {
+                    Toast.makeText(ClientesEditDelActivity.this, "Campo País esta vazio.", Toast.LENGTH_SHORT).show();
+                    return true;
+                }
+
+                if(TextUtils.isEmpty(pontoReferencia.getText().toString())) {
+                    Toast.makeText(ClientesEditDelActivity.this, "Campo Ponto de Referencia esta vazio.", Toast.LENGTH_SHORT).show();
+                    return true;
+                }
+
+                if(TextUtils.isEmpty(cep.getText().toString())) {
+                    Toast.makeText(ClientesEditDelActivity.this, "Campo Cep esta vazio.", Toast.LENGTH_SHORT).show();
+                    return true;
+                }
+
+                if(TextUtils.isEmpty(regiao.getText().toString())) {
+                    Toast.makeText(ClientesEditDelActivity.this, "Campo Região esta vazio.", Toast.LENGTH_SHORT).show();
                     return true;
                 }
 
@@ -223,34 +283,35 @@ public class ClientesEditDelActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                DatabaseUsuario databaseUsuario;
+                DatabaseCliente databaseCliente;
                 SQLiteDatabase conn;
 
 
-                    try {
-                        databaseUsuario = new DatabaseUsuario(ClientesEditDelActivity.this);
-                        conn = databaseUsuario.getWritableDatabase();
-                        UsuarioDao dao = new UsuarioDao(conn);
-                        dao.deletar(usuarioDetalhado.getId());
-                        dao.fechar();
+                try {
+                    databaseCliente = new DatabaseCliente(ClientesEditDelActivity.this);
+                    conn = databaseCliente.getWritableDatabase();
+                    ClienteDao dao = new ClienteDao(conn);
+                    dao.deletar(clienteDetalhado.getId(),clienteDetalhado.getEndereco().getId());
+                    dao.fechar();
 
-                        Toast.makeText(ClientesEditDelActivity.this, "Usuário deletado com sucesso.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ClientesEditDelActivity.this, "Cliente deletado com sucesso.", Toast.LENGTH_SHORT).show();
 
-                        Intent it = new Intent(ClientesEditDelActivity.this,ClientesActivity.class);
-                        startActivity(it);
+                    Intent it = new Intent(ClientesEditDelActivity.this,ClientesActivity.class);
+                    startActivity(it);
 
 
-                    }
-                    catch (SQLException e){
+                }
+                catch (SQLException e){
 
-                        Toast.makeText(ClientesEditDelActivity.this,"Erro: " + e.getMessage(),Toast.LENGTH_LONG).show();
+                    Toast.makeText(ClientesEditDelActivity.this,"Erro: " + e.getMessage(),Toast.LENGTH_LONG).show();
 
-                    }
+                }
 
             }
 
 
         });
+
 
     }
 

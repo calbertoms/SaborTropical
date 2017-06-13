@@ -17,7 +17,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".Telas.MainActivity" />
-        <activity android:name=".Telas.ClientesActivity" />
         <activity
             android:name=".Telas.LoginActivity"
             android:label="@string/title_activity_login">
@@ -28,13 +27,21 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Telas.Usuario.UsuariosActivity"
-            android:label="@string/title_activity_usuarios" />
+        android:name=".Telas.Usuario.UsuariosActivity"
+        android:label="@string/title_activity_usuarios" />
         <activity
             android:name=".Telas.Usuario.UsuariosCadActivity"
             android:label="@string/title_activity_usuarios_cad" />
         <activity android:name=".Telas.Usuario.UsuariosEditDelActivity"
             android:label="@string/title_activity_usuarios_edit_del"/>
+        <activity
+            android:name=".Telas.Cliente.ClientesActivity"
+            android:label="@string/title_activity_clientes" />
+        <activity
+            android:name=".Telas.Cliente.ClientesCadActivity"
+            android:label="@string/title_activity_clientes_cad" />
+        <activity android:name=".Telas.Cliente.ClientesEditDelActivity"
+            android:label="@string/title_activity_clientes_edit_del"/>
     </application>
 
 </manifest>

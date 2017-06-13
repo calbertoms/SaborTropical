@@ -6,6 +6,8 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 import com.alberto.carlos.sabortropical.Entidades.Cliente;
+import com.alberto.carlos.sabortropical.Entidades.Endereco;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,6 +21,8 @@ public class ClienteDao {
     private static final String CATEGORIA = "Sabor Tropical";
     //Nome da tabela
     private static final String NOME_TABELA_PESSOA = "pessoas";
+    //Nome da tabela
+    private static final String NOME_TABELA_ENDERECO = "endereco";
     //Nome da tabela
     private static final String NOME_TABELA_CLIENTE = "clientes";
 
@@ -47,21 +51,40 @@ public class ClienteDao {
         valuesPessoa.put("cpf", cliente.getCpf());
         valuesPessoa.put("identidade", cliente.getIdentidade());
 
-        Long id = inserirPessoa(valuesPessoa);
+        Long id_pessoa = inserirPessoa(valuesPessoa);
+
+        ContentValues valuesEndereco = new ContentValues();
+        valuesEndereco.put("logradouro", cliente.getEndereco().getLogradouro());
+        valuesEndereco.put("numero", cliente.getEndereco().getNumero());
+        valuesEndereco.put("bairro", cliente.getEndereco().getBairro());
+        valuesEndereco.put("cidade", cliente.getEndereco().getCidade());
+        valuesEndereco.put("uf", cliente.getEndereco().getUf());
+        valuesEndereco.put("pais", cliente.getEndereco().getPais());
+        valuesEndereco.put("pontoReferencia", cliente.getEndereco().getPontoreferencia());
+        valuesEndereco.put("cep", cliente.getEndereco().getCep());
+
+        Long id_endereco = inserirEndereco(valuesEndereco);
 
         ContentValues valuescliente = new ContentValues();
-        valuescliente.put("id", id);
+        valuescliente.put("id_pessoa", id_pessoa);
+        valuescliente.put("id_endereco", id_endereco);
         valuescliente.put("regiao", cliente.getRegiao());
         valuescliente.put("pontos", cliente.getPontos());
 
         inserirCliente(valuescliente);
-        return id;
+        return id_pessoa;
 
     }
 
     //metodo inseri pessoa no banco
     private Long inserirPessoa(ContentValues values) {
         Long id = conn.insert(NOME_TABELA_PESSOA, null, values);
+        return id;
+    }
+
+    //metodo inseri pessoa no banco
+    private Long inserirEndereco(ContentValues values) {
+        Long id = conn.insert(NOME_TABELA_ENDERECO, null, values);
         return id;
     }
 
@@ -87,19 +110,37 @@ public class ClienteDao {
         valuesPessoa.put("cpf", cliente.getCpf());
         valuesPessoa.put("identidade", cliente.getIdentidade());
 
-        String id = String.valueOf(cliente.getId());
+        String id_pessoa = String.valueOf(cliente.getId());
         String where = "id=?";
-        String[] whereArgs = new String[] { id };
+        String[] whereArgs = new String[] { id_pessoa };
         int countPessoa = atualizarPessoa(valuesPessoa, where, whereArgs);
+
+        ContentValues valuesEndereco = new ContentValues();
+        valuesEndereco.put("logradouro", cliente.getEndereco().getLogradouro());
+        valuesEndereco.put("numero", cliente.getEndereco().getNumero());
+        valuesEndereco.put("bairro", cliente.getEndereco().getBairro());
+        valuesEndereco.put("cidade", cliente.getEndereco().getCidade());
+        valuesEndereco.put("uf", cliente.getEndereco().getUf());
+        valuesEndereco.put("pais", cliente.getEndereco().getPais());
+        valuesEndereco.put("pontoReferencia", cliente.getEndereco().getPontoreferencia());
+        valuesEndereco.put("cep", cliente.getEndereco().getCep());
+
+        String id_endereco = String.valueOf(cliente.getEndereco().getId());
+        where = "id=?";
+        whereArgs = new String[] { id_endereco };
+        int countEndereco = atualizarEndereco(valuesEndereco, where, whereArgs);
 
         ContentValues valuescliente = new ContentValues();
 
         valuescliente.put("regiao", cliente.getRegiao());
         valuescliente.put("pontos", cliente.getPontos());
+
+        where = "id_pessoa=? AND id_endereco=?";
+        whereArgs = new String[] { id_pessoa, id_endereco };
         int countcliente = atualizarcliente(valuescliente, where, whereArgs);
 
 
-        int count = countPessoa + countcliente;
+        int count = countPessoa + countcliente + countEndereco;
         return count;
 
     }
@@ -108,6 +149,15 @@ public class ClienteDao {
     private int atualizarPessoa(ContentValues values, String where, String[] whereArgs) {
 
         int count = conn.update(NOME_TABELA_PESSOA, values, where, whereArgs);
+        Log.i(CATEGORIA, "Atualizou [" + count + "] registros");
+        return count;
+
+    }
+
+    //metodo atualiza endereco
+    private int atualizarEndereco(ContentValues values, String where, String[] whereArgs) {
+
+        int count = conn.update(NOME_TABELA_ENDERECO, values, where, whereArgs);
         Log.i(CATEGORIA, "Atualizou [" + count + "] registros");
         return count;
 
@@ -124,14 +174,26 @@ public class ClienteDao {
 
 
     //metodo deleta cliente
-    public void deletar(Long id) {
+    public void deletar(Long id_Pessoa, Long id_Endereco) {
 
         String where = "id=?";
-        String _id = String.valueOf(id);
-        String[] whereArgs = new String[] { _id };
+        String id_endereco = String.valueOf(id_Endereco);
+        String[] whereArgs = new String[] { id_endereco };
+        deletarEndereco(where, whereArgs);
+        String id_pessoa = String.valueOf(id_Pessoa);
+        where = "id_pessoa=?";
+        whereArgs = new String[] { id_pessoa };
         deletarCliente(where, whereArgs);
+        where = "id=?";
         deletarPessoa(where, whereArgs);
 
+    }
+
+    //metodo deleta pessoa
+    private void deletarEndereco(String where, String[] whereArgs) {
+
+        conn.delete(NOME_TABELA_ENDERECO, where, whereArgs);
+        Log.i(CATEGORIA, "Deletou registro");
     }
 
     //metodo deleta cliente
@@ -154,7 +216,7 @@ public class ClienteDao {
     public Cursor getCursor() {
 
         try {
-            Cursor cursor =  conn.rawQuery("SELECT t1.id,t1.nome,t1.sobreNome,t1.dataNascimento,t1.corPele,t1.corOlhos,t1.sexo,t1.nomePai,t1.nomeMae,t1.estadoCivil,t1.cpf,t1.identidade,t2.email,t2.senha,t2.dataAdmissao,t2.nivelAcesso FROM pessoas t1 INNER JOIN clientes t2 ON (t1.id = t2.id)", null);
+            Cursor cursor =  conn.rawQuery("SELECT t1.id,t1.nome,t1.sobreNome,t1.dataNascimento,t1.corPele,t1.corOlhos,t1.sexo,t1.nomePai,t1.nomeMae,t1.estadoCivil,t1.cpf,t1.identidade,t2.id_pessoa,t2.id_endereco,t2.regiao,t2.pontos,t3.logradouro,t3.numero,t3.bairro,t3.cidade,t3.uf,t3.pais,t3.pontoReferencia,t3.cep FROM pessoas t1 INNER JOIN clientes t2 ON (t1.id = t2.id_pessoa) INNER JOIN endereco t3 ON (t2.id_endereco = t3.id)", null);
             return cursor;
         } catch (SQLException e) {
             Log.d(CATEGORIA, "Erro ao buscar os clientes: " + e.toString());
@@ -177,7 +239,8 @@ public class ClienteDao {
         while(c.moveToNext()) {
             //Recupera os indices das colunas
             Cliente cliente = new Cliente();
-            cliente.setId(c.getLong(c.getColumnIndex("id")));
+            Endereco endereco = new Endereco();
+            cliente.setId(c.getLong(c.getColumnIndex("id_pessoa")));
             cliente.setNome(c.getString(c.getColumnIndex("nome")));
             cliente.setSobreNome(c.getString(c.getColumnIndex("sobreNome")));
             cliente.setDataNascimento(c.getString(c.getColumnIndex("dataNascimento")));
@@ -191,6 +254,16 @@ public class ClienteDao {
             cliente.setIdentidade(c.getString(c.getColumnIndex("identidade")));
             cliente.setRegiao(c.getString(c.getColumnIndex("regiao")));
             cliente.setPontos(c.getInt(c.getColumnIndex("pontos")));
+            endereco.setId(c.getLong(c.getColumnIndex("id_endereco")));
+            endereco.setLogradouro(c.getString(c.getColumnIndex("logradouro")));
+            endereco.setNumero(c.getInt(c.getColumnIndex("numero")));
+            endereco.setBairro(c.getString(c.getColumnIndex("bairro")));
+            endereco.setCidade(c.getString(c.getColumnIndex("cidade")));
+            endereco.setUf(c.getString(c.getColumnIndex("uf")));
+            endereco.setPais(c.getString(c.getColumnIndex("pais")));
+            endereco.setPontoreferencia(c.getString(c.getColumnIndex("pontoReferencia")));
+            endereco.setCep(c.getString(c.getColumnIndex("cep")));
+            cliente.setEndereco(endereco);
            
 
             clientes.add(cliente);

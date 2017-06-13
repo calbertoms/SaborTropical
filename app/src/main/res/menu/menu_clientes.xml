@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools" tools:context=".Telas.MainActivity">
 
     <item android:title="@string/action_novoUsuario"
-          android:id="@+id/action_novoUsuario"
+          android:id="@+id/action_novoCliente"
           android:orderInCategory="100"
           app:showAsAction="never"/>
 </menu>

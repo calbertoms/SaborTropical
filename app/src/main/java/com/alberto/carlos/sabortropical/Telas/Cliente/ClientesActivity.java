@@ -13,9 +13,9 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.alberto.carlos.sabortropical.BancoDeDados.DatabaseUsuario;
-import com.alberto.carlos.sabortropical.Dao.UsuarioDao;
-import com.alberto.carlos.sabortropical.Entidades.Usuario;
+import com.alberto.carlos.sabortropical.BancoDeDados.DatabaseCliente;
+import com.alberto.carlos.sabortropical.Dao.ClienteDao;
+import com.alberto.carlos.sabortropical.Entidades.Cliente;
 import com.alberto.carlos.sabortropical.R;
 
 import java.util.List;
@@ -23,30 +23,30 @@ import java.util.List;
 //classe principal
 public class ClientesActivity extends AppCompatActivity {
 
-    private ListView listaUsuarios;
-    private DatabaseUsuario databaseUsuario;
+    private ListView listaClientes;
+    private DatabaseCliente databaseCliente;
     private SQLiteDatabase conn;
-    private long idUsuario;
-    Usuario usuarioSelecionado;
+    private long idCliente;
+    Cliente clienteSelecionado;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_usuarios);
+        setContentView(R.layout.activity_clientes);
 
-        listaUsuarios = (ListView) findViewById(R.id.lista_de_usuarios);
+        listaClientes = (ListView) findViewById(R.id.lista_de_clientes);
 
-        registerForContextMenu(listaUsuarios);
+        registerForContextMenu(listaClientes);
 
         try {
-            databaseUsuario = new DatabaseUsuario(ClientesActivity.this);
-            conn = databaseUsuario.getReadableDatabase();
-            UsuarioDao dao = new UsuarioDao(conn);
-            List<Usuario> usuarios = dao.listarUsuarios();
-            ArrayAdapter<Usuario> adapter = new ArrayAdapter<Usuario>
-                    (ClientesActivity.this, android.R.layout.simple_list_item_1, usuarios);
+            databaseCliente = new DatabaseCliente(ClientesActivity.this);
+            conn = databaseCliente.getReadableDatabase();
+            ClienteDao dao = new ClienteDao(conn);
+            List<Cliente> clientes = dao.listarClientes();
+            ArrayAdapter<Cliente> adapter = new ArrayAdapter<Cliente>
+                    (ClientesActivity.this, android.R.layout.simple_list_item_1, clientes);
 
-            listaUsuarios.setAdapter(adapter);
+            listaClientes.setAdapter(adapter);
 
         }
         catch (SQLException e){
@@ -56,14 +56,13 @@ public class ClientesActivity extends AppCompatActivity {
         }
 
         // OnCLickListiner For List Items
-        listaUsuarios.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        listaClientes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long viewId) {
 
                 Intent editar = new Intent(ClientesActivity.this, ClientesEditDelActivity.class);
-                usuarioSelecionado = (Usuario) listaUsuarios.getItemAtPosition(position);
-
-                editar.putExtra("usuarioSelecionado", usuarioSelecionado);
+                clienteSelecionado = (Cliente) listaClientes.getItemAtPosition(position);
+                editar.putExtra("clienteSelecionado", clienteSelecionado);
                 startActivity(editar);
             }
         });
@@ -74,7 +73,7 @@ public class ClientesActivity extends AppCompatActivity {
     //cria o menu
     public boolean onCreateOptionsMenu(Menu menu){
 
-        getMenuInflater().inflate(R.menu.menu_usuarios, menu);
+        getMenuInflater().inflate(R.menu.menu_clientes, menu);
 
         return true;
 
@@ -86,7 +85,7 @@ public class ClientesActivity extends AppCompatActivity {
 
         int id = item.getItemId();
 
-        if (id == R.id.action_novoUsuario){
+        if (id == R.id.action_novoCliente){
 
              Intent it = new Intent(this,ClientesCadActivity.class);
              startActivity(it);

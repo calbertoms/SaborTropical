@@ -13,8 +13,12 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.alberto.carlos.sabortropical.BancoDeDados.DatabaseCliente;
 import com.alberto.carlos.sabortropical.BancoDeDados.DatabaseUsuario;
+import com.alberto.carlos.sabortropical.Dao.ClienteDao;
 import com.alberto.carlos.sabortropical.Dao.UsuarioDao;
+import com.alberto.carlos.sabortropical.Entidades.Cliente;
+import com.alberto.carlos.sabortropical.Entidades.Endereco;
 import com.alberto.carlos.sabortropical.Entidades.Usuario;
 import com.alberto.carlos.sabortropical.R;
 import com.alberto.carlos.sabortropical.utilitarios.Mask;
@@ -26,7 +30,7 @@ public class ClientesCadActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_usuarios_cad);
+        setContentView(R.layout.activity_clientes_cad);
 
         final EditText nome = (EditText) findViewById(R.id.campo_nome);
 
@@ -76,17 +80,23 @@ public class ClientesCadActivity extends AppCompatActivity {
         final EditText identidade = (EditText) findViewById(R.id.campo_identidade);
         identidade.addTextChangedListener(Mask.insert("#.###-###", identidade));
 
-        final EditText email = (EditText) findViewById(R.id.campo_email);
+        final EditText logradouro = (EditText) findViewById(R.id.campo_logradouro);
 
-        final EditText senha = (EditText) findViewById(R.id.campo_senha);
+        final EditText numero = (EditText) findViewById(R.id.campo_numero);
 
-        final String[] strNIvelAcesso = new String[]{"Usuário","Administrador"};
-        adapter = new ArrayAdapter<String>
-                (this, android.R.layout.simple_spinner_dropdown_item, strNIvelAcesso);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        final EditText bairro = (EditText) findViewById(R.id.campo_bairro);
 
-        final Spinner nivelAcesso = (Spinner) findViewById(R.id.campo_nivelAcesso);
-        nivelAcesso.setAdapter(adapter);
+        final EditText cidade = (EditText) findViewById(R.id.campo_cidade);
+
+        final EditText uf = (EditText) findViewById(R.id.campo_uf);
+
+        final EditText pais = (EditText) findViewById(R.id.campo_pais);
+
+        final EditText pontoReferencia = (EditText) findViewById(R.id.campo_pontoReferencia);
+
+        final EditText cep = (EditText) findViewById(R.id.campo_cep);
+
+        final EditText regiao = (EditText) findViewById(R.id.campo_regiao);
 
         Button buttonSalvar = (Button) findViewById(R.id.botao_salvar);
 
@@ -98,36 +108,44 @@ public class ClientesCadActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 boolean verificador = testarCampoVazio();
-                DatabaseUsuario databaseUsuario;
+                DatabaseCliente databaseCliente;
                 SQLiteDatabase conn;
-                long idUsuario;
+                long idcliente;
 
                 if(!verificador) {
 
                     try {
-                        databaseUsuario = new DatabaseUsuario(ClientesCadActivity.this);
-                        conn = databaseUsuario.getWritableDatabase();
-                        UsuarioDao dao = new UsuarioDao(conn);
-                        Usuario usuario = new Usuario();
-                        usuario.setNome(nome.getText().toString());
-                        usuario.setSobreNome(sobreNome.getText().toString());
-                        usuario.setDataNascimento(dataNascimento.getText().toString());
-                        usuario.setCorPele(corPele.getSelectedItemPosition());
-                        usuario.setCorOlhos(corOlhos.getSelectedItemPosition());
-                        usuario.setSexo(sexo.getSelectedItemPosition());
-                        usuario.setNomePai(nomePai.getText().toString());
-                        usuario.setNomeMae(nomeMae.getText().toString());
-                        usuario.setEstadoCivil(estadoCivil.getSelectedItemPosition());
-                        usuario.setCpf(cpf.getText().toString());
-                        usuario.setIdentidade(identidade.getText().toString());
-                        usuario.setEmail(email.getText().toString());
-                        usuario.setSenha(senha.getText().toString());
-                        usuario.setDataAdmissao(getDataAtual());
-                        usuario.setNivel(nivelAcesso.getSelectedItemPosition());
-                        idUsuario = dao.inserir(usuario);
+                        databaseCliente = new DatabaseCliente(ClientesCadActivity.this);
+                        conn = databaseCliente.getWritableDatabase();
+                        ClienteDao dao = new ClienteDao(conn);
+                        Cliente cliente = new Cliente();
+                        Endereco endereco = new Endereco();
+                        cliente.setNome(nome.getText().toString());
+                        cliente.setSobreNome(sobreNome.getText().toString());
+                        cliente.setDataNascimento(dataNascimento.getText().toString());
+                        cliente.setCorPele(corPele.getSelectedItemPosition());
+                        cliente.setCorOlhos(corOlhos.getSelectedItemPosition());
+                        cliente.setSexo(sexo.getSelectedItemPosition());
+                        cliente.setNomePai(nomePai.getText().toString());
+                        cliente.setNomeMae(nomeMae.getText().toString());
+                        cliente.setEstadoCivil(estadoCivil.getSelectedItemPosition());
+                        cliente.setCpf(cpf.getText().toString());
+                        cliente.setIdentidade(identidade.getText().toString());
+                        cliente.setRegiao(regiao.getText().toString());
+                        cliente.setPontos(0);
+                        endereco.setLogradouro(logradouro.getText().toString());
+                        endereco.setNumero(Integer.parseInt(numero.getText().toString()));
+                        endereco.setBairro(bairro.getText().toString());
+                        endereco.setCidade(cidade.getText().toString());
+                        endereco.setUf(uf.getText().toString());
+                        endereco.setPais(pais.getText().toString());
+                        endereco.setPontoreferencia(pontoReferencia.getText().toString());
+                        endereco.setCep(cep.getText().toString());
+                        cliente.setEndereco(endereco);
+                        idcliente = dao.inserir(cliente);
                         dao.fechar();
 
-                        Toast.makeText(ClientesCadActivity.this, "Usuário Nº " + idUsuario + " cadastrado com sucesso", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ClientesCadActivity.this, "Cliente Nº " + idcliente + " cadastrado com sucesso", Toast.LENGTH_SHORT).show();
 
                         Intent it = new Intent(ClientesCadActivity.this,ClientesActivity.class);
                         startActivity(it);
@@ -183,27 +201,53 @@ public class ClientesCadActivity extends AppCompatActivity {
                     return true;
                 }
 
-                if(TextUtils.isEmpty(email.getText().toString())) {
-                    Toast.makeText(ClientesCadActivity.this, "Campo email esta vazio.", Toast.LENGTH_SHORT).show();
+                if(TextUtils.isEmpty(logradouro.getText().toString())) {
+                    Toast.makeText(ClientesCadActivity.this, "Campo Logradouro esta vazio.", Toast.LENGTH_SHORT).show();
                     return true;
                 }
 
-                if(TextUtils.isEmpty(senha.getText().toString())) {
-                    Toast.makeText(ClientesCadActivity.this, "Campo Senha esta vazio.", Toast.LENGTH_SHORT).show();
+                if(TextUtils.isEmpty(numero.getText().toString())) {
+                    Toast.makeText(ClientesCadActivity.this, "Campo Numero esta vazio.", Toast.LENGTH_SHORT).show();
+                    return true;
+                }
+
+                if(TextUtils.isEmpty(bairro.getText().toString())) {
+                    Toast.makeText(ClientesCadActivity.this, "Campo Bairro esta vazio.", Toast.LENGTH_SHORT).show();
+                    return true;
+                }
+
+                if(TextUtils.isEmpty(cidade.getText().toString())) {
+                    Toast.makeText(ClientesCadActivity.this, "Campo Cidade esta vazio.", Toast.LENGTH_SHORT).show();
+                    return true;
+                }
+
+                if(TextUtils.isEmpty(uf.getText().toString())) {
+                    Toast.makeText(ClientesCadActivity.this, "Campo Uf esta vazio.", Toast.LENGTH_SHORT).show();
+                    return true;
+                }
+
+                if(TextUtils.isEmpty(pais.getText().toString())) {
+                    Toast.makeText(ClientesCadActivity.this, "Campo País esta vazio.", Toast.LENGTH_SHORT).show();
+                    return true;
+                }
+
+                if(TextUtils.isEmpty(pontoReferencia.getText().toString())) {
+                    Toast.makeText(ClientesCadActivity.this, "Campo Ponto de Referencia esta vazio.", Toast.LENGTH_SHORT).show();
+                    return true;
+                }
+
+                if(TextUtils.isEmpty(cep.getText().toString())) {
+                    Toast.makeText(ClientesCadActivity.this, "Campo Cep esta vazio.", Toast.LENGTH_SHORT).show();
+                    return true;
+                }
+
+                if(TextUtils.isEmpty(regiao.getText().toString())) {
+                    Toast.makeText(ClientesCadActivity.this, "Campo Região esta vazio.", Toast.LENGTH_SHORT).show();
                     return true;
                 }
 
                 return false;
 
-            }
-
-            private String getDataAtual(){
-
-                long date = System.currentTimeMillis();
-                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-                String data = sdf.format(date);
-
-                return data;
             }
 
 

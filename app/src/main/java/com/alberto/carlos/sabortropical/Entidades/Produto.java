@@ -12,7 +12,7 @@ public class Produto {
     private String tipo;
     private String categoria;
     private long temperaturaArmazenagem;
-    private long toleranciaTemperatura;
+    private long temperaturaTolerancia;
     private long maximoEmpilhamento;
     private String fornecedor;
     private String validade;
@@ -20,14 +20,14 @@ public class Produto {
     private long precoCompra;
     private long precoVenda;
 
-    public Produto(long id, String nome, String tipo, String categoria, long temperaturaArmazenagem, long toleranciaTemperatura, long maximoEmpilhamento, String fornecedor, String validade, String dataFabricacao, long precoCompra, long precoVenda){
+    public Produto(long id, String nome, String tipo, String categoria, long temperaturaArmazenagem, long temperaturaTolerancia, long maximoEmpilhamento, String fornecedor, String validade, String dataFabricacao, long precoCompra, long precoVenda){
 
         this.id = id;
         this.nome = nome;
         this.tipo = tipo;
         this.categoria = categoria;
         this.temperaturaArmazenagem = temperaturaArmazenagem;
-        this.toleranciaTemperatura = toleranciaTemperatura;
+        this.temperaturaTolerancia = temperaturaTolerancia;
         this.maximoEmpilhamento = maximoEmpilhamento;
         this.fornecedor = fornecedor;
         this.validade = validade;
@@ -38,13 +38,13 @@ public class Produto {
     }
 
 
-    public Produto(String nome, String tipo, String categoria, long temperaturaArmazenagem, long toleranciaTemperatura, long maximoEmpilhamento, String fornecedor, String validade, String dataFabricacao, long precoCompra, long precoVenda){
+    public Produto(String nome, String tipo, String categoria, long temperaturaArmazenagem, long temperaturaTolerancia, long maximoEmpilhamento, String fornecedor, String validade, String dataFabricacao, long precoCompra, long precoVenda){
 
         this.nome = nome;
         this.tipo = tipo;
         this.categoria = categoria;
         this.temperaturaArmazenagem = temperaturaArmazenagem;
-        this.toleranciaTemperatura = toleranciaTemperatura;
+        this.temperaturaTolerancia = temperaturaTolerancia;
         this.maximoEmpilhamento = maximoEmpilhamento;
         this.fornecedor = fornecedor;
         this.validade = validade;
@@ -98,12 +98,12 @@ public class Produto {
         this.temperaturaArmazenagem = temperaturaArmazenagem;
     }
 
-    public long getToleranciaTemperatura() {
-        return toleranciaTemperatura;
+    public long gettemperaturaTolerancia() {
+        return temperaturaTolerancia;
     }
 
-    public void setToleranciaTemperatura(long toleranciaTemperatura) {
-        this.toleranciaTemperatura = toleranciaTemperatura;
+    public void settemperaturaTolerancia(long temperaturaTolerancia) {
+        this.temperaturaTolerancia = temperaturaTolerancia;
     }
 
     public long getMaximoEmpilhamento() {

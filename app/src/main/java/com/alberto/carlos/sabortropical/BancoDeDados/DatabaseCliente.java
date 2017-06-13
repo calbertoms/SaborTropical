@@ -19,18 +19,26 @@ public class DatabaseCliente extends SQLiteOpenHelper {
                     + "corOlhos integer not null, sexo integer not null, nomePai text not null, nomeMae text not null, "
                     + "estadoCivil integer not null, cpf text not null, identidade text not null); ";
 
+    private static final String SCRIPT_DATABASE_CREATE_ENDERECO =
+            "create table endereco (id integer primary key autoincrement, "
+                    + "logradouro text not null, numero integer not null, bairro text not null, cidade text not null, "
+                    + "uf text not null, pais text not null, pontoReferencia text not null, cep text not null); ";
+
     private static final String SCRIPT_DATABASE_CREATE_CLIENTE=
-                     "create table clientes (id integer references pessoas(id), regiao text not null, pontos integer not null); ";
+                     "create table clientes (id_pessoa integer references pessoas(id), id_endereco integer references endereco(id), regiao text not null, pontos integer not null); ";
 
     //Script para fazer o drop da tabela
     private static final String SCRIPT_DATABASE_DELETE_PESSOA = "DROP TABLE IF EXISTS pessoas;";
+
+    //Script para fazer o drop da tabela
+    private static final String SCRIPT_DATABASE_DELETE_ENDERECO = "DROP TABLE IF EXISTS endereco;";
 
     //Script para fazer o drop da tabela
     private static final String SCRIPT_DATABASE_DELETE_CLIENTE = "DROP TABLE IF EXISTS clientes;";
 
     private static final String FOREING_KEY = "PRAGMA foreign_keys = ON;";
 
-    private static final int VERSAO_BANCO = 8;
+    private static final int VERSAO_BANCO = 9;
 
 
 
@@ -42,6 +50,7 @@ public class DatabaseCliente extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
 
         db.execSQL(SCRIPT_DATABASE_CREATE_PESSOA);
+        db.execSQL(SCRIPT_DATABASE_CREATE_ENDERECO);
         db.execSQL(SCRIPT_DATABASE_CREATE_CLIENTE);
         db.execSQL(FOREING_KEY);
 
@@ -50,10 +59,10 @@ public class DatabaseCliente extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
+        db.execSQL(SCRIPT_DATABASE_DELETE_ENDERECO);
         db.execSQL(SCRIPT_DATABASE_DELETE_CLIENTE);
         db.execSQL(SCRIPT_DATABASE_DELETE_PESSOA);
         onCreate(db);
-
 
     }
 }
