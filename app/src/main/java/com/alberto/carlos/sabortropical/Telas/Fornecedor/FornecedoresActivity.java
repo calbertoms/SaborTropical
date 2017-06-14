@@ -29,7 +29,6 @@ public class FornecedoresActivity extends AppCompatActivity {
     private ListView listaFornecedores;
     private DatabaseFornecedor databaseFornecedor;
     private SQLiteDatabase conn;
-    private long idFornecedor;
     Fornecedor fornecedorSelecionado;
 
     @Override

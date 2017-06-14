@@ -50,6 +50,14 @@
             android:label="@string/title_activity_fornecedores_cad" />
         <activity android:name=".Telas.Fornecedor.FornecedoresEditDelActivity"
             android:label="@string/title_activity_fornecedores_edit_del"/>
+        <activity
+            android:name=".Telas.Armazenamento.ArmazenamentosActivity"
+            android:label="@string/title_activity_armazenamentos" />
+        <activity
+            android:name=".Telas.Armazenamento.ArmazenamentosCadActivity"
+            android:label="@string/title_activity_armazenamentos_cad" />
+        <activity android:name=".Telas.Armazenamento.ArmazenamentosEditDelActivity"
+            android:label="@string/title_activity_armazenamentos_edit_del"/>
     </application>
 
 </manifest>

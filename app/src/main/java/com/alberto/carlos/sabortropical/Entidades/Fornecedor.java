@@ -10,22 +10,24 @@ public class Fornecedor implements Serializable {
 
     private long id;
     private int contrato;
+    private String nome;
     private int status;
     private String nomeResponsavel;
     private String cnpj;
     private String inscEstadual;
-    private double credito;
+    private float credito;
     private String banco;
     private String agencia;
     private String contaCorrente;
-    private String tipoPagamento;
+    private int tipoPagamento;
     private int desempenho;
     private Endereco endereco;
 
-    public Fornecedor (long id, int contrato, int status, String nomeResponsavel, String cnpj, String inscEstadual, double credito, String banco, String agencia, String contaCorrente, String tipoPagamento, int desempenho ){
+    public Fornecedor (long id, int contrato, String nome, int status, String nomeResponsavel, String cnpj, String inscEstadual, float credito, String banco, String agencia, String contaCorrente, int tipoPagamento, int desempenho ){
 
         this.id = id;
         this.contrato = contrato;
+        this.nome = nome;
         this.status = status;
         this.nomeResponsavel = nomeResponsavel;
         this.cnpj = cnpj;
@@ -39,9 +41,10 @@ public class Fornecedor implements Serializable {
 
     }
 
-    public Fornecedor (int contrato, int status, String nomeResponsavel, String cnpj, String inscEstadual, double credito, String banco, String agencia, String contaCorrente, String tipoPagamento, int desempenho ){
+    public Fornecedor (int contrato, String nome, int status, String nomeResponsavel, String cnpj, String inscEstadual, float credito, String banco, String agencia, String contaCorrente, int tipoPagamento, int desempenho ){
 
         this.contrato = contrato;
+        this.nome = nome;
         this.status = status;
         this.nomeResponsavel = nomeResponsavel;
         this.cnpj = cnpj;
@@ -76,6 +79,14 @@ public class Fornecedor implements Serializable {
         this.contrato = contrato;
     }
 
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
     public int getStatus() {
         return status;
     }
@@ -108,11 +119,11 @@ public class Fornecedor implements Serializable {
         this.inscEstadual = inscEstadual;
     }
 
-    public double getCredito() {
+    public float getCredito() {
         return credito;
     }
 
-    public void setCredito(double credito) {
+    public void setCredito(float credito) {
         this.credito = credito;
     }
 
@@ -140,11 +151,11 @@ public class Fornecedor implements Serializable {
         this.contaCorrente = contaCorrente;
     }
 
-    public String getTipoPagamento() {
+    public int getTipoPagamento() {
         return tipoPagamento;
     }
 
-    public void setTipoPagamento(String tipoPagamento) {
+    public void setTipoPagamento(int tipoPagamento) {
         this.tipoPagamento = tipoPagamento;
     }
 
@@ -163,4 +174,10 @@ public class Fornecedor implements Serializable {
     public void setEndereco(Endereco endereco) {
         this.endereco = endereco;
     }
+
+    @Override
+    public String toString() {
+        return this.getId() + " - " + this.getNome() + " - " + this.getContrato();
+    }
+
 }

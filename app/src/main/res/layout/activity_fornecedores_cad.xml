@@ -1,6 +1,260 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    >
+    <LinearLayout
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="CADASTRO DE FORNECEDOR"
+            android:layout_gravity="center"
+            />
 
-</LinearLayout>
+        <TableLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:stretchColumns="1">
+
+            <TableRow >
+                <TextView
+                    android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="Contrato:"
+                    />
+                <EditText
+                    android:layout_width="fill_parent" android:layout_height="wrap_content"
+                    android:id="@+id/campo_contrato"
+                    android:inputType="number"
+                    />
+            </TableRow>
+
+            <TableRow >
+                <TextView
+                    android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="Nome:"
+                    />
+                <EditText
+                    android:layout_width="fill_parent" android:layout_height="wrap_content"
+                    android:id="@+id/campo_nome"
+                    />
+            </TableRow>
+
+            <TableRow >
+                <TextView
+                    android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="Status:"
+                    />
+                <Spinner
+                    android:id="@+id/campo_status"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content" />
+            </TableRow>
+
+            <TableRow >
+                <TextView
+                    android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="Responsavel:"
+                    />
+                <EditText
+                    android:layout_width="fill_parent" android:layout_height="wrap_content"
+                    android:id="@+id/campo_responsavel"
+                    />
+            </TableRow>
+
+            <TableRow >
+                <TextView
+                    android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="Cnpj:"
+                    />
+
+                <EditText
+                    android:layout_width="fill_parent" android:layout_height="wrap_content"
+                    android:id="@+id/campo_cnpj"
+                    android:inputType="text"
+                    />
+            </TableRow>
+
+            <TableRow >
+                <TextView
+                    android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="Insc.Estadual:"
+                    />
+                <EditText
+                    android:layout_width="fill_parent" android:layout_height="wrap_content"
+                    android:id="@+id/campo_inscEstadual"
+                    />
+            </TableRow>
+
+            <TableRow >
+                <TextView
+                    android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="Crédito:"
+                    />
+
+                <EditText
+                    android:layout_width="fill_parent" android:layout_height="wrap_content"
+                    android:id="@+id/campo_credito"
+                    android:inputType="numberDecimal"
+                    />
+            </TableRow>
+
+            <TableRow >
+                <TextView
+                    android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="Banco:"
+                    />
+
+                <EditText
+                    android:layout_width="fill_parent" android:layout_height="wrap_content"
+                    android:id="@+id/campo_banco"
+                    />
+            </TableRow>
+
+            <TableRow >
+                <TextView
+                    android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="Agência:"
+                    />
+
+                <EditText
+                    android:layout_width="fill_parent" android:layout_height="wrap_content"
+                    android:id="@+id/campo_agencia"
+                    />
+            </TableRow>
+
+            <TableRow >
+                <TextView
+                    android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="Conta Corrente:"
+                    />
+
+                <EditText
+                    android:layout_width="fill_parent" android:layout_height="wrap_content"
+                    android:id="@+id/campo_contaCorrente"
+                    />
+            </TableRow>
+
+            <TableRow >
+                <TextView
+                    android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="Tipo de Pagamento:"
+                    />
+                <Spinner
+                    android:id="@+id/campo_tipoPagamento"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content" />
+            </TableRow>
+
+            <TableRow >
+                <TextView
+                    android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="Logradouro:"
+                    />
+
+                <EditText
+                    android:layout_width="fill_parent" android:layout_height="wrap_content"
+                    android:id="@+id/campo_logradouro"
+                    />
+            </TableRow>
+
+            <TableRow >
+                <TextView
+                    android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="numero:"
+                    />
+
+                <EditText
+                    android:layout_width="fill_parent" android:layout_height="wrap_content"
+                    android:id="@+id/campo_numero"
+                    android:inputType="number"
+                    />
+            </TableRow>
+
+            <TableRow >
+                <TextView
+                    android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="Bairro:"
+                    />
+                <EditText
+                    android:layout_width="fill_parent" android:layout_height="wrap_content"
+                    android:id="@+id/campo_bairro"
+                    android:inputType="text"
+                    />
+            </TableRow>
+
+            <TableRow >
+                <TextView
+                    android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="Cidade:"
+                    />
+                <EditText
+                    android:layout_width="fill_parent" android:layout_height="wrap_content"
+                    android:id="@+id/campo_cidade"
+                    android:inputType="text"
+                    />
+            </TableRow>
+
+            <TableRow >
+                <TextView
+                    android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="Uf:"
+                    />
+                <EditText
+                    android:layout_width="fill_parent" android:layout_height="wrap_content"
+                    android:id="@+id/campo_uf"
+                    android:inputType="text"
+                    />
+            </TableRow>
+
+            <TableRow >
+                <TextView
+                    android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="País:"
+                    />
+                <EditText
+                    android:layout_width="fill_parent" android:layout_height="wrap_content"
+                    android:id="@+id/campo_pais"
+                    android:inputType="text"
+                    />
+            </TableRow>
+
+            <TableRow >
+                <TextView
+                    android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="Ponto Referencia:"
+                    />
+                <EditText
+                    android:layout_width="fill_parent" android:layout_height="wrap_content"
+                    android:id="@+id/campo_pontoReferencia"
+                    android:inputType="text"
+                    />
+            </TableRow>
+
+            <TableRow >
+                <TextView
+                    android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="Cep:"
+                    />
+                <EditText
+                    android:layout_width="fill_parent" android:layout_height="wrap_content"
+                    android:id="@+id/campo_cep"
+                    android:inputType="text"
+                    />
+            </TableRow>
+
+            <Button
+                android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:id="@+id/botao_salvar"
+                android:layout_gravity="center"
+                android:text="Salvar"
+                android:onClick="Salvar"
+                />
+
+        </TableLayout>
+    </LinearLayout>
+</ScrollView>
+

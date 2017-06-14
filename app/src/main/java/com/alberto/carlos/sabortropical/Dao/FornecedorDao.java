@@ -36,7 +36,7 @@ public class FornecedorDao {
     }
 
     //metodo inserir fornecedor
-    public Long inserir(Fornecedor fornecedor) {
+    public Long inserir(Fornecedor fornecedor) throws SQLException {
 
         ContentValues valuesEndereco = new ContentValues();
         valuesEndereco.put("logradouro", fornecedor.getEndereco().getLogradouro());
@@ -53,6 +53,7 @@ public class FornecedorDao {
         ContentValues valuesFornecedor = new ContentValues();
         valuesFornecedor.put("id_endereco", id_endereco);
         valuesFornecedor.put("contrato", fornecedor.getContrato());
+        valuesFornecedor.put("nome", fornecedor.getNome());
         valuesFornecedor.put("status", fornecedor.getStatus());
         valuesFornecedor.put("responsavel", fornecedor.getNomeResponsavel());
         valuesFornecedor.put("cnpj", fornecedor.getCnpj());
@@ -71,19 +72,19 @@ public class FornecedorDao {
     }
 
     //metodo inseri fornecedor no banco
-    private Long inserirFornecedor(ContentValues values) {
+    private Long inserirFornecedor(ContentValues values) throws SQLException {
         Long id = conn.insert(NOME_TABELA_FORNECEDOR, null, values);
         return id;
     }
 
     //metodo inseri endereco no banco
-    private Long inserirEndereco(ContentValues values) {
+    private Long inserirEndereco(ContentValues values) throws SQLException {
         Long id = conn.insert(NOME_TABELA_ENDERECO, null, values);
         return id;
     }
 
     //metodo atualiza Fornecedor
-    public int atualizar(Fornecedor fornecedor) {
+    public int atualizar(Fornecedor fornecedor)  {
 
         ContentValues valuesEndereco = new ContentValues();
         valuesEndereco.put("logradouro", fornecedor.getEndereco().getLogradouro());
@@ -102,6 +103,7 @@ public class FornecedorDao {
 
         ContentValues valuesFornecedor = new ContentValues();
         valuesFornecedor.put("contrato", fornecedor.getContrato());
+        valuesFornecedor.put("nome", fornecedor.getNome());
         valuesFornecedor.put("status", fornecedor.getStatus());
         valuesFornecedor.put("responsavel", fornecedor.getNomeResponsavel());
         valuesFornecedor.put("cnpj", fornecedor.getCnpj());
@@ -173,21 +175,16 @@ public class FornecedorDao {
     }
 
     //Retorna o cursor com todos os clientes
-    public Cursor getCursor() {
+    public Cursor getCursor() throws SQLException {
 
-        try {
-            Cursor cursor =  conn.rawQuery("SELECT t1.id,t1.id_endereco,t1.contrato,t1.status,t1.responsavel,t1.cnpj,t1.inscEstadual,t1.credito,t1.banco,t1.agencia,t1.contaCorrente,t1.tipoPagamento,t1.desempenho,t2.logradouro,t2.numero,t2.bairro,t2.cidade,t2.uf,t2.pais,t2.pontoReferencia,t2.cep FROM fornecedor t1 INNER JOIN endereco t2 ON (t1.id_endereco = t2.id) ", null);
-            return cursor;
-        } catch (SQLException e) {
-            Log.d(CATEGORIA, "Erro ao buscar os fornecedores: " + e.toString());
-            return null;
-        }
+        Cursor cursor =  conn.rawQuery("SELECT t1.id,t1.id_endereco,t1.contrato,t1.nome,t1.status,t1.responsavel,t1.cnpj,t1.inscEstadual,t1.credito,t1.banco,t1.agencia,t1.contaCorrente,t1.tipoPagamento,t1.desempenho,t2.logradouro,t2.numero,t2.bairro,t2.cidade,t2.uf,t2.pais,t2.pontoReferencia,t2.cep FROM fornecedor t1 INNER JOIN endereco t2 ON (t1.id_endereco = t2.id); ", null);
+        return cursor;
 
     }
 
     
     //metodo retorna uma lista de fornecedor
-    public List<Fornecedor> listarFornecedor(){
+    public List<Fornecedor> listarFornecedor() throws SQLException{
 
         List<Fornecedor> fornecedores = new ArrayList<>();
 
@@ -202,15 +199,16 @@ public class FornecedorDao {
             Endereco endereco = new Endereco();
             fornecedor.setId(c.getLong(c.getColumnIndex("id")));
             fornecedor.setContrato(c.getInt(c.getColumnIndex("contrato")));
+            fornecedor.setNome(c.getString(c.getColumnIndex("nome")));
             fornecedor.setStatus(c.getInt(c.getColumnIndex("status")));
             fornecedor.setNomeResponsavel(c.getString(c.getColumnIndex("responsavel")));
             fornecedor.setCnpj(c.getString(c.getColumnIndex("cnpj")));
             fornecedor.setInscEstadual(c.getString(c.getColumnIndex("inscEstadual")));
-            fornecedor.setCredito(c.getDouble(c.getColumnIndex("credito")));
+            fornecedor.setCredito(c.getFloat(c.getColumnIndex("credito")));
             fornecedor.setBanco(c.getString(c.getColumnIndex("banco")));
             fornecedor.setAgencia(c.getString(c.getColumnIndex("agencia")));
             fornecedor.setContaCorrente(c.getString(c.getColumnIndex("contaCorrente")));
-            fornecedor.setTipoPagamento(c.getString(c.getColumnIndex("tipoPagamento")));
+            fornecedor.setTipoPagamento(c.getInt(c.getColumnIndex("tipoPagamento")));
             fornecedor.setDesempenho(c.getInt(c.getColumnIndex("desempenho")));
             endereco.setId(c.getLong(c.getColumnIndex("id_endereco")));
             endereco.setLogradouro(c.getString(c.getColumnIndex("logradouro")));

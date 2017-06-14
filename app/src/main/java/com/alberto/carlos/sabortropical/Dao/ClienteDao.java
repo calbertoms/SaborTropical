@@ -213,21 +213,16 @@ public class ClienteDao {
 
 
     //Retorna o cursor com todos os clientes
-    public Cursor getCursor() {
+    public Cursor getCursor() throws SQLException {
 
-        try {
-            Cursor cursor =  conn.rawQuery("SELECT t1.id,t1.nome,t1.sobreNome,t1.dataNascimento,t1.corPele,t1.corOlhos,t1.sexo,t1.nomePai,t1.nomeMae,t1.estadoCivil,t1.cpf,t1.identidade,t2.id_pessoa,t2.id_endereco,t2.regiao,t2.pontos,t3.logradouro,t3.numero,t3.bairro,t3.cidade,t3.uf,t3.pais,t3.pontoReferencia,t3.cep FROM pessoas t1 INNER JOIN clientes t2 ON (t1.id = t2.id_pessoa) INNER JOIN endereco t3 ON (t2.id_endereco = t3.id)", null);
-            return cursor;
-        } catch (SQLException e) {
-            Log.d(CATEGORIA, "Erro ao buscar os clientes: " + e.toString());
-            return null;
-        }
+        Cursor cursor =  conn.rawQuery("SELECT t1.id,t1.nome,t1.sobreNome,t1.dataNascimento,t1.corPele,t1.corOlhos,t1.sexo,t1.nomePai,t1.nomeMae,t1.estadoCivil,t1.cpf,t1.identidade,t2.id_pessoa,t2.id_endereco,t2.regiao,t2.pontos,t3.logradouro,t3.numero,t3.bairro,t3.cidade,t3.uf,t3.pais,t3.pontoReferencia,t3.cep FROM pessoas t1 INNER JOIN clientes t2 ON (t1.id = t2.id_pessoa) INNER JOIN endereco t3 ON (t2.id_endereco = t3.id)", null);
+        return cursor;
 
     }
 
     
     //metodo retorna uma lista de cliente
-    public List<Cliente> listarClientes(){
+    public List<Cliente> listarClientes() throws SQLException{
 
         List<Cliente> clientes = new ArrayList<>();
 

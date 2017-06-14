@@ -155,20 +155,15 @@ public class UsuarioDao {
 
 
     //Retorna o cursor com todos os usuarios
-    public Cursor getCursor() {
+    public Cursor getCursor() throws SQLException {
 
-        try {
-            Cursor cursor =  conn.rawQuery("SELECT t1.id,t1.nome,t1.sobreNome,t1.dataNascimento,t1.corPele,t1.corOlhos,t1.sexo,t1.nomePai,t1.nomeMae,t1.estadoCivil,t1.cpf,t1.identidade,t2.email,t2.senha,t2.dataAdmissao,t2.nivelAcesso FROM pessoas t1 INNER JOIN usuarios t2 ON (t1.id = t2.id)", null);
-            return cursor;
-        } catch (SQLException e) {
-            Log.d(CATEGORIA, "Erro ao buscar os usuarios: " + e.toString());
-            return null;
-        }
+        Cursor cursor =  conn.rawQuery("SELECT t1.id,t1.nome,t1.sobreNome,t1.dataNascimento,t1.corPele,t1.corOlhos,t1.sexo,t1.nomePai,t1.nomeMae,t1.estadoCivil,t1.cpf,t1.identidade,t2.email,t2.senha,t2.dataAdmissao,t2.nivelAcesso FROM pessoas t1 INNER JOIN usuarios t2 ON (t1.id = t2.id)", null);
+        return cursor;
 
     }
 
     //metodo verifica existencia de usuario
-    public Boolean existeUsuario(String email, String senha){
+    public Boolean existeUsuario(String email, String senha) throws SQLException{
 
         String[] whereArgs = new String[] { email, senha };
         Cursor cursor =  conn.rawQuery("SELECT email,senha FROM usuarios WHERE email = ? AND senha = ?", whereArgs);
@@ -182,7 +177,7 @@ public class UsuarioDao {
     }
 
     //metodo retorna uma lista de usuario
-    public List<Usuario> listarUsuarios(){
+    public List<Usuario> listarUsuarios() throws SQLException{
 
         List<Usuario> usuarios = new ArrayList<>();
 

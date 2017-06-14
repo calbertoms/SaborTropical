@@ -4,6 +4,7 @@
     <string name="action_usuario">Usuários</string>
     <string name="action_cliente">Clientes</string>
     <string name="action_fornecedor">Fornecedor</string>
+    <string name="action_armazenamento">Armazenamento</string>
     <string name="action_produto">Produto</string>
     <string name="action_relatorio">Relatorio</string>
     <string name="action_novocliente">Novo</string>
@@ -31,4 +32,10 @@
     <string name="title_activity_fornecedores_edit_del">Sabor Tropical -> Fornecedores -> Edição</string>
     <string name="action_cadastrar_fornecedores_cad">Entrar</string>
     <string name="action_novoFornecedor">Novo</string>
+    <!-- Strings related to armazename -->
+    <string name="title_activity_armazenamentos">Sabor Tropical -> Armazenamentos</string>
+    <string name="title_activity_armazenamentos_cad">Sabor Tropical -> Armazenamentos -> Cadastro</string>
+    <string name="title_activity_armazenamentos_edit_del">Sabor Tropical -> Armazenamentos -> Edição</string>
+    <string name="action_cadastrar_armazenamentos_cad">Entrar</string>
+    <string name="action_novoArmazenamento">Novo</string>
 </resources>

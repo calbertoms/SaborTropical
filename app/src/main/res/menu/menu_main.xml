@@ -18,6 +18,11 @@
         android:orderInCategory="100"
         app:showAsAction="never"/>
 
+    <item android:title="@string/action_armazenamento"
+        android:id="@+id/action_armazenamento"
+        android:orderInCategory="100"
+        app:showAsAction="never"/>
+
     <item android:title="@string/action_produto"
         android:id="@+id/action_produto"
         android:orderInCategory="100"

@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    >
+    <LinearLayout
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="CADASTRO DE ARMAZENAMENTO"
+            android:layout_gravity="center"
+            />
+
+        <TableLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:stretchColumns="1">
+
+            <TableRow >
+                <TextView
+                    android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="Nome:"
+                    />
+                <EditText
+                    android:layout_width="fill_parent" android:layout_height="wrap_content"
+                    android:id="@+id/campo_nome"
+                    />
+            </TableRow>
+
+            <TableRow >
+                <TextView
+                    android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="Tamanho:"
+                    />
+                <EditText
+                    android:layout_width="fill_parent" android:layout_height="wrap_content"
+                    android:id="@+id/campo_tamanhoExterno"
+                    android:inputType="number"
+                    />
+            </TableRow>
+
+            <TableRow >
+                <TextView
+                    android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="Area:"
+                    />
+                <EditText
+                    android:layout_width="fill_parent" android:layout_height="wrap_content"
+                    android:id="@+id/campo_area"
+                    android:inputType="numberDecimal"
+                    />
+            </TableRow>
+
+            <TableRow >
+                <TextView
+                    android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="Conservação:"
+                    />
+                <Spinner
+                    android:id="@+id/campo_estadoConservacao"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content" />
+            </TableRow>
+
+            <TableRow >
+                <TextView
+                    android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="Cor:"
+                    />
+                <EditText
+                    android:layout_width="fill_parent" android:layout_height="wrap_content"
+                    android:id="@+id/campo_cor"
+                    />
+            </TableRow>
+
+            <TableRow >
+                <TextView
+                    android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="Patrocínio:"
+                    />
+                <EditText
+                    android:layout_width="fill_parent" android:layout_height="wrap_content"
+                    android:id="@+id/campo_patrocinio"
+                    />
+            </TableRow>
+
+            <TableRow >
+                <TextView
+                    android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="Data Fabricação:"
+                    />
+
+                <EditText
+                    android:layout_width="fill_parent" android:layout_height="wrap_content"
+                    android:id="@+id/campo_dataFabricacao"
+                    android:inputType="date"
+                    />
+            </TableRow>
+
+            <TableRow >
+                <TextView
+                    android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="Peso(Kg):"
+                    />
+                <EditText
+                    android:layout_width="fill_parent" android:layout_height="wrap_content"
+                    android:id="@+id/campo_peso"
+                    android:inputType="numberDecimal"
+                    />
+            </TableRow>
+
+            <TableRow >
+                <TextView
+                    android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="Data Validade:"
+                    />
+
+                <EditText
+                    android:layout_width="fill_parent" android:layout_height="wrap_content"
+                    android:id="@+id/campo_dataValidade"
+                    android:inputType="date"
+                    />
+            </TableRow>
+
+            <Button
+                android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:id="@+id/botao_salvar"
+                android:layout_gravity="center"
+                android:text="Salvar"
+                android:onClick="Salvar"
+                />
+
+        </TableLayout>
+    </LinearLayout>
+</ScrollView>

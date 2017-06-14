@@ -1,53 +1,23 @@
 package com.alberto.carlos.sabortropical.Entidades;
 
+import java.io.Serializable;
+
 /**
  * Created by carlos.alberto on 10/06/2017.
  */
 
-public class Armazenamento {
+public class Armazenamento implements Serializable {
 
     private long id;
-    private int tamanho;
-    private long areaUtil;
-    private long peso;
+    private String nome;
+    private int tamanhoExterno;
+    private float areaUtil;
+    private float peso;
     private int estadoConservacao;
-    private int cor;
+    private String cor;
     private String patrocinio;
     private String dataFabricacao;
-    private String validade;
-    private String conservante;
-
-
-    public Armazenamento( long id,int tamanho, long areaUtil,long peso, int estadoConservacao, int cor, String patrocinio, String dataFabricacao, String validade, String conservante) {
-
-        this.id = id;
-        this.tamanho = tamanho;
-        this.areaUtil = areaUtil;
-        this.peso = peso;
-        this.estadoConservacao = estadoConservacao;
-        this.cor = cor;
-        this.patrocinio = patrocinio;
-        this.dataFabricacao = dataFabricacao;
-        this.validade = validade;
-        this.conservante = conservante;
-    }
-
-    public Armazenamento(int tamanho, long areaUtil,long peso, int estadoConservacao, int cor, String patrocinio, String dataFabricacao, String validade, String conservante) {
-
-        this.tamanho = tamanho;
-        this.areaUtil = areaUtil;
-        this.peso = peso;
-        this.estadoConservacao = estadoConservacao;
-        this.cor = cor;
-        this.patrocinio = patrocinio;
-        this.dataFabricacao = dataFabricacao;
-        this.validade = validade;
-        this.conservante = conservante;
-    }
-
-    public Armazenamento (){
-
-    }
+    private String dataValidade;
 
     public long getId() {
         return id;
@@ -57,27 +27,35 @@ public class Armazenamento {
         this.id = id;
     }
 
-    public int getTamanho() {
-        return tamanho;
+    public String getNome() {
+        return nome;
     }
 
-    public void setTamanho(int tamanho) {
-        this.tamanho = tamanho;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
-    public long getAreaUtil() {
+    public int getTamanhoExterno() {
+        return tamanhoExterno;
+    }
+
+    public void setTamanhoExterno(int tamanhoExterno) {
+        this.tamanhoExterno = tamanhoExterno;
+    }
+
+    public float getAreaUtil() {
         return areaUtil;
     }
 
-    public void setAreaUtil(long areaUtil) {
+    public void setAreaUtil(float areaUtil) {
         this.areaUtil = areaUtil;
     }
 
-    public long getPeso() {
+    public float getPeso() {
         return peso;
     }
 
-    public void setPeso(long peso) {
+    public void setPeso(float peso) {
         this.peso = peso;
     }
 
@@ -89,11 +67,11 @@ public class Armazenamento {
         this.estadoConservacao = estadoConservacao;
     }
 
-    public int getCor() {
+    public String getCor() {
         return cor;
     }
 
-    public void setCor(int cor) {
+    public void setCor(String cor) {
         this.cor = cor;
     }
 
@@ -113,19 +91,17 @@ public class Armazenamento {
         this.dataFabricacao = dataFabricacao;
     }
 
-    public String getValidade() {
-        return validade;
+    public String getDataValidade() {
+        return dataValidade;
     }
 
-    public void setValidade(String validade) {
-        this.validade = validade;
+    public void setDataValidade(String dataValidade) {
+        this.dataValidade = dataValidade;
     }
 
-    public String getConservante() {
-        return conservante;
+    @Override
+    public String toString() {
+        return this.getId() + " - " + this.getNome() + " - Válido até " + this.getDataValidade();
     }
 
-    public void setConservante(String conservante) {
-        this.conservante = conservante;
-    }
 }

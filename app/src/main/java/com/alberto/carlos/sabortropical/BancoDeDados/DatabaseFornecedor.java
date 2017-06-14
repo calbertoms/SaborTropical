@@ -15,8 +15,8 @@ public class DatabaseFornecedor extends SQLiteOpenHelper {
 
     private static final String SCRIPT_DATABASE_CREATE_FORNECEDOR =
             "create table fornecedor (id integer primary key autoincrement, id_endereco integer references endereco(id), "
-                    + "contrato integer not null, status integer not null, responsavel text not null, cnpj text not null, "
-                    + "inscEstadual text not null, credito real not null, banco text not null, agencia text not null, contaCorrente text not null, tipoPagamento text not null, "
+                    + "contrato integer not null, nome text not null, status integer not null, responsavel text not null, cnpj text not null, "
+                    + "inscEstadual text not null, credito real not null, banco text not null, agencia text not null, contaCorrente text not null, tipoPagamento int not null, "
                     + "desempenho integer not null); ";
 
     private static final String SCRIPT_DATABASE_CREATE_ENDERECO =
@@ -32,7 +32,7 @@ public class DatabaseFornecedor extends SQLiteOpenHelper {
 
     private static final String FOREING_KEY = "PRAGMA foreign_keys = ON;";
 
-    private static final int VERSAO_BANCO = 10;
+    private static final int VERSAO_BANCO = 16;
 
 
 

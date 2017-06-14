@@ -14,9 +14,12 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.alberto.carlos.sabortropical.BancoDeDados.DatabaseCliente;
+import com.alberto.carlos.sabortropical.BancoDeDados.DatabaseFornecedor;
 import com.alberto.carlos.sabortropical.Dao.ClienteDao;
+import com.alberto.carlos.sabortropical.Dao.FornecedorDao;
 import com.alberto.carlos.sabortropical.Entidades.Cliente;
 import com.alberto.carlos.sabortropical.Entidades.Endereco;
+import com.alberto.carlos.sabortropical.Entidades.Fornecedor;
 import com.alberto.carlos.sabortropical.R;
 import com.alberto.carlos.sabortropical.utilitarios.Mask;
 
@@ -25,55 +28,41 @@ public class FornecedoresCadActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_clientes_cad);
+        setContentView(R.layout.activity_fornecedores_cad);
+
+        final EditText contrato = (EditText) findViewById(R.id.campo_contrato);
 
         final EditText nome = (EditText) findViewById(R.id.campo_nome);
 
-        final EditText sobreNome = (EditText) findViewById(R.id.campo_sobreNome);
-
-        final EditText dataNascimento = (EditText) findViewById(R.id.campo_dataNascimento);
-
-        final String[] strCorPele = new String[]{"Branco","Moreno","Negro"};
+        final String[] strStatus = new String[]{"Ativo","Desativo"};
         ArrayAdapter<String> adapter = new ArrayAdapter<String>
-                (this, android.R.layout.simple_spinner_dropdown_item, strCorPele);
+                (this, android.R.layout.simple_spinner_dropdown_item, strStatus);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-        final Spinner corPele = (Spinner) findViewById(R.id.campo_corPele);
-        corPele.setAdapter(adapter);
+        final Spinner status = (Spinner) findViewById(R.id.campo_status);
+        status.setAdapter(adapter);
 
-        final String[] strCorOlhos = new String[]{"Azul","Verde","Castanho Claro","Castanho Escuro"};
+        final EditText responsavel = (EditText) findViewById(R.id.campo_responsavel);
+
+        final EditText cnpj = (EditText) findViewById(R.id.campo_cnpj);
+
+        final EditText inscEstadual = (EditText) findViewById(R.id.campo_inscEstadual);
+
+        final EditText credito = (EditText) findViewById(R.id.campo_credito);
+
+        final EditText banco = (EditText) findViewById(R.id.campo_banco);
+
+        final EditText agencia = (EditText) findViewById(R.id.campo_agencia);
+
+        final EditText contaCorrente = (EditText) findViewById(R.id.campo_contaCorrente);
+
+        final String[] strTipoPagamento = new String[]{"Dinheiro","Cartão","Cheque"};
         adapter = new ArrayAdapter<String>
-                (this, android.R.layout.simple_spinner_dropdown_item, strCorOlhos);
+                (this, android.R.layout.simple_spinner_dropdown_item, strTipoPagamento);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-        final Spinner corOlhos = (Spinner) findViewById(R.id.campo_corOlhos);
-        corOlhos.setAdapter(adapter);
-
-        final String[] strSexo = new String[]{"Feminino","Masculino","Outros"};
-        adapter = new ArrayAdapter<String>
-                (this, android.R.layout.simple_spinner_dropdown_item, strSexo);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-        final Spinner sexo = (Spinner) findViewById(R.id.campo_sexo);
-        sexo.setAdapter(adapter);
-
-        final EditText nomePai = (EditText) findViewById(R.id.campo_nomePai);
-
-        final EditText nomeMae = (EditText) findViewById(R.id.campo_nomeMae);
-
-        final String[] strEstadoCivil = new String[]{"Solteiro","Casado","Viúvo"};
-        adapter = new ArrayAdapter<String>
-                (this, android.R.layout.simple_spinner_dropdown_item, strEstadoCivil);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-        final Spinner estadoCivil = (Spinner) findViewById(R.id.campo_estadoCivil);
-        estadoCivil.setAdapter(adapter);
-
-        final EditText cpf = (EditText) findViewById(R.id.campo_cpf);
-        cpf.addTextChangedListener(Mask.insert("###.###.###-##", cpf));
-
-        final EditText identidade = (EditText) findViewById(R.id.campo_identidade);
-        identidade.addTextChangedListener(Mask.insert("#.###-###", identidade));
+        final Spinner tipoPagamento = (Spinner) findViewById(R.id.campo_tipoPagamento);
+        tipoPagamento.setAdapter(adapter);
 
         final EditText logradouro = (EditText) findViewById(R.id.campo_logradouro);
 
@@ -91,8 +80,6 @@ public class FornecedoresCadActivity extends AppCompatActivity {
 
         final EditText cep = (EditText) findViewById(R.id.campo_cep);
 
-        final EditText regiao = (EditText) findViewById(R.id.campo_regiao);
-
         Button buttonSalvar = (Button) findViewById(R.id.botao_salvar);
 
 
@@ -103,31 +90,30 @@ public class FornecedoresCadActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 boolean verificador = testarCampoVazio();
-                DatabaseCliente databaseCliente;
+                DatabaseFornecedor databaseFornecedor;
                 SQLiteDatabase conn;
-                long idcliente;
+                long idFornecedor;
 
                 if(!verificador) {
 
                     try {
-                        databaseCliente = new DatabaseCliente(FornecedoresCadActivity.this);
-                        conn = databaseCliente.getWritableDatabase();
-                        ClienteDao dao = new ClienteDao(conn);
-                        Cliente cliente = new Cliente();
+                        databaseFornecedor = new DatabaseFornecedor(FornecedoresCadActivity.this);
+                        conn = databaseFornecedor.getWritableDatabase();
+                        FornecedorDao dao = new FornecedorDao(conn);
+                        Fornecedor fornecedor = new Fornecedor();
                         Endereco endereco = new Endereco();
-                        cliente.setNome(nome.getText().toString());
-                        cliente.setSobreNome(sobreNome.getText().toString());
-                        cliente.setDataNascimento(dataNascimento.getText().toString());
-                        cliente.setCorPele(corPele.getSelectedItemPosition());
-                        cliente.setCorOlhos(corOlhos.getSelectedItemPosition());
-                        cliente.setSexo(sexo.getSelectedItemPosition());
-                        cliente.setNomePai(nomePai.getText().toString());
-                        cliente.setNomeMae(nomeMae.getText().toString());
-                        cliente.setEstadoCivil(estadoCivil.getSelectedItemPosition());
-                        cliente.setCpf(cpf.getText().toString());
-                        cliente.setIdentidade(identidade.getText().toString());
-                        cliente.setRegiao(regiao.getText().toString());
-                        cliente.setPontos(0);
+                        fornecedor.setContrato(Integer.parseInt(contrato.getText().toString()));
+                        fornecedor.setNome(nome.getText().toString());
+                        fornecedor.setStatus(status.getSelectedItemPosition());
+                        fornecedor.setNomeResponsavel(responsavel.getText().toString());
+                        fornecedor.setCnpj(cnpj.getText().toString());
+                        fornecedor.setInscEstadual(inscEstadual.getText().toString());
+                        fornecedor.setCredito(Float.parseFloat(credito.getText().toString()));
+                        fornecedor.setBanco(banco.getText().toString());
+                        fornecedor.setAgencia(agencia.getText().toString());
+                        fornecedor.setContaCorrente(contaCorrente.getText().toString());
+                        fornecedor.setTipoPagamento(tipoPagamento.getSelectedItemPosition());
+                        fornecedor.setDesempenho(0);
                         endereco.setLogradouro(logradouro.getText().toString());
                         endereco.setNumero(Integer.parseInt(numero.getText().toString()));
                         endereco.setBairro(bairro.getText().toString());
@@ -136,11 +122,11 @@ public class FornecedoresCadActivity extends AppCompatActivity {
                         endereco.setPais(pais.getText().toString());
                         endereco.setPontoreferencia(pontoReferencia.getText().toString());
                         endereco.setCep(cep.getText().toString());
-                        cliente.setEndereco(endereco);
-                        idcliente = dao.inserir(cliente);
+                        fornecedor.setEndereco(endereco);
+                        idFornecedor = dao.inserir(fornecedor);
                         dao.fechar();
 
-                        Toast.makeText(FornecedoresCadActivity.this, "Cliente Nº " + idcliente + " cadastrado com sucesso", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(FornecedoresCadActivity.this, "Fornecedor Nº " + idFornecedor + " cadastrado com sucesso", Toast.LENGTH_SHORT).show();
 
                         Intent it = new Intent(FornecedoresCadActivity.this,FornecedoresActivity.class);
                         startActivity(it);
@@ -161,38 +147,38 @@ public class FornecedoresCadActivity extends AppCompatActivity {
 
             private boolean testarCampoVazio() {
 
+                if(TextUtils.isEmpty(contrato.getText().toString())) {
+                    Toast.makeText(FornecedoresCadActivity.this, "Campo Contrato esta vazio.", Toast.LENGTH_SHORT).show();
+                    return true;
+                }
+
                 if(TextUtils.isEmpty(nome.getText().toString())) {
                     Toast.makeText(FornecedoresCadActivity.this, "Campo Nome esta vazio.", Toast.LENGTH_SHORT).show();
                     return true;
                 }
 
-                if(TextUtils.isEmpty(sobreNome.getText().toString())) {
-                    Toast.makeText(FornecedoresCadActivity.this, "Campo Sobrenome esta vazio.", Toast.LENGTH_SHORT).show();
+                if(TextUtils.isEmpty(responsavel.getText().toString())) {
+                    Toast.makeText(FornecedoresCadActivity.this, "Campo Responsavel esta vazio.", Toast.LENGTH_SHORT).show();
                     return true;
                 }
 
-                if(TextUtils.isEmpty(dataNascimento.getText().toString())) {
-                    Toast.makeText(FornecedoresCadActivity.this, "Campo Data de Nascimento esta vazio.", Toast.LENGTH_SHORT).show();
+                if(TextUtils.isEmpty(cnpj.getText().toString())) {
+                    Toast.makeText(FornecedoresCadActivity.this, "Campo Cnpj esta vazio.", Toast.LENGTH_SHORT).show();
                     return true;
                 }
 
-                if(TextUtils.isEmpty(nomePai.getText().toString())) {
-                    Toast.makeText(FornecedoresCadActivity.this, "Campo nome do Pai esta vazio.", Toast.LENGTH_SHORT).show();
+                if(TextUtils.isEmpty(inscEstadual.getText().toString())) {
+                    Toast.makeText(FornecedoresCadActivity.this, "Campo Inscrição Estadual esta vazio.", Toast.LENGTH_SHORT).show();
                     return true;
                 }
 
-                if(TextUtils.isEmpty(nomeMae.getText().toString())) {
-                    Toast.makeText(FornecedoresCadActivity.this, "Campo nome da Mãe esta vazio.", Toast.LENGTH_SHORT).show();
+                if(TextUtils.isEmpty(credito.getText().toString())) {
+                    Toast.makeText(FornecedoresCadActivity.this, "Campo Crédito esta vazio.", Toast.LENGTH_SHORT).show();
                     return true;
                 }
 
-                if(TextUtils.isEmpty(cpf.getText().toString())) {
-                    Toast.makeText(FornecedoresCadActivity.this, "Campo cpf esta vazio.", Toast.LENGTH_SHORT).show();
-                    return true;
-                }
-
-                if(TextUtils.isEmpty(identidade.getText().toString())) {
-                    Toast.makeText(FornecedoresCadActivity.this, "Campo Identidade esta vazio.", Toast.LENGTH_SHORT).show();
+                if(TextUtils.isEmpty(banco.getText().toString())) {
+                    Toast.makeText(FornecedoresCadActivity.this, "Campo Banco esta vazio.", Toast.LENGTH_SHORT).show();
                     return true;
                 }
 
@@ -233,11 +219,6 @@ public class FornecedoresCadActivity extends AppCompatActivity {
 
                 if(TextUtils.isEmpty(cep.getText().toString())) {
                     Toast.makeText(FornecedoresCadActivity.this, "Campo Cep esta vazio.", Toast.LENGTH_SHORT).show();
-                    return true;
-                }
-
-                if(TextUtils.isEmpty(regiao.getText().toString())) {
-                    Toast.makeText(FornecedoresCadActivity.this, "Campo Região esta vazio.", Toast.LENGTH_SHORT).show();
                     return true;
                 }
 

@@ -31,7 +31,7 @@ public class DatabaseUsuario extends SQLiteOpenHelper {
 
     private static final String FOREING_KEY = "PRAGMA foreign_keys = ON;";
 
-    private static final int VERSAO_BANCO = 10;
+    private static final int VERSAO_BANCO = 16;
 
 
 
