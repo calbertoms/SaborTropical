@@ -21,7 +21,7 @@ public class DatabaseArmazenamento extends SQLiteOpenHelper {
     //Script para fazer o drop da tabela
     private static final String SCRIPT_DATABASE_DELETE_ARMAZENAMENTO = "DROP TABLE IF EXISTS armazenamento;";
 
-    private static final int VERSAO_BANCO = 16;
+    private static final int VERSAO_BANCO = 18;
 
 
 

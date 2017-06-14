@@ -32,7 +32,7 @@ public class DatabaseFornecedor extends SQLiteOpenHelper {
 
     private static final String FOREING_KEY = "PRAGMA foreign_keys = ON;";
 
-    private static final int VERSAO_BANCO = 16;
+    private static final int VERSAO_BANCO = 18;
 
 
 

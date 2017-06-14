@@ -38,4 +38,10 @@
     <string name="title_activity_armazenamentos_edit_del">Sabor Tropical -> Armazenamentos -> Edição</string>
     <string name="action_cadastrar_armazenamentos_cad">Entrar</string>
     <string name="action_novoArmazenamento">Novo</string>
+    <!-- Strings related to produtos -->
+    <string name="title_activity_produtos">Sabor Tropical -> Produtos</string>
+    <string name="title_activity_produtos_cad">Sabor Tropical -> Produtos -> Cadastro</string>
+    <string name="title_activity_produtos_edit_del">Sabor Tropical -> Produtos -> Edição</string>
+    <string name="action_cadastrar_produtos_cad">Entrar</string>
+    <string name="action_novoProduto">Novo</string>
 </resources>

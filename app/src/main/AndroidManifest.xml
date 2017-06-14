@@ -58,6 +58,15 @@
             android:label="@string/title_activity_armazenamentos_cad" />
         <activity android:name=".Telas.Armazenamento.ArmazenamentosEditDelActivity"
             android:label="@string/title_activity_armazenamentos_edit_del"/>
+        <activity
+            android:name=".Telas.Produto.ProdutosActivity"
+            android:label="@string/title_activity_produtos" />
+        <activity
+        android:name=".Telas.Produto.ProdutosCadActivity"
+        android:label="@string/title_activity_produtos_cad" />
+        <activity
+            android:name=".Telas.Produto.ProdutosEditDelActivity"
+            android:label="@string/title_activity_produtos_edit_del" />
     </application>
 
 </manifest>
