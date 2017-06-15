@@ -6,50 +6,37 @@ package com.alberto.carlos.sabortropical.Entidades;
 
 public class Item {
 
-    private long id;
-    private String data;
-    private long valorTotal;
+    private int quantidade;
+    private float valorUnitario;
+    private Produto produto;
 
-    public Item (long id, String data, long valorTotal){
-
-        this.id = id;
-        this.data = data;
-        this.valorTotal = valorTotal;
-
+    public Item(int quantidade, float valorUnitario, Produto produto) {
+        this.quantidade = quantidade;
+        this.valorUnitario = valorUnitario;
+        this.produto = produto;
     }
 
-    public Item (String data, long valorTotal){
-
-        this.data = data;
-        this.valorTotal = valorTotal;
-
+    public int getQuantidade() {
+        return quantidade;
     }
 
-    public Item(){
-
+    public void setQuantidade(int quantidade) {
+        this.quantidade = quantidade;
     }
 
-    public long getId() {
-        return id;
+    public float getValorUnitario() {
+        return valorUnitario;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setValorUnitario(float valorUnitario) {
+        this.valorUnitario = valorUnitario;
     }
 
-    public String getData() {
-        return data;
+    public Produto getProduto() {
+        return produto;
     }
 
-    public void setData(String data) {
-        this.data = data;
-    }
-
-    public long getValorTotal() {
-        return valorTotal;
-    }
-
-    public void setValorTotal(long valorTotal) {
-        this.valorTotal = valorTotal;
+    public void setProduto(Produto produto) {
+        this.produto = produto;
     }
 }

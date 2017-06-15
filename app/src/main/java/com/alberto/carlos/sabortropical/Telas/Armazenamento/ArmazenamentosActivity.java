@@ -13,7 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.alberto.carlos.sabortropical.BancoDeDados.DatabaseArmazenamento;
+import com.alberto.carlos.sabortropical.BancoDeDados.Database;
 import com.alberto.carlos.sabortropical.Dao.ArmazenamentoDao;
 import com.alberto.carlos.sabortropical.Entidades.Armazenamento;
 import com.alberto.carlos.sabortropical.R;
@@ -24,7 +24,7 @@ import java.util.List;
 public class ArmazenamentosActivity extends AppCompatActivity {
 
     private ListView listaArmazenamentos;
-    private DatabaseArmazenamento databaseArmazenamento;
+    private Database database;
     private SQLiteDatabase conn;
     Armazenamento armazenamentoSelecionado;
 
@@ -38,8 +38,8 @@ public class ArmazenamentosActivity extends AppCompatActivity {
         registerForContextMenu(listaArmazenamentos);
 
         try {
-            databaseArmazenamento = new DatabaseArmazenamento(ArmazenamentosActivity.this);
-            conn = databaseArmazenamento.getReadableDatabase();
+            database = new Database(ArmazenamentosActivity.this);
+            conn = database.getReadableDatabase();
             ArmazenamentoDao dao = new ArmazenamentoDao(conn);
             List<Armazenamento> armazenamentos = dao.listarArmazenamento();
             ArrayAdapter<Armazenamento> adapter = new ArrayAdapter<Armazenamento>

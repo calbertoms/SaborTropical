@@ -13,13 +13,10 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.alberto.carlos.sabortropical.BancoDeDados.DatabaseCliente;
-import com.alberto.carlos.sabortropical.BancoDeDados.DatabaseUsuario;
+import com.alberto.carlos.sabortropical.BancoDeDados.Database;
 import com.alberto.carlos.sabortropical.Dao.ClienteDao;
-import com.alberto.carlos.sabortropical.Dao.UsuarioDao;
 import com.alberto.carlos.sabortropical.Entidades.Cliente;
 import com.alberto.carlos.sabortropical.Entidades.Endereco;
-import com.alberto.carlos.sabortropical.Entidades.Usuario;
 import com.alberto.carlos.sabortropical.R;
 import com.alberto.carlos.sabortropical.utilitarios.Mask;
 
@@ -130,14 +127,14 @@ public class ClientesEditDelActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 boolean verificador = testarCampoVazio();
-                DatabaseCliente databaseCliente;
+                Database databaseCliente;
                 SQLiteDatabase conn;
                 int qtdAtualizadas;
 
                 if(!verificador) {
 
                     try {
-                        databaseCliente = new DatabaseCliente(ClientesEditDelActivity.this);
+                        databaseCliente = new Database(ClientesEditDelActivity.this);
                         conn = databaseCliente.getWritableDatabase();
                         ClienteDao dao = new ClienteDao(conn);
                         Cliente cliente = new Cliente();
@@ -283,12 +280,12 @@ public class ClientesEditDelActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                DatabaseCliente databaseCliente;
+                Database databaseCliente;
                 SQLiteDatabase conn;
 
 
                 try {
-                    databaseCliente = new DatabaseCliente(ClientesEditDelActivity.this);
+                    databaseCliente = new Database(ClientesEditDelActivity.this);
                     conn = databaseCliente.getWritableDatabase();
                     ClienteDao dao = new ClienteDao(conn);
                     dao.deletar(clienteDetalhado.getId(),clienteDetalhado.getEndereco().getId());

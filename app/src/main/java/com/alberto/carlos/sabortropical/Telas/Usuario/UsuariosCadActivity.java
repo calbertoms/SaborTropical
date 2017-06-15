@@ -13,7 +13,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.alberto.carlos.sabortropical.BancoDeDados.DatabaseUsuario;
+import com.alberto.carlos.sabortropical.BancoDeDados.Database;
 import com.alberto.carlos.sabortropical.Dao.UsuarioDao;
 import com.alberto.carlos.sabortropical.Entidades.Usuario;
 import com.alberto.carlos.sabortropical.R;
@@ -98,15 +98,15 @@ public class UsuariosCadActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 boolean verificador = testarCampoVazio();
-                DatabaseUsuario databaseUsuario;
+                Database database;
                 SQLiteDatabase conn;
                 long idUsuario;
 
                 if(!verificador) {
 
                     try {
-                        databaseUsuario = new DatabaseUsuario(UsuariosCadActivity.this);
-                        conn = databaseUsuario.getWritableDatabase();
+                        database = new Database(UsuariosCadActivity.this);
+                        conn = database.getWritableDatabase();
                         UsuarioDao dao = new UsuarioDao(conn);
                         Usuario usuario = new Usuario();
                         usuario.setNome(nome.getText().toString());

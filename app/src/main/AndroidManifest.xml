@@ -67,6 +67,9 @@
         <activity
             android:name=".Telas.Produto.ProdutosEditDelActivity"
             android:label="@string/title_activity_produtos_edit_del" />
+        <activity
+            android:name=".Telas.VendaActivity"
+            android:label="@string/title_activity_vendas" />
     </application>
 
 </manifest>

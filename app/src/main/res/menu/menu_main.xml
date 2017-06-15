@@ -24,7 +24,12 @@
         app:showAsAction="never"/>
 
     <item android:title="@string/action_produto"
-        android:id="@+id/action_produto"
+    android:id="@+id/action_produto"
+    android:orderInCategory="100"
+    app:showAsAction="never"/>
+
+    <item android:title="@string/action_venda"
+        android:id="@+id/action_venda"
         android:orderInCategory="100"
         app:showAsAction="never"/>
 

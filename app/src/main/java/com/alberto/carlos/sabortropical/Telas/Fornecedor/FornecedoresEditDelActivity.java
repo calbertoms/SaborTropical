@@ -13,15 +13,11 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.alberto.carlos.sabortropical.BancoDeDados.DatabaseCliente;
-import com.alberto.carlos.sabortropical.BancoDeDados.DatabaseFornecedor;
-import com.alberto.carlos.sabortropical.Dao.ClienteDao;
+import com.alberto.carlos.sabortropical.BancoDeDados.Database;
 import com.alberto.carlos.sabortropical.Dao.FornecedorDao;
-import com.alberto.carlos.sabortropical.Entidades.Cliente;
 import com.alberto.carlos.sabortropical.Entidades.Endereco;
 import com.alberto.carlos.sabortropical.Entidades.Fornecedor;
 import com.alberto.carlos.sabortropical.R;
-import com.alberto.carlos.sabortropical.utilitarios.Mask;
 
 public class FornecedoresEditDelActivity extends AppCompatActivity {
 
@@ -113,14 +109,14 @@ public class FornecedoresEditDelActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 boolean verificador = testarCampoVazio();
-                DatabaseFornecedor databaseFornecedor;
+                Database databaseFornecedor;
                 SQLiteDatabase conn;
                 int qtdAtualizadas;
 
                 if(!verificador) {
 
                     try {
-                        databaseFornecedor = new DatabaseFornecedor(FornecedoresEditDelActivity.this);
+                        databaseFornecedor = new Database(FornecedoresEditDelActivity.this);
                         conn = databaseFornecedor.getWritableDatabase();
                         FornecedorDao dao = new FornecedorDao(conn);
                         Fornecedor fornecedor = new Fornecedor();
@@ -260,12 +256,12 @@ public class FornecedoresEditDelActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                DatabaseFornecedor databaseFornecedor;
+                Database databaseFornecedor;
                 SQLiteDatabase conn;
 
 
                 try {
-                    databaseFornecedor = new DatabaseFornecedor(FornecedoresEditDelActivity.this);
+                    databaseFornecedor = new Database(FornecedoresEditDelActivity.this);
                     conn = databaseFornecedor.getWritableDatabase();
                     FornecedorDao dao = new FornecedorDao(conn);
                     dao.deletar(fornecedorDetalhado.getId(), fornecedorDetalhado.getEndereco().getId());

@@ -13,9 +13,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.alberto.carlos.sabortropical.BancoDeDados.DatabaseArmazenamento;
-import com.alberto.carlos.sabortropical.BancoDeDados.DatabaseFornecedor;
-import com.alberto.carlos.sabortropical.BancoDeDados.DatabaseProduto;
+import com.alberto.carlos.sabortropical.BancoDeDados.Database;
 import com.alberto.carlos.sabortropical.Dao.ArmazenamentoDao;
 import com.alberto.carlos.sabortropical.Dao.FornecedorDao;
 import com.alberto.carlos.sabortropical.Dao.ProdutoDao;
@@ -23,8 +21,6 @@ import com.alberto.carlos.sabortropical.Entidades.Armazenamento;
 import com.alberto.carlos.sabortropical.Entidades.Fornecedor;
 import com.alberto.carlos.sabortropical.Entidades.Produto;
 import com.alberto.carlos.sabortropical.R;
-import com.alberto.carlos.sabortropical.Telas.Armazenamento.ArmazenamentosActivity;
-import com.alberto.carlos.sabortropical.Telas.Fornecedor.FornecedoresActivity;
 
 import java.util.List;
 
@@ -37,9 +33,9 @@ public class ProdutosCadActivity extends AppCompatActivity {
 
         final EditText nome = (EditText) findViewById(R.id.campo_nome);
 
-        DatabaseFornecedor databaseFornecedor;
+        Database databaseFornecedor;
         SQLiteDatabase conn;
-        databaseFornecedor = new DatabaseFornecedor(ProdutosCadActivity.this);
+        databaseFornecedor = new Database(ProdutosCadActivity.this);
         conn = databaseFornecedor.getReadableDatabase();
         FornecedorDao dao = new FornecedorDao(conn);
         final List<Fornecedor> fornecedores = dao.listarFornecedor();
@@ -49,9 +45,9 @@ public class ProdutosCadActivity extends AppCompatActivity {
         final Spinner fornecedor = (Spinner) findViewById(R.id.campo_fornecedor);
         fornecedor.setAdapter(adapter);
 
-        DatabaseArmazenamento databaseArmazenamento;
+        Database databaseArmazenamento;
         SQLiteDatabase conn2;
-        databaseArmazenamento = new DatabaseArmazenamento(ProdutosCadActivity.this);
+        databaseArmazenamento = new Database(ProdutosCadActivity.this);
         conn2 = databaseArmazenamento.getReadableDatabase();
         ArmazenamentoDao dao2 = new ArmazenamentoDao(conn2);
         final List<Armazenamento> armazenamentos = dao2.listarArmazenamento();
@@ -89,14 +85,14 @@ public class ProdutosCadActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 boolean verificador = testarCampoVazio();
-                DatabaseProduto databaseProduto;
+                Database databaseProduto;
                 SQLiteDatabase conn;
                 long idProduto;
 
                 if(!verificador) {
 
                     try {
-                        databaseProduto = new DatabaseProduto(ProdutosCadActivity.this);
+                        databaseProduto = new Database(ProdutosCadActivity.this);
                         conn = databaseProduto.getWritableDatabase();
                         ProdutoDao dao = new ProdutoDao(conn);
                         Produto produto = new Produto();

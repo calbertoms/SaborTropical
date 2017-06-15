@@ -13,7 +13,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.alberto.carlos.sabortropical.BancoDeDados.DatabaseUsuario;
+import com.alberto.carlos.sabortropical.BancoDeDados.Database;
 import com.alberto.carlos.sabortropical.Dao.UsuarioDao;
 import com.alberto.carlos.sabortropical.Entidades.Usuario;
 import com.alberto.carlos.sabortropical.R;
@@ -114,15 +114,15 @@ public class UsuariosEditDelActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 boolean verificador = testarCampoVazio();
-                DatabaseUsuario databaseUsuario;
+                Database database;
                 SQLiteDatabase conn;
                 int qtdAtualizadas;
 
                 if(!verificador) {
 
                     try {
-                        databaseUsuario = new DatabaseUsuario(UsuariosEditDelActivity.this);
-                        conn = databaseUsuario.getWritableDatabase();
+                        database = new Database(UsuariosEditDelActivity.this);
+                        conn = database.getWritableDatabase();
                         UsuarioDao dao = new UsuarioDao(conn);
                         Usuario usuario = new Usuario();
                         usuario.setId(usuarioDetalhado.getId());
@@ -223,13 +223,13 @@ public class UsuariosEditDelActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                DatabaseUsuario databaseUsuario;
+                Database database;
                 SQLiteDatabase conn;
 
 
                     try {
-                        databaseUsuario = new DatabaseUsuario(UsuariosEditDelActivity.this);
-                        conn = databaseUsuario.getWritableDatabase();
+                        database = new Database(UsuariosEditDelActivity.this);
+                        conn = database.getWritableDatabase();
                         UsuarioDao dao = new UsuarioDao(conn);
                         dao.deletar(usuarioDetalhado.getId());
                         dao.fechar();

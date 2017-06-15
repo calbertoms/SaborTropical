@@ -13,16 +13,10 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.alberto.carlos.sabortropical.BancoDeDados.DatabaseArmazenamento;
-import com.alberto.carlos.sabortropical.BancoDeDados.DatabaseCliente;
+import com.alberto.carlos.sabortropical.BancoDeDados.Database;
 import com.alberto.carlos.sabortropical.Dao.ArmazenamentoDao;
-import com.alberto.carlos.sabortropical.Dao.ClienteDao;
 import com.alberto.carlos.sabortropical.Entidades.Armazenamento;
-import com.alberto.carlos.sabortropical.Entidades.Cliente;
-import com.alberto.carlos.sabortropical.Entidades.Endereco;
 import com.alberto.carlos.sabortropical.R;
-import com.alberto.carlos.sabortropical.Telas.Cliente.ClientesActivity;
-import com.alberto.carlos.sabortropical.utilitarios.Mask;
 
 public class ArmazenamentosCadActivity extends AppCompatActivity {
 
@@ -65,14 +59,14 @@ public class ArmazenamentosCadActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 boolean verificador = testarCampoVazio();
-                DatabaseArmazenamento databaseArmazenamento;
+                Database databaseArmazenamento;
                 SQLiteDatabase conn;
                 long idArmazenamento;
 
                 if(!verificador) {
 
                     try {
-                        databaseArmazenamento = new DatabaseArmazenamento(ArmazenamentosCadActivity.this);
+                        databaseArmazenamento = new Database(ArmazenamentosCadActivity.this);
                         conn = databaseArmazenamento.getWritableDatabase();
                         ArmazenamentoDao dao = new ArmazenamentoDao(conn);
                         Armazenamento armazenamento = new Armazenamento();

@@ -13,11 +13,10 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.alberto.carlos.sabortropical.BancoDeDados.DatabaseProduto;
+import com.alberto.carlos.sabortropical.BancoDeDados.Database;
 import com.alberto.carlos.sabortropical.Dao.ProdutoDao;
 import com.alberto.carlos.sabortropical.Entidades.Produto;
 import com.alberto.carlos.sabortropical.R;
-import com.alberto.carlos.sabortropical.Telas.Armazenamento.ArmazenamentosEditDelActivity;
 
 import java.util.List;
 
@@ -25,7 +24,7 @@ import java.util.List;
 public class ProdutosActivity extends AppCompatActivity {
 
     private ListView listaProdutos;
-    private DatabaseProduto databaseProduto;
+    private Database databaseProduto;
     private SQLiteDatabase conn;
     Produto produtoSelecionado;
 
@@ -39,7 +38,7 @@ public class ProdutosActivity extends AppCompatActivity {
         registerForContextMenu(listaProdutos);
 
         try {
-            databaseProduto = new DatabaseProduto(ProdutosActivity.this);
+            databaseProduto = new Database(ProdutosActivity.this);
             conn = databaseProduto.getReadableDatabase();
             ProdutoDao dao = new ProdutoDao(conn);
             List<Produto> produtos = dao.listarProduto();

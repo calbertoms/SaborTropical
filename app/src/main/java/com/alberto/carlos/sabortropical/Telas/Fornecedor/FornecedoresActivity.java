@@ -13,11 +13,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.alberto.carlos.sabortropical.BancoDeDados.DatabaseCliente;
-import com.alberto.carlos.sabortropical.BancoDeDados.DatabaseFornecedor;
-import com.alberto.carlos.sabortropical.Dao.ClienteDao;
+import com.alberto.carlos.sabortropical.BancoDeDados.Database;
 import com.alberto.carlos.sabortropical.Dao.FornecedorDao;
-import com.alberto.carlos.sabortropical.Entidades.Cliente;
 import com.alberto.carlos.sabortropical.Entidades.Fornecedor;
 import com.alberto.carlos.sabortropical.R;
 
@@ -27,7 +24,7 @@ import java.util.List;
 public class FornecedoresActivity extends AppCompatActivity {
 
     private ListView listaFornecedores;
-    private DatabaseFornecedor databaseFornecedor;
+    private Database databaseFornecedor;
     private SQLiteDatabase conn;
     Fornecedor fornecedorSelecionado;
 
@@ -41,7 +38,7 @@ public class FornecedoresActivity extends AppCompatActivity {
         registerForContextMenu(listaFornecedores);
 
         try {
-            databaseFornecedor = new DatabaseFornecedor(FornecedoresActivity.this);
+            databaseFornecedor = new Database(FornecedoresActivity.this);
             conn = databaseFornecedor.getReadableDatabase();
             FornecedorDao dao = new FornecedorDao(conn);
             List<Fornecedor> fornecedores = dao.listarFornecedor();

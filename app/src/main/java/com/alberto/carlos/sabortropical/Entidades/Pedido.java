@@ -7,31 +7,25 @@ package com.alberto.carlos.sabortropical.Entidades;
 public class Pedido {
 
     private long id;
-    private long precoUnitario;
-    private int quantidade;
-    private long precoTotal;
+    private String data;
+    private String vencimento;
+    private float precoTotal;
+    private int condPag;
+    private float desconto;
+    private String observacao;
+    private int status;
+    private Cliente cliente;
 
-    public Pedido(long id, long precoUnitario, int quantidade, long precoTotal){
-
+    public Pedido(long id, String data, String vencimento, float precoTotal, int condPag, float desconto, String observacao, int status, Cliente cliente) {
         this.id = id;
-        this.precoUnitario = precoUnitario;
-        this.quantidade = quantidade;
+        this.data = data;
+        this.vencimento = vencimento;
         this.precoTotal = precoTotal;
-
-
-    }
-
-    public Pedido( long precoUnitario, int quantidade, long precoTotal){
-
-        this.precoUnitario = precoUnitario;
-        this.quantidade = quantidade;
-        this.precoTotal = precoTotal;
-
-
-    }
-
-    public Pedido(){
-
+        this.condPag = condPag;
+        this.desconto = desconto;
+        this.observacao = observacao;
+        this.status = status;
+        this.cliente = cliente;
     }
 
     public long getId() {
@@ -42,27 +36,67 @@ public class Pedido {
         this.id = id;
     }
 
-    public long getPrecoUnitario() {
-        return precoUnitario;
+    public String getData() {
+        return data;
     }
 
-    public void setPrecoUnitario(long precoUnitario) {
-        this.precoUnitario = precoUnitario;
+    public void setData(String data) {
+        this.data = data;
     }
 
-    public int getQuantidade() {
-        return quantidade;
+    public String getVencimento() {
+        return vencimento;
     }
 
-    public void setQuantidade(int quantidade) {
-        this.quantidade = quantidade;
+    public void setVencimento(String vencimento) {
+        this.vencimento = vencimento;
     }
 
-    public long getPrecoTotal() {
+    public float getPrecoTotal() {
         return precoTotal;
     }
 
-    public void setPrecoTotal(long precoTotal) {
+    public void setPrecoTotal(float precoTotal) {
         this.precoTotal = precoTotal;
+    }
+
+    public int getCondPag() {
+        return condPag;
+    }
+
+    public void setCondPag(int condPag) {
+        this.condPag = condPag;
+    }
+
+    public float getDesconto() {
+        return desconto;
+    }
+
+    public void setDesconto(float desconto) {
+        this.desconto = desconto;
+    }
+
+    public String getObservacao() {
+        return observacao;
+    }
+
+    public void setObservacao(String observacao) {
+        this.observacao = observacao;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
 }

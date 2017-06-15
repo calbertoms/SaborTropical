@@ -13,17 +13,12 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.alberto.carlos.sabortropical.BancoDeDados.DatabaseCliente;
-import com.alberto.carlos.sabortropical.BancoDeDados.DatabaseUsuario;
+import com.alberto.carlos.sabortropical.BancoDeDados.Database;
 import com.alberto.carlos.sabortropical.Dao.ClienteDao;
-import com.alberto.carlos.sabortropical.Dao.UsuarioDao;
 import com.alberto.carlos.sabortropical.Entidades.Cliente;
 import com.alberto.carlos.sabortropical.Entidades.Endereco;
-import com.alberto.carlos.sabortropical.Entidades.Usuario;
 import com.alberto.carlos.sabortropical.R;
 import com.alberto.carlos.sabortropical.utilitarios.Mask;
-
-import java.text.SimpleDateFormat;
 
 public class ClientesCadActivity extends AppCompatActivity {
 
@@ -108,14 +103,14 @@ public class ClientesCadActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 boolean verificador = testarCampoVazio();
-                DatabaseCliente databaseCliente;
+                Database databaseCliente;
                 SQLiteDatabase conn;
                 long idcliente;
 
                 if(!verificador) {
 
                     try {
-                        databaseCliente = new DatabaseCliente(ClientesCadActivity.this);
+                        databaseCliente = new Database(ClientesCadActivity.this);
                         conn = databaseCliente.getWritableDatabase();
                         ClienteDao dao = new ClienteDao(conn);
                         Cliente cliente = new Cliente();
