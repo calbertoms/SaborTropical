@@ -18,6 +18,8 @@ import com.alberto.carlos.sabortropical.R;
 import com.alberto.carlos.sabortropical.Telas.Armazenamento.ArmazenamentosActivity;
 import com.alberto.carlos.sabortropical.Telas.Cliente.ClientesActivity;
 import com.alberto.carlos.sabortropical.Telas.Fornecedor.FornecedoresActivity;
+import com.alberto.carlos.sabortropical.Telas.Pedido.CompraActivity;
+import com.alberto.carlos.sabortropical.Telas.Pedido.VendaActivity;
 import com.alberto.carlos.sabortropical.Telas.Produto.ProdutosActivity;
 import com.alberto.carlos.sabortropical.Telas.Usuario.UsuariosActivity;
 
@@ -105,6 +107,18 @@ public class MainActivity extends AppCompatActivity {
         else if (id == R.id.action_produto){
 
             Intent it = new Intent(this, ProdutosActivity.class);
+            startActivity(it);
+
+        }
+        else if (id == R.id.action_venda){
+
+            Intent it = new Intent(this, VendaActivity.class);
+            startActivity(it);
+
+        }
+        else if (id == R.id.action_compra){
+
+            Intent it = new Intent(this, CompraActivity.class);
             startActivity(it);
 
         }

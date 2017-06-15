@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    >
+    <LinearLayout
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="COMPRA DE PRODUTO"
+            android:layout_gravity="center"
+            />
+
+        <TableLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:stretchColumns="1">
+
+            <TableRow >
+                <TextView
+                    android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="Usuario:"
+                    />
+                <Spinner
+                    android:id="@+id/campo_usuario"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content" />
+            </TableRow>
+
+            <TableRow >
+                <TextView
+                    android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="Data da Venda:"
+                    />
+                <EditText
+                    android:layout_width="fill_parent" android:layout_height="wrap_content"
+                    android:id="@+id/campo_dataVenda"
+                    android:inputType="date"
+                    />
+            </TableRow>
+
+            <TableRow >
+                <TextView
+                    android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="Data Vencimento:"
+                    />
+                <EditText
+                    android:layout_width="fill_parent" android:layout_height="wrap_content"
+                    android:id="@+id/campo_dataVencimento"
+                    android:inputType="date"
+                    />
+            </TableRow>
+
+            <TableRow >
+                <TextView
+                    android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="Produto:"
+                    />
+                <Spinner
+                    android:id="@+id/campo_produto"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content" />
+            </TableRow>
+
+            <TableRow >
+                <TextView
+                    android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="Valor Total (R$):"
+                    />
+                <EditText
+                    android:layout_width="fill_parent" android:layout_height="wrap_content"
+                    android:id="@+id/campo_precoTotal"
+                    android:inputType="numberDecimal"
+                    />
+            </TableRow>
+
+            <TableRow >
+                <TextView
+                    android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="Desconto:"
+                    />
+
+                <EditText
+                    android:layout_width="fill_parent" android:layout_height="wrap_content"
+                    android:id="@+id/campo_desconto"
+                    android:inputType="numberDecimal"
+                    />
+            </TableRow>
+
+            <TableRow >
+                <TextView
+                    android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="Condição de Pagamento:"
+                    />
+                <Spinner
+                    android:id="@+id/campo_condicaoPagamento"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content" />
+            </TableRow>
+
+            <TableRow >
+                <TextView
+                    android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="Pago ?"
+                    />
+
+                <Spinner
+                    android:id="@+id/campo_status"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content" />
+            </TableRow>
+            <TableRow >
+                <TextView
+                    android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="Observação:"
+                    />
+
+                <EditText
+                    android:layout_width="fill_parent" android:layout_height="wrap_content"
+                    android:id="@+id/campo_observacao"
+                    />
+            </TableRow>
+
+            <Button
+                android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:id="@+id/botao_salvar"
+                android:layout_gravity="center"
+                android:text="Salvar"
+                android:onClick="Salvar"
+                />
+
+        </TableLayout>
+    </LinearLayout>
+</ScrollView>

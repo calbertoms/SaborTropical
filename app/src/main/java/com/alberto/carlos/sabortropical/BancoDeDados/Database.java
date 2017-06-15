@@ -47,8 +47,17 @@ public class Database extends SQLiteOpenHelper {
                     + "nome text not null, tipo text not null, categoria text not null, temperaturaArmazenamento integer not null, temperaturaTolerancia integer not null, "
                     + "maximoEmpilhamento integer not null, dataValidade text not null, dataFabricacao text not null, precoCompra real not null, precoVenda real not null); ";
 
+    private static final String SCRIPT_DATABASE_CREATE_ITEM =
+            "create table item (id integer primary key autoincrement, id_produto integer references produto(id), "
+                    + "valorUnitario real not null, quantidade integer not null); ";
+
     private static final String SCRIPT_DATABASE_CREATE_VENDA =
-            "create table venda (id integer primary key autoincrement, id_cliente integer references cliente(id_pessoa), id_produto integer references produto(id),  "
+            "create table venda (id integer primary key autoincrement, id_cliente integer references cliente(id_pessoa), id_item integer references item(id),  "
+                    + "dataVenda text not null, dataVencimento text not null, precoTotal real not null, desconto real not null, condPag integer not null, "
+                    + "status integer not null, observacao text not null); ";
+
+    private static final String SCRIPT_DATABASE_CREATE_COMPRA =
+            "create table compra (id integer primary key autoincrement, id_usuario integer references usuario(id), id_item integer references item(id),  "
                     + "dataVenda text not null, dataVencimento text not null, precoTotal real not null, desconto real not null, condPag integer not null, "
                     + "status integer not null, observacao text not null); ";
 
@@ -74,13 +83,19 @@ public class Database extends SQLiteOpenHelper {
     private static final String SCRIPT_DATABASE_DELETE_PRODUTO= "DROP TABLE IF EXISTS produto;";
 
     //Script para fazer o drop da tabela
+    private static final String SCRIPT_DATABASE_DELETE_ITEM = "DROP TABLE IF EXISTS item;";
+
+    //Script para fazer o drop da tabela
     private static final String SCRIPT_DATABASE_DELETE_VENDA = "DROP TABLE IF EXISTS venda;";
+
+    //Script para fazer o drop da tabela
+    private static final String SCRIPT_DATABASE_DELETE_COMPRA = "DROP TABLE IF EXISTS compra;";
 
 
 
     private static final String FOREING_KEY = "PRAGMA foreign_keys = ON;";
 
-    private static final int VERSAO_BANCO = 3;
+    private static final int VERSAO_BANCO = 4;
 
 
 
@@ -98,7 +113,9 @@ public class Database extends SQLiteOpenHelper {
         db.execSQL(SCRIPT_DATABASE_CREATE_FORNECEDOR);
         db.execSQL(SCRIPT_DATABASE_CREATE_ARMAZENAMENTO);
         db.execSQL(SCRIPT_DATABASE_CREATE_PRODUTO);
+        db.execSQL(SCRIPT_DATABASE_CREATE_ITEM);
         db.execSQL(SCRIPT_DATABASE_CREATE_VENDA);
+        db.execSQL(SCRIPT_DATABASE_CREATE_COMPRA);
         db.execSQL(FOREING_KEY);
 
     }
@@ -107,6 +124,8 @@ public class Database extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
         db.execSQL(SCRIPT_DATABASE_DELETE_VENDA);
+        db.execSQL(SCRIPT_DATABASE_DELETE_COMPRA);
+        db.execSQL(SCRIPT_DATABASE_DELETE_ITEM);
         db.execSQL(SCRIPT_DATABASE_DELETE_PRODUTO);
         db.execSQL(SCRIPT_DATABASE_DELETE_ARMAZENAMENTO);
         db.execSQL(SCRIPT_DATABASE_DELETE_FORNECEDOR);

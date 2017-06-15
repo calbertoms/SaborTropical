@@ -6,6 +6,7 @@
     <string name="action_fornecedor">Fornecedor</string>
     <string name="action_armazenamento">Armazenamento</string>
     <string name="action_venda">Venda</string>
+    <string name="action_compra">Compra</string>
     <string name="action_produto">Produto</string>
     <string name="action_relatorio">Relatorio</string>
     <string name="action_novocliente">Novo</string>
@@ -47,4 +48,5 @@
     <string name="action_novoProduto">Novo</string>
 
     <string name="title_activity_vendas">Sabor Tropical -> Vendas</string>
+    <string name="title_activity_compras">Sabor Tropical -> Compras</string>
 </resources>

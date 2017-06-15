@@ -33,6 +33,11 @@
         android:orderInCategory="100"
         app:showAsAction="never"/>
 
+    <item android:title="@string/action_compra"
+        android:id="@+id/action_compra"
+        android:orderInCategory="100"
+        app:showAsAction="never"/>
+
     <item android:title="@string/action_relatorio"
         android:id="@+id/action_relatorio"
         android:orderInCategory="100"

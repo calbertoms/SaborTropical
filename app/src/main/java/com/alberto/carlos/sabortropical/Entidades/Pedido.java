@@ -1,5 +1,14 @@
 package com.alberto.carlos.sabortropical.Entidades;
 
+import android.content.Context;
+import android.database.SQLException;
+import android.database.sqlite.SQLiteDatabase;
+
+import com.alberto.carlos.sabortropical.BancoDeDados.Database;
+import com.alberto.carlos.sabortropical.Dao.PedidoDao;
+import com.alberto.carlos.sabortropical.Dao.ProdutoDao;
+import com.alberto.carlos.sabortropical.Telas.Produto.ProdutosCadActivity;
+
 /**
  * Created by carlos.alberto on 11/06/2017.
  */
@@ -15,6 +24,8 @@ public class Pedido {
     private String observacao;
     private int status;
     private Cliente cliente;
+    private Item item;
+    private Usuario usuario;
 
     public Pedido(long id, String data, String vencimento, float precoTotal, int condPag, float desconto, String observacao, int status, Cliente cliente) {
         this.id = id;
@@ -26,6 +37,9 @@ public class Pedido {
         this.observacao = observacao;
         this.status = status;
         this.cliente = cliente;
+    }
+
+    public Pedido() {
     }
 
     public long getId() {
@@ -99,4 +113,53 @@ public class Pedido {
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
     }
+
+    public Item getItem() {
+        return item;
+    }
+
+    public void setItem(Item item) {
+        this.item = item;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    public long Vender(Context context) throws SQLException {
+
+        Database databasePedido;
+        SQLiteDatabase conn;
+        long id;
+
+        databasePedido = new Database(context);
+        conn = databasePedido.getWritableDatabase();
+        PedidoDao pedidoDao = new PedidoDao(conn);
+        id = pedidoDao.inserirVenda(this);
+
+        return id;
+
+    }
+
+    public long Comprar(Context context) throws SQLException {
+
+        Database databasePedido;
+        SQLiteDatabase conn;
+        long id;
+
+        databasePedido = new Database(context);
+        conn = databasePedido.getWritableDatabase();
+        PedidoDao pedidoDao = new PedidoDao(conn);
+        id = pedidoDao.inserirCompra(this);
+
+        return id;
+
+    }
+
+
+
 }
