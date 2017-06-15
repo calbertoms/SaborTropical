@@ -73,6 +73,12 @@
         <activity
             android:name=".Telas.Pedido.CompraActivity"
             android:label="@string/title_activity_compras" />
+        <activity
+            android:name=".Telas.Relatorio.RelatorioActivity"
+            android:label="@string/title_activity_relatorios" />
+        <activity
+            android:name=".Telas.Relatorio.RelatorioDetalhadoActivity"
+            android:label="@string/title_activity_relatorios_detalhados" />
     </application>
 
 </manifest>

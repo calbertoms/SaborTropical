@@ -21,6 +21,7 @@ import com.alberto.carlos.sabortropical.Telas.Fornecedor.FornecedoresActivity;
 import com.alberto.carlos.sabortropical.Telas.Pedido.CompraActivity;
 import com.alberto.carlos.sabortropical.Telas.Pedido.VendaActivity;
 import com.alberto.carlos.sabortropical.Telas.Produto.ProdutosActivity;
+import com.alberto.carlos.sabortropical.Telas.Relatorio.RelatorioActivity;
 import com.alberto.carlos.sabortropical.Telas.Usuario.UsuariosActivity;
 
 import java.util.List;
@@ -119,6 +120,12 @@ public class MainActivity extends AppCompatActivity {
         else if (id == R.id.action_compra){
 
             Intent it = new Intent(this, CompraActivity.class);
+            startActivity(it);
+
+        }
+        else if (id == R.id.action_relatorio){
+
+            Intent it = new Intent(this, RelatorioActivity.class);
             startActivity(it);
 
         }

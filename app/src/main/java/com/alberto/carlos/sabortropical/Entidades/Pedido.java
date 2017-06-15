@@ -160,6 +160,11 @@ public class Pedido {
 
     }
 
+    @Override
+    public String toString() {
+        return  this.getItem().getProduto().getNome() + " - R$ " + this.getPrecoTotal();
+    }
+
 
 
 }

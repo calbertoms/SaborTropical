@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    >
+    <LinearLayout
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="FILTRO DE RELATÓRIO"
+            android:layout_gravity="center"
+            />
+
+        <TableLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:stretchColumns="1">
+
+            <TableRow >
+                <TextView
+                    android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="Data Inicial:"
+                    />
+                <EditText
+                    android:layout_width="fill_parent" android:layout_height="wrap_content"
+                    android:id="@+id/campo_dataInicial"
+                    android:inputType="date"
+                    />
+            </TableRow>
+
+            <TableRow >
+                <TextView
+                    android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="Data Final:"
+                    />
+                <EditText
+                    android:layout_width="fill_parent" android:layout_height="wrap_content"
+                    android:id="@+id/campo_dataFinal"
+                    android:inputType="date"
+                    />
+            </TableRow>
+
+            <Button
+                android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:id="@+id/botao_compras"
+                android:layout_gravity="center"
+                android:text="Compras"
+                android:onClick="compras"
+                />
+            <Button
+                android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:id="@+id/botao_vendas"
+                android:layout_gravity="center"
+                android:text="Vendas"
+                android:onClick="vendas"
+                />
+
+        </TableLayout>
+    </LinearLayout>
+</ScrollView>

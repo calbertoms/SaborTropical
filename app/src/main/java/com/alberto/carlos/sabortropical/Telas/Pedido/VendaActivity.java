@@ -119,8 +119,8 @@ public class VendaActivity extends AppCompatActivity {
                         item.setValorUnitario(produtos.get(produto.getSelectedItemPosition()).getPrecoVenda());
                         Pedido pedido = new Pedido();
                         pedido.setCliente(clientes.get(cliente.getSelectedItemPosition()));
-                        pedido.setData(dataVenda.getText().toString());
-                        pedido.setVencimento(dataVencimento.getText().toString());
+                        pedido.setData(formataData(dataVenda.getText().toString()));
+                        pedido.setVencimento(formataData(dataVencimento.getText().toString()));
                         pedido.setPrecoTotal(Float.parseFloat(valorTotal.getText().toString()));
                         pedido.setDesconto(Float.parseFloat(desconto.getText().toString()));
                         pedido.setCondPag(condPag.getSelectedItemPosition());
@@ -178,6 +178,17 @@ public class VendaActivity extends AppCompatActivity {
 
 
                 return false;
+
+            }
+
+            private String formataData(String p_Data){
+
+                String data;
+
+                data = p_Data.substring(6,10) + "-" + p_Data.substring(3,5) + "-" + p_Data.substring(0,2);
+
+
+                return data;
 
             }
 

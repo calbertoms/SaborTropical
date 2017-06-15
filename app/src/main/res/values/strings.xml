@@ -49,4 +49,8 @@
 
     <string name="title_activity_vendas">Sabor Tropical -> Vendas</string>
     <string name="title_activity_compras">Sabor Tropical -> Compras</string>
+    <string name="title_activity_relatorios">Sabor Tropical -> Filtro Relatório</string>
+    <string name="title_activity_relatorios_detalhados">Sabor Tropical -> Relatório Detalhado</string>
+
+
 </resources>
