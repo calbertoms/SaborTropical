@@ -1,6 +1,15 @@
 package com.alberto.carlos.sabortropical.Entidades;
 
+import android.content.Context;
+import android.database.SQLException;
+import android.database.sqlite.SQLiteDatabase;
+
+import com.alberto.carlos.sabortropical.BancoDeDados.Database;
+import com.alberto.carlos.sabortropical.Dao.ClienteDao;
+import com.alberto.carlos.sabortropical.Dao.FornecedorDao;
+
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * Created by carlos.alberto on 11/06/2017.
@@ -22,6 +31,8 @@ public class Fornecedor implements Serializable {
     private int tipoPagamento;
     private int desempenho;
     private Endereco endereco;
+    private Database databaseFornecedor;
+    private SQLiteDatabase conn;
 
     public Fornecedor (long id, int contrato, String nome, int status, String nomeResponsavel, String cnpj, String inscEstadual, float credito, String banco, String agencia, String contaCorrente, int tipoPagamento, int desempenho ){
 
@@ -178,6 +189,55 @@ public class Fornecedor implements Serializable {
     @Override
     public String toString() {
         return this.getId() + " - " + this.getNome() + " - " + this.getContrato();
+    }
+
+    public long Cadastrar(Context context) throws SQLException {
+
+        databaseFornecedor = new Database(context);
+        conn = databaseFornecedor.getWritableDatabase();
+        FornecedorDao dao = new FornecedorDao(conn);
+
+        Long idFornecedor= dao.inserir(this);
+        dao.fechar();
+
+        return idFornecedor;
+    }
+
+    public List<Fornecedor> Visualizar(Context context) throws SQLException {
+
+        List<Fornecedor> fornecedores;
+
+        databaseFornecedor = new Database(context);
+        conn = databaseFornecedor.getReadableDatabase();
+        FornecedorDao dao = new FornecedorDao(conn);
+        fornecedores = dao.listarFornecedor();
+        dao.fechar();
+
+        return fornecedores;
+
+    }
+
+    public int Editar(Context context) throws SQLException {
+
+        databaseFornecedor = new Database(context);
+        conn = databaseFornecedor.getWritableDatabase();
+        FornecedorDao dao = new FornecedorDao(conn);
+
+        int qtdAtualizadas = dao.atualizar(this);
+        dao.fechar();
+
+        return qtdAtualizadas;
+
+    }
+
+    public void Deletar(Context context,long id_fornecedor,long id_endereco) throws SQLException{
+
+        databaseFornecedor = new Database(context);
+        conn = databaseFornecedor.getWritableDatabase();
+        FornecedorDao dao = new FornecedorDao(conn);
+        dao.deletar(id_fornecedor,id_endereco);
+        dao.fechar();
+
     }
 
 }

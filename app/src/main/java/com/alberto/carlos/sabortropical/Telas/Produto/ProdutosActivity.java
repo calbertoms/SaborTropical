@@ -24,8 +24,6 @@ import java.util.List;
 public class ProdutosActivity extends AppCompatActivity {
 
     private ListView listaProdutos;
-    private Database databaseProduto;
-    private SQLiteDatabase conn;
     Produto produtoSelecionado;
 
     @Override
@@ -38,10 +36,8 @@ public class ProdutosActivity extends AppCompatActivity {
         registerForContextMenu(listaProdutos);
 
         try {
-            databaseProduto = new Database(ProdutosActivity.this);
-            conn = databaseProduto.getReadableDatabase();
-            ProdutoDao dao = new ProdutoDao(conn);
-            List<Produto> produtos = dao.listarProduto();
+            Produto produto = new Produto();
+            List<Produto> produtos = produto.Visualizar(ProdutosActivity.this);
             ArrayAdapter<Produto> adapter = new ArrayAdapter<Produto>
                     (ProdutosActivity.this, android.R.layout.simple_list_item_1, produtos);
 

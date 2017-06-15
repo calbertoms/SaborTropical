@@ -24,8 +24,6 @@ import java.util.List;
 public class FornecedoresActivity extends AppCompatActivity {
 
     private ListView listaFornecedores;
-    private Database databaseFornecedor;
-    private SQLiteDatabase conn;
     Fornecedor fornecedorSelecionado;
 
     @Override
@@ -38,10 +36,8 @@ public class FornecedoresActivity extends AppCompatActivity {
         registerForContextMenu(listaFornecedores);
 
         try {
-            databaseFornecedor = new Database(FornecedoresActivity.this);
-            conn = databaseFornecedor.getReadableDatabase();
-            FornecedorDao dao = new FornecedorDao(conn);
-            List<Fornecedor> fornecedores = dao.listarFornecedor();
+            Fornecedor fornecedor = new Fornecedor();
+            List<Fornecedor> fornecedores = fornecedor.Visualizar(FornecedoresActivity.this);
             ArrayAdapter<Fornecedor> adapter = new ArrayAdapter<Fornecedor>
                     (FornecedoresActivity.this, android.R.layout.simple_list_item_1, fornecedores);
 

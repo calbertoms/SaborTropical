@@ -24,8 +24,6 @@ import java.util.List;
 public class ClientesActivity extends AppCompatActivity {
 
     private ListView listaClientes;
-    private Database databaseCliente;
-    private SQLiteDatabase conn;
     private long idCliente;
     Cliente clienteSelecionado;
 
@@ -39,10 +37,8 @@ public class ClientesActivity extends AppCompatActivity {
         registerForContextMenu(listaClientes);
 
         try {
-            databaseCliente = new Database(ClientesActivity.this);
-            conn = databaseCliente.getReadableDatabase();
-            ClienteDao dao = new ClienteDao(conn);
-            List<Cliente> clientes = dao.listarClientes();
+            Cliente cliente = new Cliente();
+            List<Cliente> clientes = cliente.Visualizar(ClientesActivity.this);
             ArrayAdapter<Cliente> adapter = new ArrayAdapter<Cliente>
                     (ClientesActivity.this, android.R.layout.simple_list_item_1, clientes);
 

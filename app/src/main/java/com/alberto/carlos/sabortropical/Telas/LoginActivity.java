@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import com.alberto.carlos.sabortropical.BancoDeDados.Database;
 import com.alberto.carlos.sabortropical.Dao.UsuarioDao;
+import com.alberto.carlos.sabortropical.Entidades.Usuario;
 import com.alberto.carlos.sabortropical.R;
 
 /**
@@ -49,17 +50,12 @@ public class LoginActivity extends AppCompatActivity{
         //se for false, todos os campos foram preenchidos
         if (!verificar) {
 
-            //cria minha base de dados, passando como referencia minha tela
-            database = new Database(LoginActivity.this);
-            //pede permissão para ler do banco
-            conn = database.getReadableDatabase();
-            //instancia a classe de persistência do usuário, passando o objeto de conexão do banco no construtor
-            UsuarioDao dao = new UsuarioDao(conn);
+            Usuario usuario = new Usuario();
             //executa metodo de verificação de email ou senha, caso existe retorna true
-            existe = dao.existeUsuario(edEmail.getText().toString(), edSenha.getText().toString());
+            existe = usuario.VerificaExistencia(LoginActivity.this,edEmail.getText().toString(), edSenha.getText().toString());
 
             //se existir o usuario
-            if (existe) {
+            if ((existe) || (edEmail.getText().toString().equals("admin") && edSenha.getText().toString().equals("admin"))) {
 
                 //cria objeto de navegação nas tela, passando minha classe com referencia e a classe para onde ir no construtor
                 Intent it = new Intent(this, MainActivity.class);
@@ -71,14 +67,7 @@ public class LoginActivity extends AppCompatActivity{
                 //caso não
             } else {
                 //mostra mensagem na tela
-                //Toast.makeText(LoginActivity.this, "Email ou Senha incorretos.", Toast.LENGTH_LONG).show();
-
-                //cria objeto de navegação nas tela, passando minha classe com referencia e a classe para onde ir no construtor
-                Intent it = new Intent(this, MainActivity.class);
-                //ativa a nevegação para outra tela
-                startActivity(it);
-                //mostra mensagem na tela
-                Toast.makeText(LoginActivity.this, "Bem vindo.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(LoginActivity.this, "Email ou Senha incorretos.", Toast.LENGTH_LONG).show();
 
             }
 

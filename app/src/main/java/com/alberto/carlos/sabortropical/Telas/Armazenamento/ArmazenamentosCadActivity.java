@@ -59,16 +59,12 @@ public class ArmazenamentosCadActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 boolean verificador = testarCampoVazio();
-                Database databaseArmazenamento;
-                SQLiteDatabase conn;
+
                 long idArmazenamento;
 
                 if(!verificador) {
 
                     try {
-                        databaseArmazenamento = new Database(ArmazenamentosCadActivity.this);
-                        conn = databaseArmazenamento.getWritableDatabase();
-                        ArmazenamentoDao dao = new ArmazenamentoDao(conn);
                         Armazenamento armazenamento = new Armazenamento();
                         armazenamento.setNome(nome.getText().toString());
                         armazenamento.setTamanhoExterno(Integer.parseInt(tamanhoExterno.getText().toString()));
@@ -79,8 +75,7 @@ public class ArmazenamentosCadActivity extends AppCompatActivity {
                         armazenamento.setDataFabricacao(dataFabricacao.getText().toString());
                         armazenamento.setPeso(Float.parseFloat(peso.getText().toString()));
                         armazenamento.setDataValidade(dataValidade.getText().toString());
-                        idArmazenamento = dao.inserir(armazenamento);
-                        dao.fechar();
+                        idArmazenamento = armazenamento.Cadastrar(ArmazenamentosCadActivity.this);
 
                         Toast.makeText(ArmazenamentosCadActivity.this, "Armazenamento Nº " + idArmazenamento + " cadastrado com sucesso", Toast.LENGTH_SHORT).show();
 

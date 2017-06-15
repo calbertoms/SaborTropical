@@ -103,16 +103,11 @@ public class ClientesCadActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 boolean verificador = testarCampoVazio();
-                Database databaseCliente;
-                SQLiteDatabase conn;
                 long idcliente;
 
                 if(!verificador) {
 
                     try {
-                        databaseCliente = new Database(ClientesCadActivity.this);
-                        conn = databaseCliente.getWritableDatabase();
-                        ClienteDao dao = new ClienteDao(conn);
                         Cliente cliente = new Cliente();
                         Endereco endereco = new Endereco();
                         cliente.setNome(nome.getText().toString());
@@ -137,8 +132,7 @@ public class ClientesCadActivity extends AppCompatActivity {
                         endereco.setPontoreferencia(pontoReferencia.getText().toString());
                         endereco.setCep(cep.getText().toString());
                         cliente.setEndereco(endereco);
-                        idcliente = dao.inserir(cliente);
-                        dao.fechar();
+                        idcliente = cliente.Cadastrar(ClientesCadActivity.this);
 
                         Toast.makeText(ClientesCadActivity.this, "Cliente Nº " + idcliente + " cadastrado com sucesso", Toast.LENGTH_SHORT).show();
 

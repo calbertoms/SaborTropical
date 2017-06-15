@@ -114,16 +114,11 @@ public class UsuariosEditDelActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 boolean verificador = testarCampoVazio();
-                Database database;
-                SQLiteDatabase conn;
                 int qtdAtualizadas;
 
                 if(!verificador) {
 
                     try {
-                        database = new Database(UsuariosEditDelActivity.this);
-                        conn = database.getWritableDatabase();
-                        UsuarioDao dao = new UsuarioDao(conn);
                         Usuario usuario = new Usuario();
                         usuario.setId(usuarioDetalhado.getId());
                         usuario.setNome(nome.getText().toString());
@@ -141,8 +136,7 @@ public class UsuariosEditDelActivity extends AppCompatActivity {
                         usuario.setSenha(senha.getText().toString());
                         usuario.setDataAdmissao(usuarioDetalhado.getDataAdmissao());
                         usuario.setNivel(nivelAcesso.getSelectedItemPosition());
-                        qtdAtualizadas = dao.atualizar(usuario);
-                        dao.fechar();
+                        qtdAtualizadas = usuario.Editar(UsuariosEditDelActivity.this);
 
                         Toast.makeText(UsuariosEditDelActivity.this, "Foram atualizados " + qtdAtualizadas + " campos", Toast.LENGTH_SHORT).show();
 
@@ -223,16 +217,9 @@ public class UsuariosEditDelActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Database database;
-                SQLiteDatabase conn;
-
-
                     try {
-                        database = new Database(UsuariosEditDelActivity.this);
-                        conn = database.getWritableDatabase();
-                        UsuarioDao dao = new UsuarioDao(conn);
-                        dao.deletar(usuarioDetalhado.getId());
-                        dao.fechar();
+                        Usuario usuario = new Usuario();
+                        usuario.Deletar(UsuariosEditDelActivity.this,usuarioDetalhado.getId());
 
                         Toast.makeText(UsuariosEditDelActivity.this, "Usuário deletado com sucesso.", Toast.LENGTH_SHORT).show();
 

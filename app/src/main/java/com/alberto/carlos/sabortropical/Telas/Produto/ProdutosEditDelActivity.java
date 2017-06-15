@@ -35,29 +35,22 @@ public class ProdutosEditDelActivity extends AppCompatActivity {
 
         final EditText nome = (EditText) findViewById(R.id.campo_nome);
 
-        Database databaseFornecedor;
-        SQLiteDatabase conn;
-        databaseFornecedor = new Database(ProdutosEditDelActivity.this);
-        conn = databaseFornecedor.getReadableDatabase();
-        FornecedorDao dao = new FornecedorDao(conn);
-        final List<Fornecedor> fornecedores = dao.listarFornecedor();
+
+        Fornecedor fornecedor = new Fornecedor();
+        final List<Fornecedor> fornecedores = fornecedor.Visualizar(ProdutosEditDelActivity.this);
         ArrayAdapter<Fornecedor> adapter = new ArrayAdapter<Fornecedor>
                 (ProdutosEditDelActivity.this, android.R.layout.simple_spinner_dropdown_item, fornecedores);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        final Spinner fornecedor = (Spinner) findViewById(R.id.campo_fornecedor);
-        fornecedor.setAdapter(adapter);
+        final Spinner fornecedorSpinner = (Spinner) findViewById(R.id.campo_fornecedor);
+        fornecedorSpinner.setAdapter(adapter);
 
-        Database databaseArmazenamento;
-        SQLiteDatabase conn2;
-        databaseArmazenamento = new Database(ProdutosEditDelActivity.this);
-        conn2 = databaseArmazenamento.getReadableDatabase();
-        ArmazenamentoDao dao2 = new ArmazenamentoDao(conn2);
-        final List<Armazenamento> armazenamentos = dao2.listarArmazenamento();
+        Armazenamento armazenamento = new Armazenamento();
+        final List<Armazenamento> armazenamentos = armazenamento.Visualizar(ProdutosEditDelActivity.this);
         ArrayAdapter<Armazenamento> adapter2 = new ArrayAdapter<Armazenamento>
                 (ProdutosEditDelActivity.this, android.R.layout.simple_spinner_dropdown_item, armazenamentos);
         adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        final Spinner armazenamento = (Spinner) findViewById(R.id.campo_armazenamento);
-        armazenamento.setAdapter(adapter2);
+        final Spinner armazenamentoSpinner = (Spinner) findViewById(R.id.campo_armazenamento);
+        armazenamentoSpinner.setAdapter(adapter2);
 
         final EditText tipo = (EditText) findViewById(R.id.campo_tipo);
 
@@ -101,21 +94,16 @@ public class ProdutosEditDelActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 boolean verificador = testarCampoVazio();
-                Database databaseProduto;
-                SQLiteDatabase conn;
                 int qtdAtualizadas;
 
                 if(!verificador) {
 
                     try {
-                        databaseProduto = new Database(ProdutosEditDelActivity.this);
-                        conn = databaseProduto.getWritableDatabase();
-                        ProdutoDao dao = new ProdutoDao(conn);
                         Produto produto = new Produto();
                         produto.setId(produtoDetalhado.getId());
                         produto.setNome(nome.getText().toString());
-                        produto.setArmazenamento(armazenamentos.get(armazenamento.getSelectedItemPosition()));
-                        produto.setFornecedor(fornecedores.get(fornecedor.getSelectedItemPosition()));
+                        produto.setArmazenamento(armazenamentos.get(armazenamentoSpinner.getSelectedItemPosition()));
+                        produto.setFornecedor(fornecedores.get(fornecedorSpinner.getSelectedItemPosition()));
                         produto.setTipo(tipo.getText().toString());
                         produto.setCategoria(categoria.getText().toString());
                         produto.setTemperaturaArmazenagem(Integer.parseInt(temperaturaArmazenamento.getText().toString()));
@@ -125,8 +113,7 @@ public class ProdutosEditDelActivity extends AppCompatActivity {
                         produto.setDataValidade(dataValidade.getText().toString());
                         produto.setPrecoCompra(Float.parseFloat(precoCompra.getText().toString()));
                         produto.setPrecoVenda(Float.parseFloat(precoVenda.getText().toString()));
-                        qtdAtualizadas = dao.atualizar(produto);
-                        dao.fechar();
+                        qtdAtualizadas = produto.Editar(ProdutosEditDelActivity.this);
 
                         Toast.makeText(ProdutosEditDelActivity.this, "Foram atualizados " + qtdAtualizadas + " campos", Toast.LENGTH_SHORT).show();
 
@@ -212,16 +199,10 @@ public class ProdutosEditDelActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Database databaseProduto;
-                SQLiteDatabase conn;
-
 
                 try {
-                    databaseProduto = new Database(ProdutosEditDelActivity.this);
-                    conn = databaseProduto.getWritableDatabase();
-                    ProdutoDao dao = new ProdutoDao(conn);
-                    dao.deletar(produtoDetalhado.getId());
-                    dao.fechar();
+                    Produto produto = new Produto();
+                    produto.Deletar(ProdutosEditDelActivity.this,produtoDetalhado.getId());
 
                     Toast.makeText(ProdutosEditDelActivity.this, "Produto deletado com sucesso.", Toast.LENGTH_SHORT).show();
 

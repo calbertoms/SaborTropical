@@ -85,16 +85,11 @@ public class ProdutosCadActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 boolean verificador = testarCampoVazio();
-                Database databaseProduto;
-                SQLiteDatabase conn;
                 long idProduto;
 
                 if(!verificador) {
 
                     try {
-                        databaseProduto = new Database(ProdutosCadActivity.this);
-                        conn = databaseProduto.getWritableDatabase();
-                        ProdutoDao dao = new ProdutoDao(conn);
                         Produto produto = new Produto();
                         produto.setNome(nome.getText().toString());
                         produto.setArmazenamento(armazenamentos.get(armazenamento.getSelectedItemPosition()));
@@ -108,8 +103,7 @@ public class ProdutosCadActivity extends AppCompatActivity {
                         produto.setDataValidade(dataValidade.getText().toString());
                         produto.setPrecoCompra(Float.parseFloat(precoCompra.getText().toString()));
                         produto.setPrecoVenda(Float.parseFloat(precoVenda.getText().toString()));
-                        idProduto = dao.inserir(produto);
-                        dao.fechar();
+                        idProduto = produto.Cadastrar(ProdutosCadActivity.this);
 
                         Toast.makeText(ProdutosCadActivity.this, "Produto Nº " + idProduto + " cadastrado com sucesso", Toast.LENGTH_SHORT).show();
 

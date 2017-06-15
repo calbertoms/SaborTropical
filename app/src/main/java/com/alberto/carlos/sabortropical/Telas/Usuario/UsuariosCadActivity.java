@@ -98,16 +98,11 @@ public class UsuariosCadActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 boolean verificador = testarCampoVazio();
-                Database database;
-                SQLiteDatabase conn;
                 long idUsuario;
 
                 if(!verificador) {
 
                     try {
-                        database = new Database(UsuariosCadActivity.this);
-                        conn = database.getWritableDatabase();
-                        UsuarioDao dao = new UsuarioDao(conn);
                         Usuario usuario = new Usuario();
                         usuario.setNome(nome.getText().toString());
                         usuario.setSobreNome(sobreNome.getText().toString());
@@ -124,8 +119,7 @@ public class UsuariosCadActivity extends AppCompatActivity {
                         usuario.setSenha(senha.getText().toString());
                         usuario.setDataAdmissao(getDataAtual());
                         usuario.setNivel(nivelAcesso.getSelectedItemPosition());
-                        idUsuario = dao.inserir(usuario);
-                        dao.fechar();
+                        idUsuario = usuario.Cadastrar(UsuariosCadActivity.this);
 
                         Toast.makeText(UsuariosCadActivity.this, "Usuário Nº " + idUsuario + " cadastrado com sucesso", Toast.LENGTH_SHORT).show();
 

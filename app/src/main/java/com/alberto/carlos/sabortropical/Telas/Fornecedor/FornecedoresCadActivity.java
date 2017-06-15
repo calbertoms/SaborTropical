@@ -86,16 +86,11 @@ public class FornecedoresCadActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 boolean verificador = testarCampoVazio();
-                Database databaseFornecedor;
-                SQLiteDatabase conn;
                 long idFornecedor;
 
                 if(!verificador) {
 
                     try {
-                        databaseFornecedor = new Database(FornecedoresCadActivity.this);
-                        conn = databaseFornecedor.getWritableDatabase();
-                        FornecedorDao dao = new FornecedorDao(conn);
                         Fornecedor fornecedor = new Fornecedor();
                         Endereco endereco = new Endereco();
                         fornecedor.setContrato(Integer.parseInt(contrato.getText().toString()));
@@ -119,8 +114,7 @@ public class FornecedoresCadActivity extends AppCompatActivity {
                         endereco.setPontoreferencia(pontoReferencia.getText().toString());
                         endereco.setCep(cep.getText().toString());
                         fornecedor.setEndereco(endereco);
-                        idFornecedor = dao.inserir(fornecedor);
-                        dao.fechar();
+                        idFornecedor = fornecedor.Cadastrar(FornecedoresCadActivity.this);
 
                         Toast.makeText(FornecedoresCadActivity.this, "Fornecedor Nº " + idFornecedor + " cadastrado com sucesso", Toast.LENGTH_SHORT).show();
 

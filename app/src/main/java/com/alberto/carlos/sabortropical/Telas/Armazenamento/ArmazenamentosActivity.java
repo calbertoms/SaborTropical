@@ -24,8 +24,6 @@ import java.util.List;
 public class ArmazenamentosActivity extends AppCompatActivity {
 
     private ListView listaArmazenamentos;
-    private Database database;
-    private SQLiteDatabase conn;
     Armazenamento armazenamentoSelecionado;
 
     @Override
@@ -38,10 +36,8 @@ public class ArmazenamentosActivity extends AppCompatActivity {
         registerForContextMenu(listaArmazenamentos);
 
         try {
-            database = new Database(ArmazenamentosActivity.this);
-            conn = database.getReadableDatabase();
-            ArmazenamentoDao dao = new ArmazenamentoDao(conn);
-            List<Armazenamento> armazenamentos = dao.listarArmazenamento();
+            Armazenamento armazenamento = new Armazenamento();
+            List<Armazenamento> armazenamentos = armazenamento.Visualizar(ArmazenamentosActivity.this);
             ArrayAdapter<Armazenamento> adapter = new ArrayAdapter<Armazenamento>
                     (ArmazenamentosActivity.this, android.R.layout.simple_list_item_1, armazenamentos);
 

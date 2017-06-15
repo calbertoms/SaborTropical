@@ -127,16 +127,11 @@ public class ClientesEditDelActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 boolean verificador = testarCampoVazio();
-                Database databaseCliente;
-                SQLiteDatabase conn;
                 int qtdAtualizadas;
 
                 if(!verificador) {
 
                     try {
-                        databaseCliente = new Database(ClientesEditDelActivity.this);
-                        conn = databaseCliente.getWritableDatabase();
-                        ClienteDao dao = new ClienteDao(conn);
                         Cliente cliente = new Cliente();
                         Endereco endereco = new Endereco();
                         cliente.setId(clienteDetalhado.getId());
@@ -163,8 +158,7 @@ public class ClientesEditDelActivity extends AppCompatActivity {
                         endereco.setPontoreferencia(pontoReferencia.getText().toString());
                         endereco.setCep(cep.getText().toString());
                         cliente.setEndereco(endereco);
-                        qtdAtualizadas = dao.atualizar(cliente);
-                        dao.fechar();
+                        qtdAtualizadas = cliente.Editar(ClientesEditDelActivity.this);
 
                         Toast.makeText(ClientesEditDelActivity.this, "Foram atualizados " + qtdAtualizadas + " campos", Toast.LENGTH_SHORT).show();
 
@@ -280,16 +274,11 @@ public class ClientesEditDelActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Database databaseCliente;
-                SQLiteDatabase conn;
-
 
                 try {
-                    databaseCliente = new Database(ClientesEditDelActivity.this);
-                    conn = databaseCliente.getWritableDatabase();
-                    ClienteDao dao = new ClienteDao(conn);
-                    dao.deletar(clienteDetalhado.getId(),clienteDetalhado.getEndereco().getId());
-                    dao.fechar();
+
+                    Cliente cliente = new Cliente();
+                    cliente.Deletar(ClientesEditDelActivity.this,clienteDetalhado.getId(),clienteDetalhado.getEndereco().getId());
 
                     Toast.makeText(ClientesEditDelActivity.this, "Cliente deletado com sucesso.", Toast.LENGTH_SHORT).show();
 

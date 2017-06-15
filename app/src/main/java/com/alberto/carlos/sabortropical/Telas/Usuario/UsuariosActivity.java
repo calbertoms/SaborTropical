@@ -24,8 +24,6 @@ import java.util.List;
 public class UsuariosActivity extends AppCompatActivity {
 
     private ListView listaUsuarios;
-    private Database database;
-    private SQLiteDatabase conn;
     private long idUsuario;
     Usuario usuarioSelecionado;
 
@@ -39,10 +37,8 @@ public class UsuariosActivity extends AppCompatActivity {
         registerForContextMenu(listaUsuarios);
 
         try {
-            database = new Database(UsuariosActivity.this);
-            conn = database.getReadableDatabase();
-            UsuarioDao dao = new UsuarioDao(conn);
-            List<Usuario> usuarios = dao.listarUsuarios();
+            Usuario usuario = new Usuario();
+            List<Usuario> usuarios = usuario.Visualizar(UsuariosActivity.this);
             ArrayAdapter<Usuario> adapter = new ArrayAdapter<Usuario>
                     (UsuariosActivity.this, android.R.layout.simple_list_item_1, usuarios);
 

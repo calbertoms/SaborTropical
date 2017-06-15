@@ -109,16 +109,11 @@ public class FornecedoresEditDelActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 boolean verificador = testarCampoVazio();
-                Database databaseFornecedor;
-                SQLiteDatabase conn;
                 int qtdAtualizadas;
 
                 if(!verificador) {
 
                     try {
-                        databaseFornecedor = new Database(FornecedoresEditDelActivity.this);
-                        conn = databaseFornecedor.getWritableDatabase();
-                        FornecedorDao dao = new FornecedorDao(conn);
                         Fornecedor fornecedor = new Fornecedor();
                         Endereco endereco = new Endereco();
                         fornecedor.setId(fornecedorDetalhado.getId());
@@ -144,8 +139,7 @@ public class FornecedoresEditDelActivity extends AppCompatActivity {
                         endereco.setPontoreferencia(pontoReferencia.getText().toString());
                         endereco.setCep(cep.getText().toString());
                         fornecedor.setEndereco(endereco);
-                        qtdAtualizadas = dao.atualizar(fornecedor);
-                        dao.fechar();
+                        qtdAtualizadas = fornecedor.Editar(FornecedoresEditDelActivity.this);
 
                         Toast.makeText(FornecedoresEditDelActivity.this, "Foram atualizados " + qtdAtualizadas + " campos", Toast.LENGTH_SHORT).show();
 
@@ -256,16 +250,10 @@ public class FornecedoresEditDelActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Database databaseFornecedor;
-                SQLiteDatabase conn;
-
 
                 try {
-                    databaseFornecedor = new Database(FornecedoresEditDelActivity.this);
-                    conn = databaseFornecedor.getWritableDatabase();
-                    FornecedorDao dao = new FornecedorDao(conn);
-                    dao.deletar(fornecedorDetalhado.getId(), fornecedorDetalhado.getEndereco().getId());
-                    dao.fechar();
+                    Fornecedor fornecedor = new Fornecedor();
+                    fornecedor.Deletar(FornecedoresEditDelActivity.this,fornecedorDetalhado.getId(), fornecedorDetalhado.getEndereco().getId());
 
                     Toast.makeText(FornecedoresEditDelActivity.this, "Cliente deletado com sucesso.", Toast.LENGTH_SHORT).show();
 

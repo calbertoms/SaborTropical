@@ -1,7 +1,16 @@
 package com.alberto.carlos.sabortropical.Entidades;
 
 
+import android.content.Context;
+import android.database.SQLException;
+import android.database.sqlite.SQLiteDatabase;
+
+import com.alberto.carlos.sabortropical.BancoDeDados.Database;
+import com.alberto.carlos.sabortropical.Dao.ClienteDao;
+import com.alberto.carlos.sabortropical.Dao.ProdutoDao;
+
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * Created by carlos.alberto on 11/06/2017.
@@ -22,6 +31,8 @@ public class Produto implements Serializable {
     private String dataFabricacao;
     private float precoCompra;
     private float precoVenda;
+    private Database databaseProduto;
+    private SQLiteDatabase conn;
 
     public Produto(long id, String nome, String tipo, String categoria, int temperaturaArmazenagem, int temperaturaTolerancia, int maximoEmpilhamento, Fornecedor fornecedor, Armazenamento armazenamento, String dataValidade, String dataFabricacao, float precoCompra, float precoVenda) {
         this.id = id;
@@ -163,6 +174,56 @@ public class Produto implements Serializable {
 
     @Override
     public String toString() {
-        return this.getId() + " - " + this.getNome() + " - " + this.getArmazenamento().getNome();
+        return this.getId() + " - " + this.getNome() + " - R$ " + this.getPrecoVenda();
     }
+
+    public long Cadastrar(Context context) throws SQLException {
+
+        databaseProduto = new Database(context);
+        conn = databaseProduto.getWritableDatabase();
+        ProdutoDao dao = new ProdutoDao(conn);
+
+        Long idProduto= dao.inserir(this);
+        dao.fechar();
+
+        return idProduto;
+    }
+
+    public List<Produto> Visualizar(Context context) throws SQLException {
+
+        List<Produto> produtos;
+
+        databaseProduto = new Database(context);
+        conn = databaseProduto.getReadableDatabase();
+        ProdutoDao dao = new ProdutoDao(conn);
+        produtos = dao.listarProduto();
+        dao.fechar();
+
+        return produtos;
+
+    }
+
+    public int Editar(Context context) throws SQLException {
+
+        databaseProduto = new Database(context);
+        conn = databaseProduto.getWritableDatabase();
+        ProdutoDao dao = new ProdutoDao(conn);
+
+        int qtdAtualizadas = dao.atualizar(this);
+        dao.fechar();
+
+        return qtdAtualizadas;
+
+    }
+
+    public void Deletar(Context context,long id_produto) throws SQLException{
+
+        databaseProduto = new Database(context);
+        conn = databaseProduto.getWritableDatabase();
+        ProdutoDao dao = new ProdutoDao(conn);
+        dao.deletar(id_produto);
+        dao.fechar();
+
+    }
+
 }

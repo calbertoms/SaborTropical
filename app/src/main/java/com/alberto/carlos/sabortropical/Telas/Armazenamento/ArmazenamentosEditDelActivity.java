@@ -72,16 +72,11 @@ public class ArmazenamentosEditDelActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 boolean verificador = testarCampoVazio();
-                Database databaseArmazenamento;
-                SQLiteDatabase conn;
                 int qtdAtualizadas;
 
                 if(!verificador) {
 
                     try {
-                        databaseArmazenamento = new Database(ArmazenamentosEditDelActivity.this);
-                        conn = databaseArmazenamento.getWritableDatabase();
-                        ArmazenamentoDao dao = new ArmazenamentoDao(conn);
                         Armazenamento armazenamento = new Armazenamento();
                         armazenamento.setId(armazenamentoDetalhado.getId());
                         armazenamento.setNome(nome.getText().toString());
@@ -93,8 +88,7 @@ public class ArmazenamentosEditDelActivity extends AppCompatActivity {
                         armazenamento.setDataFabricacao(dataFabricacao.getText().toString());
                         armazenamento.setPeso(Float.parseFloat(peso.getText().toString()));
                         armazenamento.setDataValidade(dataValidade.getText().toString());
-                        qtdAtualizadas = dao.atualizar(armazenamento);
-                        dao.fechar();
+                        qtdAtualizadas = armazenamento.Editar(ArmazenamentosEditDelActivity.this);
 
                         Toast.makeText(ArmazenamentosEditDelActivity.this, "Foram atualizados " + qtdAtualizadas + " campos", Toast.LENGTH_SHORT).show();
 
@@ -170,16 +164,12 @@ public class ArmazenamentosEditDelActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Database databaseArmazenamento;
-                SQLiteDatabase conn;
 
 
                 try {
-                    databaseArmazenamento = new Database(ArmazenamentosEditDelActivity.this);
-                    conn = databaseArmazenamento.getWritableDatabase();
-                    ArmazenamentoDao dao = new ArmazenamentoDao(conn);
-                    dao.deletar(armazenamentoDetalhado.getId());
-                    dao.fechar();
+
+                    Armazenamento armazenamento = new Armazenamento();
+                    armazenamento.Deletar(ArmazenamentosEditDelActivity.this,armazenamentoDetalhado.getId());
 
                     Toast.makeText(ArmazenamentosEditDelActivity.this, "Armazenamento deletado com sucesso.", Toast.LENGTH_SHORT).show();
 
